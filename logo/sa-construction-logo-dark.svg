@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 470">
+  <rect width="560" height="470" fill="#0C0C0C"/>
+  <g transform="translate(160,36)" fill="none" stroke="#EFE9DE" stroke-width="6" stroke-linecap="round">
+    <path d="M 20.97 106.08 A 100 100 0 0 1 219.03 106.08"/>
+    <path d="M 20.97 133.92 A 100 100 0 0 0 219.03 133.92" stroke-dasharray="20 13.3"/>
+    <path d="M 6 120 H 234"/>
+    <path d="M 76 108 L 120 64 L 164 108" stroke-linejoin="round"/>
+    <circle cx="120" cy="98" r="6" fill="#EFE9DE" stroke="none"/>
+  </g>
+  <text x="284" y="354" text-anchor="middle" fill="#EFE9DE"
+        font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+        font-size="33" font-weight="600" letter-spacing="8">SA CONSTRUCTION</text>
+  <text x="282" y="398" text-anchor="middle" fill="#EFE9DE" opacity="0.6"
+        font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+        font-size="16" font-weight="400" letter-spacing="4">INC · (774) 368-9752</text>
+</svg>
