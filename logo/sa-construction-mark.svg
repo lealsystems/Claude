@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <!-- upper blade housing / horizon arc -->
+  <path d="M 20.97 106.08 A 100 100 0 0 1 219.03 106.08" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round"/>
+  <!-- lower arc: segmented like a diamond-blade rim -->
+  <path d="M 20.97 133.92 A 100 100 0 0 0 219.03 133.92" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round" stroke-dasharray="20 13.3"/>
+  <!-- kerf: the cut line passing through the circle -->
+  <path d="M 6 120 H 234" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round"/>
+  <!-- roofline -->
+  <path d="M 76 108 L 120 64 L 164 108" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- door -->
+  <circle cx="120" cy="98" r="6" fill="#1A1A1A"/>
+</svg>
