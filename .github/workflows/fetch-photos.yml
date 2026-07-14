@@ -1,0 +1,38 @@
+name: Fetch oak photo candidates
+on:
+  push:
+    branches: [claude/logo-redesign-minimalist-2mp31c]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download candidates
+        id: dl
+        run: |
+          d=website/assets/photos/candidates
+          if [ -d "$d" ]; then echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0; fi
+          mkdir -p "$d"
+          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+          u() { curl -fsSL -A "$UA" --max-time 40 -o "$d/u$1.jpg" "https://images.unsplash.com/photo-$1?w=1800&q=80&auto=format&fit=crop" || rm -f "$d/u$1.jpg"; }
+          p() { curl -fsSL -A "$UA" --max-time 40 -o "$d/p$1.jpg" "https://images.pexels.com/photos/$1/pexels-photo-$1.jpeg?auto=compress&cs=tinysrgb&w=1800" || rm -f "$d/p$1.jpg"; }
+          u 1618220179428-22790b461013; u 1615873968403-89e068629265; u 1600210492486-724fe5c67fb0
+          u 1600607687939-ce8a6c25118c; u 1616486338812-3dadae4b4ace; u 1618221195710-dd6b41faaea6
+          u 1617806118233-18e1de247200; u 1524758631624-e2822e304c36; u 1507842217343-583bb7270b66
+          u 1521587760476-6c12a4b040da; u 1481627834876-b7833e8f5570; u 1509805225007-73e8ba4b5be8
+          u 1520333789090-1afc82db536a; u 1587049352846-4a222e784acb; u 1541123437800-1bb1317badc2
+          u 1586023492125-27b2c045efd7; u 1513694203232-719a280e022f; u 1519710164239-da123dc03ef4
+          u 1493663284031-b7e3aefcae8e; u 1533090161767-e6ffed986c88; u 1571055107559-3e67626fa8be
+          u 1600585154340-be6161a56a0c; u 1507089947368-19c1da9775ae; u 1505693416388-ac5aa068fe85
+          p 1571460; p 259962; p 2724749; p 1080721; p 3356416; p 276724; p 1866149; p 2079246
+          ls -la "$d"; ls "$d" | wc -l
+      - name: Commit candidates
+        if: steps.dl.outputs.skip != '1'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add website/assets/photos/candidates
+          git commit -m "Add oak photo candidates [skip ci]"
+          git push
