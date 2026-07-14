@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SA Construction Inc — Fine Homebuilding &amp; Architectural Millwork</title>
+<meta name="description" content="SA Construction Inc — bespoke oak paneling, custom libraries, kitchens, and architectural millwork. (774) 368-9752">
+<link rel="icon" type="image/svg+xml" href="assets/sa-badge.svg">
+<style>
+  :root{
+    --ink:#0B0A09; --ink2:#161412; --paper:#F4F0E8; --cream:#EDE7DB;
+    --silver:#C7CACF; --silver-d:#8B8E95; --oak:#B08A57; --brass:#C9A25E;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--cream);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+  .label{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  .rule{width:64px;height:1px;background:var(--brass);margin:18px 0 28px}
+
+  /* ---------- nav ---------- */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(11,10,9,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(199,202,207,.12)}
+  .nav-in{max-width:1320px;margin:0 auto;padding:14px clamp(20px,4vw,48px);display:flex;align-items:center;gap:28px}
+  .brand{display:flex;align-items:center;gap:14px;margin-right:auto}
+  .brand img{width:52px;height:52px}
+  .brand b{font-family:var(--serif);font-size:19px;letter-spacing:.14em;color:var(--paper);white-space:nowrap}
+  .brand small{display:block;font-size:10px;letter-spacing:.42em;color:var(--silver-d);font-family:var(--sans);font-weight:400}
+  .nav-links{display:flex;gap:30px;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--silver)}
+  .nav-links a:hover{color:var(--brass)}
+  .nav-tel{font-size:13.5px;letter-spacing:.08em;color:var(--paper);border:1px solid rgba(201,162,94,.55);padding:9px 18px;white-space:nowrap}
+  .nav-tel:hover{background:var(--brass);color:var(--ink)}
+  @media(max-width:900px){.nav-links{display:none}}
+
+  /* ---------- hero ---------- */
+  header{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;isolation:isolate;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:-2}
+  .hero-bg img{width:100%;height:100%;object-fit:cover}
+  header::after{content:"";position:absolute;inset:0;z-index:-1;background:
+    radial-gradient(ellipse at 50% 42%, rgba(11,10,9,.25), rgba(11,10,9,.88) 78%)}
+  .hero-in{padding:140px 20px 90px;max-width:900px}
+  .hero-in .badge{width:clamp(170px,24vw,250px);margin:0 auto 38px;filter:drop-shadow(0 18px 50px rgba(0,0,0,.7))}
+  h1{font-family:var(--serif);font-weight:400;color:var(--paper);font-size:clamp(34px,5.4vw,62px);line-height:1.14;letter-spacing:.01em}
+  .hero-sub{margin:26px auto 40px;max-width:600px;color:var(--silver);font-size:clamp(15px,1.6vw,18px);font-weight:300;letter-spacing:.02em}
+  .cta-row{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:15px 34px;font-size:12.5px;letter-spacing:.26em;text-transform:uppercase;border:1px solid var(--brass);color:var(--paper);transition:.25s}
+  .btn:hover{background:var(--brass);color:var(--ink)}
+  .btn.solid{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+  .btn.solid:hover{background:var(--brass);border-color:var(--brass)}
+  .hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:var(--silver-d);font-size:10.5px;letter-spacing:.4em;text-transform:uppercase}
+
+  section{padding:clamp(80px,10vw,130px) 0}
+
+  /* ---------- statement ---------- */
+  .statement p.big{font-family:var(--serif);font-size:clamp(24px,3.3vw,40px);line-height:1.42;color:var(--paper);max-width:980px}
+  .statement p.big em{color:var(--brass);font-style:normal}
+  .statement .cols{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:56px;color:var(--silver);font-weight:300;font-size:15.5px}
+  @media(max-width:800px){.statement .cols{grid-template-columns:1fr}}
+
+  /* ---------- portfolio ---------- */
+  .portfolio{background:var(--ink2)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:22px}
+  @media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{position:relative;overflow:hidden;border:1px solid rgba(199,202,207,.1)}
+  .card .ph{aspect-ratio:4/3;overflow:hidden}
+  .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.6,.2,1)}
+  .card:hover .ph img{transform:scale(1.045)}
+  .card figcaption{padding:20px 22px 24px;border-top:1px solid rgba(201,162,94,.35)}
+  .card h3{font-family:var(--serif);font-weight:400;font-size:21px;color:var(--paper);margin-bottom:6px}
+  .card p{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--silver-d)}
+
+  /* ---------- materials ---------- */
+  .materials .mat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:40px}
+  @media(max-width:800px){.materials .mat-grid{grid-template-columns:1fr}}
+  .mat{border:1px solid rgba(199,202,207,.12)}
+  .mat .sw{height:180px;overflow:hidden}
+  .mat .sw img{width:100%;height:100%;object-fit:cover}
+  .mat div{padding:22px}
+  .mat h3{font-family:var(--serif);font-weight:400;font-size:20px;color:var(--paper);margin-bottom:8px}
+  .mat p{font-size:14px;color:var(--silver);font-weight:300}
+
+  /* ---------- services ---------- */
+  .services{background:var(--ink2)}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:30px;border-top:1px solid rgba(199,202,207,.14)}
+  @media(max-width:900px){.svc-grid{grid-template-columns:1fr}}
+  .svc{padding:34px 28px 38px;border-bottom:1px solid rgba(199,202,207,.14);border-right:1px solid rgba(199,202,207,.14)}
+  .svc:nth-child(3n){border-right:none}
+  @media(max-width:900px){.svc{border-right:none}}
+  .svc span{font-family:var(--serif);color:var(--brass);font-size:15px;letter-spacing:.1em}
+  .svc h3{font-family:var(--serif);font-weight:400;font-size:22px;color:var(--paper);margin:10px 0 10px}
+  .svc p{font-size:14px;color:var(--silver);font-weight:300}
+
+  /* ---------- process ---------- */
+  .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:38px;margin-top:44px}
+  @media(max-width:900px){.proc-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.proc-grid{grid-template-columns:1fr}}
+  .step span{font-family:var(--serif);font-size:44px;color:transparent;-webkit-text-stroke:1px var(--brass);display:block;margin-bottom:12px}
+  .step h3{font-family:var(--serif);font-weight:400;font-size:19px;color:var(--paper);margin-bottom:8px}
+  .step p{font-size:13.5px;color:var(--silver-d);font-weight:300}
+
+  /* ---------- quote band ---------- */
+  .quote{position:relative;isolation:isolate;text-align:center;overflow:hidden}
+  .quote .bg{position:absolute;inset:0;z-index:-2}
+  .quote .bg img{width:100%;height:100%;object-fit:cover}
+  .quote::after{content:"";position:absolute;inset:0;z-index:-1;background:rgba(11,10,9,.82)}
+  .quote blockquote{font-family:var(--serif);font-size:clamp(24px,3.4vw,40px);color:var(--paper);font-style:italic;max-width:820px;margin:0 auto;line-height:1.4}
+  .quote cite{display:block;margin-top:22px;font-style:normal;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--brass)}
+
+  /* ---------- contact ---------- */
+  .contact .split{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;margin-top:26px}
+  @media(max-width:900px){.contact .split{grid-template-columns:1fr}}
+  .contact h2.big{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4vw,48px);color:var(--paper);line-height:1.2}
+  .contact .tel{display:inline-block;margin:30px 0 8px;font-family:var(--serif);font-size:clamp(26px,3vw,36px);color:var(--brass);border-bottom:1px solid rgba(201,162,94,.5);padding-bottom:6px}
+  .contact .meta{margin-top:26px;color:var(--silver-d);font-size:14px;font-weight:300}
+  .contact .meta b{color:var(--silver);font-weight:600;font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;display:block;margin-bottom:4px}
+  .contact .meta > div{margin-bottom:20px}
+  form{display:grid;gap:16px}
+  .f2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.f2{grid-template-columns:1fr}}
+  input,textarea{width:100%;background:transparent;border:1px solid rgba(199,202,207,.25);color:var(--paper);padding:15px 16px;font-family:var(--sans);font-size:14.5px}
+  input::placeholder,textarea::placeholder{color:var(--silver-d)}
+  input:focus,textarea:focus{outline:none;border-color:var(--brass)}
+  form .btn{cursor:pointer;background:none;justify-self:start;font-family:var(--sans)}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid rgba(199,202,207,.12);padding:46px 0 54px}
+  .foot{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .foot img{width:56px}
+  .foot .fb b{font-family:var(--serif);letter-spacing:.14em;color:var(--paper);font-size:16px}
+  .foot .fb div{font-size:11px;letter-spacing:.3em;color:var(--silver-d);text-transform:uppercase;margin-top:3px}
+  .foot .fr{margin-left:auto;text-align:right;color:var(--silver-d);font-size:12.5px;font-weight:300}
+  @media(max-width:700px){.foot .fr{margin-left:0;text-align:left}}
+
+  /* reveal on scroll */
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
+  .rv.on{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <img src="assets/sa-badge.svg" alt="SA Construction blade badge">
+      <b>SA CONSTRUCTION<small>FINE HOMEBUILDING &amp; MILLWORK</small></b>
+    </a>
+    <div class="nav-links">
+      <a href="#craft">Craft</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-tel" href="tel:+17743689752">(774) 368-9752</a>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="hero-bg"><img src="assets/img/hero-panels.svg" alt="Full-height oak raised paneling"></div>
+  <div class="hero-in">
+    <img class="badge" src="assets/sa-badge.svg" alt="SA Construction Inc">
+    <h1>Fine Homebuilding &amp;<br>Architectural Millwork</h1>
+    <p class="hero-sub">Bespoke oak paneling, libraries, kitchens, and interiors —
+      measured twice, cut once, and built to last generations.</p>
+    <div class="cta-row">
+      <a class="btn solid" href="#portfolio">View the Work</a>
+      <a class="btn" href="tel:+17743689752">Call (774) 368‑9752</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</header>
+
+<section class="statement" id="craft">
+  <div class="wrap rv">
+    <div class="label">The Company</div>
+    <div class="rule"></div>
+    <p class="big">We partner with remarkable clients and their architects to bring
+      exceptional design to life — in <em>solid oak</em>, joined by hand, finished
+      to a standard that machines alone can’t reach.</p>
+    <div class="cols">
+      <p>SA Construction is a general contractor with a cabinetmaker’s temperament.
+         Our reputation is built on architectural paneling and casework: quarter-sawn
+         and rift-sawn white oak, book-matched veneers, hand-beveled coffers, and
+         joinery that closes with the sound of a bank-vault door. We run lean crews,
+         communicate plainly, and treat every home as if our own name were carved
+         into the newel post.</p>
+      <p>From a single paneled study to a whole-home renovation, the same rule
+         applies: honest materials, precise measurement, and finishes that ask to be
+         touched. We shop-fabricate, dry-fit, and install white-glove — so the dust
+         stays in our shop and the craftsmanship stays in your walls.</p>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio" id="portfolio">
+  <div class="wrap">
+    <div class="rv">
+      <div class="label">Selected Work</div>
+      <div class="rule"></div>
+    </div>
+    <div class="grid">
+      <figure class="card rv">
+        <div class="ph"><img src="assets/img/library.svg" alt="Floor-to-ceiling white oak library"></div>
+        <figcaption>
+          <h3>The Beacon Study</h3>
+          <p>Floor-to-ceiling library · white oak</p>
+        </figcaption>
+      </figure>
+      <figure class="card rv">
+        <div class="ph"><img src="assets/img/kitchen.svg" alt="Rift-sawn oak slab cabinetry with brass pulls"></div>
+        <figcaption>
+          <h3>Rift Oak Kitchen</h3>
+          <p>Slab cabinetry · rift-sawn oak · brass</p>
+        </figcaption>
+      </figure>
+      <figure class="card rv">
+        <div class="ph"><img src="assets/img/coffered.svg" alt="Coffered oak paneling"></div>
+        <figcaption>
+          <h3>Coffered Salon</h3>
+          <p>Hand-beveled coffers · solid oak</p>
+        </figcaption>
+      </figure>
+      <figure class="card rv">
+        <div class="ph"><img src="assets/img/fumed.svg" alt="Fumed oak slat wall with brass reveal"></div>
+        <figcaption>
+          <h3>Fumed Oak Lounge</h3>
+          <p>Slat wall · fumed oak · brass reveal</p>
+        </figcaption>
+      </figure>
+      <figure class="card rv">
+        <div class="ph"><img src="assets/img/hero-panels.svg" alt="Raised panel entry hall"></div>
+        <figcaption>
+          <h3>Raised Panel Hall</h3>
+          <p>Entry hall · raised panels · oil finish</p>
+        </figcaption>
+      </figure>
+      <figure class="card rv">
+        <div class="ph"><img src="assets/img/grain.svg" alt="Cathedral grain oak boards, book-matched"></div>
+        <figcaption>
+          <h3>Material Study</h3>
+          <p>Cathedral grain · book-matched boards</p>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="materials">
+  <div class="wrap">
+    <div class="rv">
+      <div class="label">Our Material</div>
+      <div class="rule"></div>
+      <p class="big" style="font-family:var(--serif);font-size:clamp(22px,2.8vw,34px);line-height:1.4;color:var(--paper);max-width:900px">
+        White oak, three ways. The same tree, sawn three directions,
+        gives three different rooms.</p>
+    </div>
+    <div class="mat-grid">
+      <div class="mat rv">
+        <div class="sw"><img src="assets/img/grain.svg" alt="Quarter-sawn oak swatch"></div>
+        <div>
+          <h3>Quarter‑Sawn</h3>
+          <p>Cut across the growth rings for ray fleck and figure. Stable, traditional,
+             and luminous under a hand-rubbed oil finish. Our choice for libraries and paneled rooms.</p>
+        </div>
+      </div>
+      <div class="mat rv">
+        <div class="sw"><img src="assets/img/kitchen.svg" alt="Rift-sawn oak swatch"></div>
+        <div>
+          <h3>Rift‑Sawn</h3>
+          <p>Straight, calm, linear grain with no cathedral. The modern workhorse —
+             kitchens, slab doors, and long runs where the eye should rest, not wander.</p>
+        </div>
+      </div>
+      <div class="mat rv">
+        <div class="sw"><img src="assets/img/fumed.svg" alt="Fumed oak swatch"></div>
+        <div>
+          <h3>Fumed</h3>
+          <p>Darkened to the core in an ammonia chamber — never stained. Deep, smoky
+             tones that wear beautifully in lounges, bars, and wine rooms.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="rv">
+      <div class="label">What We Build</div>
+      <div class="rule"></div>
+    </div>
+    <div class="svc-grid rv">
+      <div class="svc"><span>I</span><h3>Architectural Paneling</h3>
+        <p>Raised, flat, and coffered paneling; wainscot and full-height walls, shop-fabricated and scribed to the room.</p></div>
+      <div class="svc"><span>II</span><h3>Libraries &amp; Studies</h3>
+        <p>Floor-to-ceiling shelving, rolling ladders, concealed doors, and desks built into the architecture.</p></div>
+      <div class="svc"><span>III</span><h3>Kitchens &amp; Cabinetry</h3>
+        <p>Custom casework in rift and quarter-sawn oak — inset or slab, with hardware chosen to age well.</p></div>
+      <div class="svc"><span>IV</span><h3>Staircases &amp; Railings</h3>
+        <p>Curved and straight runs, hand-shaped rails, and newels that anchor the whole house.</p></div>
+      <div class="svc"><span>V</span><h3>Doors, Trim &amp; Casework</h3>
+        <p>Solid-core paneled doors, pivot doors, and trim packages milled to the architect's profiles.</p></div>
+      <div class="svc"><span>VI</span><h3>Whole-Home Renovation</h3>
+        <p>Full general contracting with millwork-first thinking — one crew, one standard, one point of contact.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="rv">
+      <div class="label">How We Work</div>
+      <div class="rule"></div>
+    </div>
+    <div class="proc-grid">
+      <div class="step rv"><span>01</span><h3>Consultation</h3>
+        <p>Walk the space, hear the brief, and speak honestly about budget, lead time, and what the room wants to be.</p></div>
+      <div class="step rv"><span>02</span><h3>Shop Drawings</h3>
+        <p>Every elevation drawn, every reveal dimensioned, every board sequenced — approved before a single cut.</p></div>
+      <div class="step rv"><span>03</span><h3>Crafting</h3>
+        <p>Milled, joined, and finished in our shop under controlled humidity. Dry-fit before it ever ships.</p></div>
+      <div class="step rv"><span>04</span><h3>Installation</h3>
+        <p>White-glove install, scribed to the plaster, cleaned to broom-and-cloth standard. Then we stand behind it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="bg"><img src="assets/img/coffered.svg" alt=""></div>
+  <div class="wrap rv">
+    <blockquote>“Measure twice. Cut once.<br>Stand behind it forever.”</blockquote>
+    <cite>The SA Construction Standard</cite>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="rv">
+      <div class="label">Contact</div>
+      <div class="rule"></div>
+    </div>
+    <div class="split">
+      <div class="rv">
+        <h2 class="big">Let’s build something<br>that outlasts us.</h2>
+        <a class="tel" href="tel:+17743689752">(774) 368‑9752</a>
+        <div class="meta">
+          <div><b>Service Area</b>Southeastern Massachusetts · Cape &amp; Islands · Greater Boston</div>
+          <div><b>Trade</b>General contracting · architectural millwork · custom casework</div>
+          <div><b>Hours</b>Monday – Saturday, 7am – 5pm</div>
+        </div>
+      </div>
+      <form class="rv" id="qform">
+        <div class="f2">
+          <input type="text" name="name" placeholder="Name" required>
+          <input type="tel" name="phone" placeholder="Phone">
+        </div>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="msg" rows="5" placeholder="Tell us about the project — the room, the wood, the timeline." required></textarea>
+        <button class="btn" type="submit">Request a Consultation</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <img src="assets/sa-badge.svg" alt="">
+    <div class="fb">
+      <b>SA CONSTRUCTION INC</b>
+      <div>Fine Homebuilding &amp; Architectural Millwork</div>
+    </div>
+    <div class="fr">
+      © 2026 SA Construction Inc · (774) 368‑9752<br>
+      Licensed &amp; Insured · Massachusetts
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  document.getElementById('qform').addEventListener('submit', e => {
+    e.preventDefault();
+    const d = new FormData(e.target);
+    const body = encodeURIComponent(
+      `Name: ${d.get('name')}\nPhone: ${d.get('phone')}\nEmail: ${d.get('email')}\n\n${d.get('msg')}`);
+    location.href = `mailto:info@saconstruction.com?subject=Consultation Request&body=${body}`;
+  });
+</script>
+</body>
+</html>
