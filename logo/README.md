@@ -1,6 +1,26 @@
 # SA Construction Inc — Logo
 
-A minimalist redesign of the original badge logo. All files are scalable SVG.
+Two minimalist redesigns of the original badge logo.
+
+## v2 — Silver blade mark (`v2/`)
+
+A side-view table-saw blade in brushed silver, with a black house set inside it.
+The clever bit: **the blade's arbor hole is the house's round window** — one
+circle serving both readings. Palette is strictly silver / black / white.
+
+- `v2/sa-construction-mark.svg` — icon only, transparent background
+- `v2/sa-construction-logo.svg` — stacked lockup, white background
+- `v2/sa-construction-logo-dark.svg` — stacked lockup on black (the house
+  reads as a knockout through the blade)
+- `v2/sa-construction-horizontal.svg` — horizontal lockup
+- `v2/png/` — high-definition PNG exports (up to 2048 px, mark is transparent)
+
+v2 palette: steel gradient `#F5F6F8 → #C3C6CC → #8B8E95`, ink `#0A0A0B`,
+white `#FFFFFF`.
+
+## v1 — Line mark
+
+The first pass: a single-line-weight kerf-and-chevron mark. All files are scalable SVG.
 
 ## Concept
 
