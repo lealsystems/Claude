@@ -1,0 +1,25 @@
+name: Fetch pitch photos
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download photos
+        run: |
+          mkdir -p website/assets/photos
+          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+          curl -fSL -A "$UA" -o website/assets/photos/rift-oak-cabinets.png \
+            "https://images.squarespace-cdn.com/content/v1/5ef4ddc21250a85af33e09e9/33d222f4-a92d-46c8-840d-400622d81c90/Rift+Sawn+Oak+Cabinets.png?format=2500w"
+          curl -fSL -A "$UA" -o website/assets/photos/houzz-photo.jpg \
+            "https://st.hzcdn.com/simgs/fae18c9b0b29704f_14-5915/photo.jpg"
+          file website/assets/photos/*
+      - name: Commit photos to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add website/assets/photos
+          git commit -m "Add pitch photos fetched via workflow"
+          git push
