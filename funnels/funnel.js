@@ -75,13 +75,23 @@
     return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || ICONS.sparkle) + '</svg>';
   }
 
-  var F = window.FUNNEL || { steps: [] };
   var app = document.getElementById("app");
   var progressBar = document.getElementById("progress-bar");
 
   // Flow: -1 = intro, 0..n-1 = questions, n = lead form, n+1 = thanks
+  var F = { steps: [] };
   var state = { idx: -1, answers: {}, done: false };
-  var totalSteps = F.steps.length + 1; // questions + lead form
+  var totalSteps = 1;
+
+  // Boot (or re-boot) the engine with a funnel config. Multi-quiz pages
+  // call window.CCBoot(config) each time the visitor picks a trade.
+  function boot(config) {
+    F = config;
+    state = { idx: -1, answers: {}, done: false };
+    totalSteps = F.steps.length + 1; // questions + lead form
+    renderPartners();
+    render();
+  }
 
   /* ---------- Chrome (topbar + footer + partners), rendered once ---------- */
   function renderChrome() {
@@ -113,9 +123,13 @@
           '<div class="footer-area">© ' + new Date().getFullYear() + ' Cape Codder Building & Remodeling INC</div>' +
         '</div>';
     }
+  }
+
+  function renderPartners() {
     var partners = document.getElementById("partners");
-    if (partners && F.partners) {
-      partners.innerHTML =
+    if (!partners) return;
+    if (!F.partners) { partners.innerHTML = ""; return; }
+    partners.innerHTML =
         '<div class="lbl">Proud Installer Of</div>' +
         '<div class="partner-badges">' +
           '<div class="partner-badge"><span class="pb-mark harvey">H</span>' +
@@ -123,8 +137,7 @@
           '<div class="partner-badge"><span class="pb-mark andersen">A</span>' +
             '<span><span class="pb-name">Andersen</span><br><span class="pb-sub">Windows & Doors</span></span></div>' +
         '</div>';
-      // Swap the .pb-mark monograms for official brand logo image files when available.
-    }
+    // Swap the .pb-mark monograms for official brand logo image files when available.
   }
 
   /* ---------- Progress ---------- */
@@ -167,6 +180,7 @@
       return '<li><span class="tick">' + icon("check", 13) + '</span>' + t + "</li>";
     }).join("");
     return '<div class="step-card intro">' +
+      (window.onFunnelExit ? metaBar(true, "") : "") +
       '<div class="intro-kicker">' + icon("sparkle", 14) + F.intro.kicker + "</div>" +
       "<h1>" + F.intro.headline + "</h1>" +
       '<p class="sub">' + F.intro.sub + "</p>" +
@@ -283,6 +297,7 @@
     var backBtn = app.querySelector('[data-act="back"]');
     if (backBtn) backBtn.addEventListener("click", function () {
       if (state.idx > -1) { state.idx -= 1; render(); }
+      else if (window.onFunnelExit) window.onFunnelExit(); // back to quiz picker
     });
 
     var step = state.idx > -1 && state.idx < F.steps.length ? F.steps[state.idx] : null;
@@ -351,8 +366,10 @@
   }
 
   renderChrome();
-  if (F.intro) render(); // hub pages set intro: null and render their own content
+  // Single-funnel pages define window.FUNNEL and boot immediately.
+  // Hub/picker pages omit it (or set intro: null) and call CCBoot on demand.
+  if (window.FUNNEL && window.FUNNEL.intro) boot(window.FUNNEL);
 
-  // Expose the icon helper for the hub page.
   window.CCIcon = icon;
+  window.CCBoot = boot;
 })();

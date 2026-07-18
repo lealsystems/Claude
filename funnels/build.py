@@ -19,7 +19,7 @@ logo_uri = f"data:image/png;base64,{logo_b64}"
 
 js_inline = js.replace('logo: "logo.png"', f'logo: "{logo_uri}"')
 
-pages = ["index.html", "windows-doors.html", "siding.html",
+pages = ["index.html", "quiz.html", "windows-doors.html", "siding.html",
          "roofing.html", "kitchen.html", "bathroom.html"]
 
 for name in pages:

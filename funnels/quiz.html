@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Project Quotes — Cape Codder Building &amp; Remodeling</title>
+<meta name="description" content="Pick your project — windows &amp; doors, siding, roofing, kitchen, or bathroom — answer a few quick questions, and get a free quote from Cape Cod's trusted local builders.">
+<link rel="stylesheet" href="funnel.css">
+<style>
+  .hub-card { font: inherit; text-align: left; width: 100%; cursor: pointer; }
+  .hub-card .hc-text { line-height: 1.35; }
+</style>
+</head>
+<body>
+<header id="topbar" class="topbar"></header>
+<main class="stage">
+  <div id="picker" class="hub-hero step-card">
+    <img class="hub-logo" src="logo.png" alt="Cape Codder Building &amp; Remodeling">
+    <h1>What can we build for <em>you?</em></h1>
+    <p>Pick your project, answer a few quick questions, and get a free, no-obligation quote from our local team — usually within one business day.</p>
+    <div class="hub-grid">
+      <button class="hub-card" data-f="windows-doors">
+        <span class="opt-icon" data-icon="window"></span>
+        <span class="hc-text"><span class="hc-title">Windows &amp; Doors</span><br><span class="hc-sub">Harvey &amp; Andersen installer</span></span>
+        <span class="hc-go">&rarr;</span>
+      </button>
+      <button class="hub-card" data-f="siding">
+        <span class="opt-icon" data-icon="cedar"></span>
+        <span class="hc-text"><span class="hc-title">Siding</span><br><span class="hc-sub">Cedar, vinyl &amp; fiber cement</span></span>
+        <span class="hc-go">&rarr;</span>
+      </button>
+      <button class="hub-card" data-f="roofing">
+        <span class="opt-icon" data-icon="roof"></span>
+        <span class="hc-text"><span class="hc-title">Roofing</span><br><span class="hc-sub">Repairs &amp; full replacements</span></span>
+        <span class="hc-go">&rarr;</span>
+      </button>
+      <button class="hub-card" data-f="kitchen">
+        <span class="opt-icon" data-icon="cabinet"></span>
+        <span class="hc-text"><span class="hc-title">Kitchen</span><br><span class="hc-sub">Full remodels &amp; refreshes</span></span>
+        <span class="hc-go">&rarr;</span>
+      </button>
+      <button class="hub-card" data-f="bathroom">
+        <span class="opt-icon" data-icon="shower"></span>
+        <span class="hc-text"><span class="hc-title">Bathroom</span><br><span class="hc-sub">Remodels &amp; conversions</span></span>
+        <span class="hc-go">&rarr;</span>
+      </button>
+    </div>
+  </div>
+  <div id="app" hidden></div>
+</main>
+<section id="partners" class="partners" hidden></section>
+<footer id="site-footer" class="site-footer"></footer>
+<script>
+// All five quizzes, keyed by trade. Set shared options here:
+//   endpoint:   GoHighLevel Workflow Inbound Webhook URL (per funnel)
+//   bookingUrl: GHL calendar link shown on the results screen
+window.FUNNELS = {
+  "windows-doors": {
+  slug: "windows-doors",
+  projectNoun: "windows & doors project",
+  partners: true,
+  // endpoint: "https://your-crm-webhook-here", // wire to Zapier/GHL/Formspree; falls back to email
+  intro: {
+    kicker: "Windows & Doors",
+    headline: "Find your perfect <em>windows &amp; doors</em> in 60 seconds",
+    sub: "Answer a few quick questions and get a free, no-obligation quote from Cape Cod's trusted local installers of Harvey and Andersen windows & doors.",
+    cta: "Start My Free Quote",
+    bullets: [
+      "Free in-home consultation &amp; exact measurements",
+      "Energy-efficient options that handle coastal weather",
+      "Installed by certified local pros — not subcontractors"
+    ]
+  },
+  steps: [
+    {
+      id: "need",
+      short: "Project",
+      title: "What does your home need?",
+      options: [
+        { icon: "window", label: "Replacement Windows", sub: "Upgrade old or drafty windows" },
+        { icon: "door",   label: "Entry Door",          sub: "Front, side, or back door" },
+        { icon: "slider", label: "Patio / Slider Door", sub: "Sliding or French doors" },
+        { icon: "both",   label: "Windows & Doors",     sub: "A combination project" }
+      ]
+    },
+    {
+      id: "count",
+      short: "Project size",
+      title: "How many windows or doors are we talking about?",
+      sub: "A rough guess is perfectly fine.",
+      options: [
+        { icon: "window", label: "1–3" },
+        { icon: "window", label: "4–7" },
+        { icon: "window", label: "8–12" },
+        { icon: "house",  label: "13+ / Whole home" }
+      ]
+    },
+    {
+      id: "condition",
+      short: "You're noticing",
+      title: "What are you noticing with your current windows or doors?",
+      multi: true,
+      options: [
+        { icon: "snow",   label: "Drafts & Cold Spots",  sub: "Rooms never feel warm" },
+        { icon: "drop",   label: "Condensation",         sub: "Fog between the panes" },
+        { icon: "wrench", label: "Hard to Open / Close", sub: "Sticking, painted shut" },
+        { icon: "warn",   label: "Rot or Damage",        sub: "Soft frames, chipped sills" },
+        { icon: "dollar", label: "High Energy Bills",    sub: "Heating & cooling costs" },
+        { icon: "check",  label: "Nothing Obvious",      sub: "Just ready for an upgrade" }
+      ]
+    },
+    {
+      id: "priority",
+      short: "Priorities",
+      title: "What matters most to you?",
+      multi: true,
+      options: [
+        { icon: "bolt",   label: "Energy Efficiency", sub: "Lower heating & cooling bills" },
+        { icon: "sound",  label: "Noise Reduction",   sub: "A quieter home" },
+        { icon: "star",   label: "Curb Appeal",       sub: "A beautiful new look" },
+        { icon: "shield", label: "Low Maintenance",   sub: "Durable, coastal-ready materials" }
+      ]
+    },
+    {
+      id: "property",
+      short: "Property",
+      title: "What type of property is it?",
+      options: [
+        { icon: "house",    label: "Single-Family Home" },
+        { icon: "condo",    label: "Condo / Townhouse" },
+        { icon: "building", label: "Multi-Family" },
+        { icon: "store",    label: "Commercial" }
+      ]
+    },
+    {
+      id: "timeline",
+      short: "Timeline",
+      title: "When would you like the work done?",
+      options: [
+        { icon: "bolt",     label: "As soon as possible" },
+        { icon: "calendar", label: "In 1–3 months" },
+        { icon: "clock",    label: "In 3–6 months" },
+        { icon: "search",   label: "Just researching" }
+      ]
+    }
+  ],
+  result: {
+    urgentIf: {
+      condition: ["Drafts & Cold Spots", "Condensation", "Hard to Open / Close", "Rot or Damage", "High Energy Bills"]
+    },
+    urgent: "Based on your answers, a professional window & door evaluation would be a smart next step. Drafts, condensation, sticking sashes, and damaged frames are classic signs that replacement will pay for itself in comfort and energy savings. As certified installers of Harvey and Andersen products, we'll inspect everything and walk you through your options — with no pressure.",
+    calm: "Good news — nothing in your answers suggests an emergency. A free evaluation is still worth it: we'll measure everything, check seals and operation, and give you exact numbers so you can plan the upgrade on your own timeline with Harvey or Andersen products."
+  },
+  // bookingUrl: "https://your-ghl-calendar-link", // adds a booking button to the results screen
+  form: {
+    title: "Your free windows &amp; doors quote is ready to book",
+    sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",
+    cta: "Get My Free Quote"
+  }
+},
+
+  "siding": {
+  slug: "siding",
+  projectNoun: "siding project",
+  // endpoint: "https://your-crm-webhook-here",
+  intro: {
+    kicker: "Siding",
+    headline: "Give your home a <em>coastal-proof</em> new exterior",
+    sub: "From classic cedar shingles to low-maintenance vinyl — answer a few quick questions and get a free siding quote built for Cape Cod weather.",
+    cta: "Start My Free Quote",
+    bullets: [
+      "Materials chosen for salt air, wind &amp; New England winters",
+      "Classic Cape Cod looks or clean modern lines",
+      "Free in-home consultation &amp; detailed estimate"
+    ]
+  },
+  steps: [
+    {
+      id: "scope",
+      short: "Project",
+      title: "What kind of siding project is it?",
+      options: [
+        { icon: "refresh", label: "Full Replacement",  sub: "New siding for the whole home" },
+        { icon: "wrench",  label: "Repair / Partial",  sub: "One side, storm damage, rot" },
+        { icon: "plus",    label: "New Construction",  sub: "Addition or new build" },
+        { icon: "question",label: "Not Sure Yet",      sub: "Help me figure it out" }
+      ]
+    },
+    {
+      id: "material",
+      short: "Material",
+      title: "Which material are you leaning toward?",
+      sub: "We'll bring samples either way.",
+      options: [
+        { icon: "cedar",  label: "Cedar Shingles",  sub: "The classic Cape Cod look" },
+        { icon: "vinyl",  label: "Vinyl",           sub: "Low maintenance, great value" },
+        { icon: "hardie", label: "Fiber Cement",    sub: "Hardie-style durability" },
+        { icon: "sparkle",label: "Help Me Choose",  sub: "Show me the options" }
+      ]
+    },
+    {
+      id: "size",
+      short: "Home size",
+      title: "Roughly how big is your home?",
+      options: [
+        { icon: "house", label: "Under 1,500 sq ft" },
+        { icon: "house", label: "1,500 – 2,500 sq ft" },
+        { icon: "house", label: "Over 2,500 sq ft" },
+        { icon: "question", label: "Not sure" }
+      ]
+    },
+    {
+      id: "timeline",
+      short: "Timeline",
+      title: "When would you like the work done?",
+      options: [
+        { icon: "bolt",     label: "As soon as possible" },
+        { icon: "calendar", label: "In 1–3 months" },
+        { icon: "clock",    label: "In 3–6 months" },
+        { icon: "search",   label: "Just researching" }
+      ]
+    }
+  ],
+  result: {
+    urgentIf: { scope: ["Repair / Partial"], timeline: ["As soon as possible"] },
+    urgent: "Based on your answers, it's worth having us take a look soon. Damaged or failing siding lets coastal moisture reach the structure underneath, and small problems grow fast through a Cape Cod winter. We'll inspect it, give you honest options, and price both repair and replacement.",
+    calm: "Your project sounds like a great candidate for a planned upgrade. We'll bring material samples, measure your home, and give you an exact quote so you can compare options — cedar, vinyl, and fiber cement all handle the coast differently, and we'll walk you through the trade-offs."
+  },
+  // bookingUrl: "https://your-ghl-calendar-link",
+  form: {
+    title: "Your free siding quote is ready to book",
+    sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",
+    cta: "Get My Free Quote"
+  }
+},
+
+  "roofing": {
+  slug: "roofing",
+  projectNoun: "roofing project",
+  // endpoint: "https://your-crm-webhook-here",
+  intro: {
+    kicker: "Roofing",
+    headline: "A roof that stands up to <em>Cape Cod weather</em>",
+    sub: "Nor'easters, salt air, and summer sun are tough on roofs. Answer a few quick questions and get a free roofing quote from a local team that builds for it.",
+    cta: "Start My Free Quote",
+    bullets: [
+      "Fast response for leaks &amp; storm damage",
+      "Architectural shingles, cedar &amp; metal options",
+      "Clean job sites and honest, detailed estimates"
+    ]
+  },
+  steps: [
+    {
+      id: "situation",
+      short: "Situation",
+      title: "What's going on with your roof?",
+      options: [
+        { icon: "drop",     label: "Leak / Storm Damage", sub: "Something needs attention now" },
+        { icon: "clock",    label: "Old & Worn",          sub: "It's showing its age" },
+        { icon: "calendar", label: "Planning Ahead",      sub: "Budgeting a replacement" },
+        { icon: "plus",     label: "New Construction",    sub: "Addition or new build" }
+      ]
+    },
+    {
+      id: "material",
+      short: "Material",
+      title: "Which roofing material do you prefer?",
+      sub: "We'll walk you through pros, cons, and cost either way.",
+      options: [
+        { icon: "shingle", label: "Asphalt Shingles", sub: "The proven all-rounder" },
+        { icon: "cedar",   label: "Cedar",            sub: "Natural New England character" },
+        { icon: "metal",   label: "Metal",            sub: "Modern & ultra-durable" },
+        { icon: "sparkle", label: "Help Me Choose",   sub: "Show me the options" }
+      ]
+    },
+    {
+      id: "age",
+      short: "Roof age",
+      title: "How old is your current roof?",
+      options: [
+        { icon: "roof",     label: "Under 10 years" },
+        { icon: "roof",     label: "10 – 20 years" },
+        { icon: "roof",     label: "Over 20 years" },
+        { icon: "question", label: "Not sure" }
+      ]
+    },
+    {
+      id: "timeline",
+      short: "Timeline",
+      title: "When would you like the work done?",
+      options: [
+        { icon: "bolt",     label: "As soon as possible" },
+        { icon: "calendar", label: "In 1–3 months" },
+        { icon: "clock",    label: "In 3–6 months" },
+        { icon: "search",   label: "Just researching" }
+      ]
+    }
+  ],
+  result: {
+    urgentIf: { situation: ["Leak / Storm Damage", "Old & Worn"], age: ["Over 20 years"] },
+    urgent: "Based on your answers, we recommend an inspection soon. Leaks, visible wear, or a roof past the 20-year mark can turn into interior damage quickly — especially with Cape Cod nor'easters. We'll get eyes on it fast, document everything, and give you straight answers on repair vs. replacement.",
+    calm: "Your roof doesn't sound like an emergency — which is the best time to plan. A free inspection gives you a clear picture of its remaining life and an exact replacement number, so a surprise never forces your hand. We'll walk the roof, photograph everything, and put it in writing."
+  },
+  // bookingUrl: "https://your-ghl-calendar-link",
+  form: {
+    title: "Your free roofing quote is ready to book",
+    sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",
+    cta: "Get My Free Quote"
+  }
+},
+
+  "kitchen": {
+  slug: "kitchen",
+  projectNoun: "kitchen remodel",
+  // endpoint: "https://your-crm-webhook-here",
+  intro: {
+    kicker: "Kitchen Remodeling",
+    headline: "Design the kitchen your home <em>deserves</em>",
+    sub: "From full transformations to cabinet and counter upgrades — answer a few quick questions and get a free kitchen remodeling quote, on-time and on-budget.",
+    cta: "Start My Free Quote",
+    bullets: [
+      "Expert craftsmanship, delivered on-time &amp; on-budget",
+      "Coastal, modern, farmhouse — designed around you",
+      "One local team from design to final walkthrough"
+    ]
+  },
+  steps: [
+    {
+      id: "scope",
+      short: "Scope",
+      title: "How big is your kitchen dream?",
+      options: [
+        { icon: "sparkle", label: "Full Remodel",         sub: "Down to the studs, all new" },
+        { icon: "cabinet", label: "Cabinets & Counters",  sub: "Keep the layout, refresh the look" },
+        { icon: "layout",  label: "Layout Change",        sub: "Open it up, move things around" },
+        { icon: "paint",   label: "Light Refresh",        sub: "Paint, hardware, backsplash" }
+      ]
+    },
+    {
+      id: "style",
+      short: "Style",
+      title: "Which style speaks to you?",
+      options: [
+        { icon: "wave",    label: "Classic Coastal",  sub: "Bright, airy, Cape Cod charm" },
+        { icon: "layout",  label: "Modern",           sub: "Clean lines, minimal detail" },
+        { icon: "house",   label: "Farmhouse",        sub: "Warm, rustic, welcoming" },
+        { icon: "sparkle", label: "Not Sure Yet",     sub: "Show me ideas" }
+      ]
+    },
+    {
+      id: "budget",
+      short: "Budget",
+      title: "What investment range feels right?",
+      sub: "Just a guide — we'll build a plan around your budget.",
+      options: [
+        { icon: "dollar", label: "Under $25k" },
+        { icon: "dollar", label: "$25k – $50k" },
+        { icon: "dollar", label: "$50k – $100k" },
+        { icon: "gem",    label: "$100k+" }
+      ]
+    },
+    {
+      id: "timeline",
+      short: "Timeline",
+      title: "When would you like to start?",
+      options: [
+        { icon: "bolt",     label: "As soon as possible" },
+        { icon: "calendar", label: "In 1–3 months" },
+        { icon: "clock",    label: "In 3–6 months" },
+        { icon: "search",   label: "Just researching" }
+      ]
+    }
+  ],
+  result: {
+    urgentIf: { timeline: ["As soon as possible", "In 1\u20133 months"] },
+    urgent: "You're ready to move — let's make it count. We'll schedule a design consultation, take exact measurements, and turn your answers into a concrete plan and quote. Our kitchens are delivered on-time and on-budget by one accountable local team.",
+    calm: "A kitchen this good deserves good planning. We'll start with a free design consultation: measurements, layout ideas, material options, and a real budget — so when you're ready to build, every decision is already made and priced."
+  },
+  // bookingUrl: "https://your-ghl-calendar-link",
+  form: {
+    title: "Your free kitchen quote is ready to book",
+    sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",
+    cta: "Get My Free Quote"
+  }
+},
+
+  "bathroom": {
+  slug: "bathroom",
+  projectNoun: "bathroom remodel",
+  // endpoint: "https://your-crm-webhook-here",
+  intro: {
+    kicker: "Bathroom Remodeling",
+    headline: "Turn your bathroom into a <em>daily retreat</em>",
+    sub: "Premium finishes and meticulous attention to detail — answer a few quick questions and get a free, no-obligation bathroom remodeling quote.",
+    cta: "Start My Free Quote",
+    bullets: [
+      "High-quality finishes &amp; meticulous detail",
+      "Tub-to-shower conversions &amp; accessibility upgrades",
+      "One local team from design to final walkthrough"
+    ]
+  },
+  steps: [
+    {
+      id: "scope",
+      short: "Scope",
+      title: "What would you like to do?",
+      options: [
+        { icon: "sparkle", label: "Full Remodel",             sub: "Everything new, floor to ceiling" },
+        { icon: "shower",  label: "Tub-to-Shower Conversion", sub: "Modern walk-in shower" },
+        { icon: "vanity",  label: "Vanity & Fixtures",        sub: "Refresh the essentials" },
+        { icon: "access",  label: "Accessibility Upgrades",   sub: "Safer, easier to use" }
+      ]
+    },
+    {
+      id: "count",
+      short: "Bathrooms",
+      title: "How many bathrooms are we updating?",
+      options: [
+        { icon: "tub", label: "One" },
+        { icon: "tub", label: "Two" },
+        { icon: "tub", label: "Three or more" }
+      ]
+    },
+    {
+      id: "style",
+      short: "Style",
+      title: "Which look are you going for?",
+      options: [
+        { icon: "wave",    label: "Classic Coastal", sub: "Bright, breezy, timeless" },
+        { icon: "sparkle", label: "Modern Spa",      sub: "Sleek stone & glass" },
+        { icon: "tile",    label: "Timeless White",  sub: "Clean subway tile & marble looks" },
+        { icon: "question",label: "Not Sure Yet",    sub: "Show me ideas" }
+      ]
+    },
+    {
+      id: "timeline",
+      short: "Timeline",
+      title: "When would you like to start?",
+      options: [
+        { icon: "bolt",     label: "As soon as possible" },
+        { icon: "calendar", label: "In 1–3 months" },
+        { icon: "clock",    label: "In 3–6 months" },
+        { icon: "search",   label: "Just researching" }
+      ]
+    }
+  ],
+  result: {
+    urgentIf: { timeline: ["As soon as possible", "In 1\u20133 months"], scope: ["Accessibility Upgrades"] },
+    urgent: "You're ready to move — let's get you on the schedule. We'll visit, measure, and turn your answers into a detailed plan and quote. Most bathroom remodels are faster than people expect when one local team handles design through final walkthrough.",
+    calm: "Great bathrooms start with a good plan. We'll do a free consultation — measurements, fixture and tile options, and a real budget — so you can move forward on your own timeline with zero guesswork."
+  },
+  // bookingUrl: "https://your-ghl-calendar-link",
+  form: {
+    title: "Your free bathroom quote is ready to book",
+    sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",
+    cta: "Get My Free Quote"
+  }
+}
+};
+</script>
+<script src="funnel.js"></script>
+<script>
+(function () {
+  var picker = document.getElementById("picker");
+  var appEl = document.getElementById("app");
+  var partnersEl = document.getElementById("partners");
+
+  picker.querySelectorAll(".hub-card .opt-icon").forEach(function (el) {
+    el.innerHTML = window.CCIcon(el.dataset.icon, 26);
+  });
+
+  function showPicker() {
+    window.onFunnelExit = null;
+    appEl.hidden = true;
+    appEl.innerHTML = "";
+    partnersEl.hidden = true;
+    picker.hidden = false;
+    var bar = document.getElementById("progress-bar");
+    if (bar) bar.style.width = "0%";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function startFunnel(slug) {
+    var config = window.FUNNELS[slug];
+    if (!config) return;
+    picker.hidden = true;
+    appEl.hidden = false;
+    partnersEl.hidden = !config.partners;
+    window.onFunnelExit = showPicker; // intro back button returns here
+    window.CCBoot(config);
+  }
+
+  picker.querySelectorAll(".hub-card").forEach(function (card) {
+    card.addEventListener("click", function () { startFunnel(card.dataset.f); });
+  });
+
+  // Brand logo in the header returns to the picker instead of leaving the page.
+  var brand = document.querySelector(".topbar .brand");
+  if (brand) brand.addEventListener("click", function (e) { e.preventDefault(); showPicker(); });
+})();
+</script>
+</body>
+</html>
