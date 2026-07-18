@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Siding Quote — Cape Codder Building &amp; Remodeling</title>
+<meta name="description" content="Answer a few quick questions and get a free, no-obligation siding quote — vinyl, cedar shingles, or fiber cement — built for Cape Cod's coastal weather.">
+<link rel="stylesheet" href="funnel.css">
+</head>
+<body>
+<header id="topbar" class="topbar"></header>
+<main class="stage"><div id="app"></div></main>
+<footer id="site-footer" class="site-footer"></footer>
+<script>
+window.FUNNEL = {
+  slug: "siding",
+  projectNoun: "siding project",
+  // endpoint: "https://your-crm-webhook-here",
+  intro: {
+    kicker: "Siding",
+    headline: "Give your home a <em>coastal-proof</em> new exterior",
+    sub: "From classic cedar shingles to low-maintenance vinyl — answer a few quick questions and get a free siding quote built for Cape Cod weather.",
+    cta: "Start My Free Quote",
+    bullets: [
+      "Materials chosen for salt air, wind &amp; New England winters",
+      "Classic Cape Cod looks or clean modern lines",
+      "Free in-home consultation &amp; detailed estimate"
+    ]
+  },
+  steps: [
+    {
+      id: "scope",
+      title: "What kind of siding project is it?",
+      options: [
+        { icon: "refresh", label: "Full Replacement",  sub: "New siding for the whole home" },
+        { icon: "wrench",  label: "Repair / Partial",  sub: "One side, storm damage, rot" },
+        { icon: "plus",    label: "New Construction",  sub: "Addition or new build" },
+        { icon: "question",label: "Not Sure Yet",      sub: "Help me figure it out" }
+      ]
+    },
+    {
+      id: "material",
+      title: "Which material are you leaning toward?",
+      sub: "We'll bring samples either way.",
+      options: [
+        { icon: "cedar",  label: "Cedar Shingles",  sub: "The classic Cape Cod look" },
+        { icon: "vinyl",  label: "Vinyl",           sub: "Low maintenance, great value" },
+        { icon: "hardie", label: "Fiber Cement",    sub: "Hardie-style durability" },
+        { icon: "sparkle",label: "Help Me Choose",  sub: "Show me the options" }
+      ]
+    },
+    {
+      id: "size",
+      title: "Roughly how big is your home?",
+      options: [
+        { icon: "house", label: "Under 1,500 sq ft" },
+        { icon: "house", label: "1,500 – 2,500 sq ft" },
+        { icon: "house", label: "Over 2,500 sq ft" },
+        { icon: "question", label: "Not sure" }
+      ]
+    },
+    {
+      id: "timeline",
+      title: "When would you like the work done?",
+      options: [
+        { icon: "bolt",     label: "As soon as possible" },
+        { icon: "calendar", label: "In 1–3 months" },
+        { icon: "clock",    label: "In 3–6 months" },
+        { icon: "search",   label: "Just researching" }
+      ]
+    }
+  ],
+  form: {
+    title: "Your free siding quote is ready to book",
+    sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",
+    cta: "Get My Free Quote"
+  }
+};
+</script>
+<script src="funnel.js"></script>
+</body>
+</html>

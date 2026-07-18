@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Bathroom Remodel Quote — Cape Codder Building &amp; Remodeling</title>
+<meta name="description" content="Full remodel, tub-to-shower conversion, or a fresh new vanity — answer a few quick questions and get a free bathroom remodeling quote on Cape Cod.">
+<link rel="stylesheet" href="funnel.css">
+</head>
+<body>
+<header id="topbar" class="topbar"></header>
+<main class="stage"><div id="app"></div></main>
+<footer id="site-footer" class="site-footer"></footer>
+<script>
+window.FUNNEL = {
+  slug: "bathroom",
+  projectNoun: "bathroom remodel",
+  // endpoint: "https://your-crm-webhook-here",
+  intro: {
+    kicker: "Bathroom Remodeling",
+    headline: "Turn your bathroom into a <em>daily retreat</em>",
+    sub: "Premium finishes and meticulous attention to detail — answer a few quick questions and get a free, no-obligation bathroom remodeling quote.",
+    cta: "Start My Free Quote",
+    bullets: [
+      "High-quality finishes &amp; meticulous detail",
+      "Tub-to-shower conversions &amp; accessibility upgrades",
+      "One local team from design to final walkthrough"
+    ]
+  },
+  steps: [
+    {
+      id: "scope",
+      title: "What would you like to do?",
+      options: [
+        { icon: "sparkle", label: "Full Remodel",             sub: "Everything new, floor to ceiling" },
+        { icon: "shower",  label: "Tub-to-Shower Conversion", sub: "Modern walk-in shower" },
+        { icon: "vanity",  label: "Vanity & Fixtures",        sub: "Refresh the essentials" },
+        { icon: "access",  label: "Accessibility Upgrades",   sub: "Safer, easier to use" }
+      ]
+    },
+    {
+      id: "count",
+      title: "How many bathrooms are we updating?",
+      options: [
+        { icon: "tub", label: "One" },
+        { icon: "tub", label: "Two" },
+        { icon: "tub", label: "Three or more" }
+      ]
+    },
+    {
+      id: "style",
+      title: "Which look are you going for?",
+      options: [
+        { icon: "wave",    label: "Classic Coastal", sub: "Bright, breezy, timeless" },
+        { icon: "sparkle", label: "Modern Spa",      sub: "Sleek stone & glass" },
+        { icon: "tile",    label: "Timeless White",  sub: "Clean subway tile & marble looks" },
+        { icon: "question",label: "Not Sure Yet",    sub: "Show me ideas" }
+      ]
+    },
+    {
+      id: "timeline",
+      title: "When would you like to start?",
+      options: [
+        { icon: "bolt",     label: "As soon as possible" },
+        { icon: "calendar", label: "In 1–3 months" },
+        { icon: "clock",    label: "In 3–6 months" },
+        { icon: "search",   label: "Just researching" }
+      ]
+    }
+  ],
+  form: {
+    title: "Your free bathroom quote is ready to book",
+    sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",
+    cta: "Get My Free Quote"
+  }
+};
+</script>
+<script src="funnel.js"></script>
+</body>
+</html>

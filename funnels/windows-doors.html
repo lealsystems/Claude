@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Windows &amp; Doors Quote — Cape Codder Building &amp; Remodeling</title>
+<meta name="description" content="Answer a few quick questions and get a free, no-obligation quote for replacement windows and doors on Cape Cod. Proud installer of Harvey and Andersen Windows & Doors.">
+<link rel="stylesheet" href="funnel.css">
+</head>
+<body>
+<header id="topbar" class="topbar"></header>
+<main class="stage"><div id="app"></div></main>
+<section id="partners" class="partners"></section>
+<footer id="site-footer" class="site-footer"></footer>
+<script>
+window.FUNNEL = {
+  slug: "windows-doors",
+  projectNoun: "windows & doors project",
+  partners: true,
+  // endpoint: "https://your-crm-webhook-here", // wire to Zapier/GHL/Formspree; falls back to email
+  intro: {
+    kicker: "Windows & Doors",
+    headline: "Find your perfect <em>windows &amp; doors</em> in 60 seconds",
+    sub: "Answer a few quick questions and get a free, no-obligation quote from Cape Cod's trusted local installers of Harvey and Andersen windows & doors.",
+    cta: "Start My Free Quote",
+    bullets: [
+      "Free in-home consultation &amp; exact measurements",
+      "Energy-efficient options that handle coastal weather",
+      "Installed by certified local pros — not subcontractors"
+    ]
+  },
+  steps: [
+    {
+      id: "need",
+      title: "What does your home need?",
+      options: [
+        { icon: "window", label: "Replacement Windows", sub: "Upgrade old or drafty windows" },
+        { icon: "door",   label: "Entry Door",          sub: "Front, side, or back door" },
+        { icon: "slider", label: "Patio / Slider Door", sub: "Sliding or French doors" },
+        { icon: "both",   label: "Windows & Doors",     sub: "A combination project" }
+      ]
+    },
+    {
+      id: "count",
+      title: "How many windows or doors are we talking about?",
+      sub: "A rough guess is perfectly fine.",
+      options: [
+        { icon: "window", label: "1–3" },
+        { icon: "window", label: "4–7" },
+        { icon: "window", label: "8–12" },
+        { icon: "house",  label: "13+ / Whole home" }
+      ]
+    },
+    {
+      id: "priority",
+      title: "What matters most to you?",
+      multi: true,
+      options: [
+        { icon: "bolt",   label: "Energy Efficiency", sub: "Lower heating & cooling bills" },
+        { icon: "sound",  label: "Noise Reduction",   sub: "A quieter home" },
+        { icon: "star",   label: "Curb Appeal",       sub: "A beautiful new look" },
+        { icon: "shield", label: "Low Maintenance",   sub: "Durable, coastal-ready materials" }
+      ]
+    },
+    {
+      id: "property",
+      title: "What type of property is it?",
+      options: [
+        { icon: "house",    label: "Single-Family Home" },
+        { icon: "condo",    label: "Condo / Townhouse" },
+        { icon: "building", label: "Multi-Family" },
+        { icon: "store",    label: "Commercial" }
+      ]
+    },
+    {
+      id: "timeline",
+      title: "When would you like the work done?",
+      options: [
+        { icon: "bolt",     label: "As soon as possible" },
+        { icon: "calendar", label: "In 1–3 months" },
+        { icon: "clock",    label: "In 3–6 months" },
+        { icon: "search",   label: "Just researching" }
+      ]
+    }
+  ],
+  form: {
+    title: "Your free windows &amp; doors quote is ready to book",
+    sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",
+    cta: "Get My Free Quote"
+  }
+};
+</script>
+<script src="funnel.js"></script>
+</body>
+</html>

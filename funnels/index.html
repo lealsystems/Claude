@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Project Quotes — Cape Codder Building &amp; Remodeling</title>
+<meta name="description" content="Pick your project — windows & doors, siding, roofing, kitchen, or bathroom — answer a few quick questions, and get a free quote from Cape Cod's trusted local builders.">
+<link rel="stylesheet" href="funnel.css">
+</head>
+<body>
+<header id="topbar" class="topbar"></header>
+<main class="stage">
+  <div id="app"></div>
+  <div class="hub-hero step-card">
+    <h1>What can we build for <em>you?</em></h1>
+    <p>Pick your project, answer a few quick questions, and get a free, no-obligation quote from our local team — usually within one business day.</p>
+    <div class="hub-grid">
+      <a class="hub-card" href="windows-doors.html">
+        <span class="opt-icon" data-icon="window"></span>
+        <span><span class="hc-title">Windows &amp; Doors</span><br><span class="hc-sub">Harvey &amp; Andersen installer</span></span>
+        <span class="hc-go">→</span>
+      </a>
+      <a class="hub-card" href="siding.html">
+        <span class="opt-icon" data-icon="cedar"></span>
+        <span><span class="hc-title">Siding</span><br><span class="hc-sub">Cedar, vinyl &amp; fiber cement</span></span>
+        <span class="hc-go">→</span>
+      </a>
+      <a class="hub-card" href="roofing.html">
+        <span class="opt-icon" data-icon="roof"></span>
+        <span><span class="hc-title">Roofing</span><br><span class="hc-sub">Repairs &amp; full replacements</span></span>
+        <span class="hc-go">→</span>
+      </a>
+      <a class="hub-card" href="kitchen.html">
+        <span class="opt-icon" data-icon="cabinet"></span>
+        <span><span class="hc-title">Kitchen</span><br><span class="hc-sub">Full remodels &amp; refreshes</span></span>
+        <span class="hc-go">→</span>
+      </a>
+      <a class="hub-card" href="bathroom.html">
+        <span class="opt-icon" data-icon="shower"></span>
+        <span><span class="hc-title">Bathroom</span><br><span class="hc-sub">Remodels &amp; conversions</span></span>
+        <span class="hc-go">→</span>
+      </a>
+    </div>
+  </div>
+</main>
+<footer id="site-footer" class="site-footer"></footer>
+<script>
+// Hub page: no quiz — the engine renders topbar/footer, then we fill card icons.
+window.FUNNEL = { slug: "hub", steps: [], intro: null };
+</script>
+<script src="funnel.js"></script>
+<script>
+document.getElementById("app").remove();
+document.querySelectorAll(".hub-card .opt-icon").forEach(function (el) {
+  el.innerHTML = window.CCIcon(el.dataset.icon, 26);
+});
+</script>
+</body>
+</html>
