@@ -30,6 +30,7 @@ window.FUNNEL = {
   steps: [
     {
       id: "scope",
+      short: "Scope",
       title: "How big is your kitchen dream?",
       options: [
         { icon: "sparkle", label: "Full Remodel",         sub: "Down to the studs, all new" },
@@ -40,6 +41,7 @@ window.FUNNEL = {
     },
     {
       id: "style",
+      short: "Style",
       title: "Which style speaks to you?",
       options: [
         { icon: "wave",    label: "Classic Coastal",  sub: "Bright, airy, Cape Cod charm" },
@@ -50,6 +52,7 @@ window.FUNNEL = {
     },
     {
       id: "budget",
+      short: "Budget",
       title: "What investment range feels right?",
       sub: "Just a guide — we'll build a plan around your budget.",
       options: [
@@ -61,6 +64,7 @@ window.FUNNEL = {
     },
     {
       id: "timeline",
+      short: "Timeline",
       title: "When would you like to start?",
       options: [
         { icon: "bolt",     label: "As soon as possible" },
@@ -70,6 +74,12 @@ window.FUNNEL = {
       ]
     }
   ],
+  result: {
+    urgentIf: { timeline: ["As soon as possible", "In 1\u20133 months"] },
+    urgent: "You're ready to move — let's make it count. We'll schedule a design consultation, take exact measurements, and turn your answers into a concrete plan and quote. Our kitchens are delivered on-time and on-budget by one accountable local team.",
+    calm: "A kitchen this good deserves good planning. We'll start with a free design consultation: measurements, layout ideas, material options, and a real budget — so when you're ready to build, every decision is already made and priced."
+  },
+  // bookingUrl: "https://your-ghl-calendar-link",
   form: {
     title: "Your free kitchen quote is ready to book",
     sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",

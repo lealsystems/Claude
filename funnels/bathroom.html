@@ -30,6 +30,7 @@ window.FUNNEL = {
   steps: [
     {
       id: "scope",
+      short: "Scope",
       title: "What would you like to do?",
       options: [
         { icon: "sparkle", label: "Full Remodel",             sub: "Everything new, floor to ceiling" },
@@ -40,6 +41,7 @@ window.FUNNEL = {
     },
     {
       id: "count",
+      short: "Bathrooms",
       title: "How many bathrooms are we updating?",
       options: [
         { icon: "tub", label: "One" },
@@ -49,6 +51,7 @@ window.FUNNEL = {
     },
     {
       id: "style",
+      short: "Style",
       title: "Which look are you going for?",
       options: [
         { icon: "wave",    label: "Classic Coastal", sub: "Bright, breezy, timeless" },
@@ -59,6 +62,7 @@ window.FUNNEL = {
     },
     {
       id: "timeline",
+      short: "Timeline",
       title: "When would you like to start?",
       options: [
         { icon: "bolt",     label: "As soon as possible" },
@@ -68,6 +72,12 @@ window.FUNNEL = {
       ]
     }
   ],
+  result: {
+    urgentIf: { timeline: ["As soon as possible", "In 1\u20133 months"], scope: ["Accessibility Upgrades"] },
+    urgent: "You're ready to move — let's get you on the schedule. We'll visit, measure, and turn your answers into a detailed plan and quote. Most bathroom remodels are faster than people expect when one local team handles design through final walkthrough.",
+    calm: "Great bathrooms start with a good plan. We'll do a free consultation — measurements, fixture and tile options, and a real budget — so you can move forward on your own timeline with zero guesswork."
+  },
+  // bookingUrl: "https://your-ghl-calendar-link",
   form: {
     title: "Your free bathroom quote is ready to book",
     sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",

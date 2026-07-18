@@ -14,7 +14,8 @@
     email: "capecodderhi@gmail.com",
     site: "capecodderinc.com",
     area: "Proudly serving Cape Cod & the Islands, the South Shore, and the Greater Boston area.",
-    fave: "⭐ 2024 Nextdoor Neighborhood Fave"
+    fave: "⭐ 2024 Nextdoor Neighborhood Fave",
+    logo: "logo.png"
   };
 
   /* ---------- Icon library (24x24 stroke) ---------- */
@@ -89,7 +90,7 @@
       topbar.innerHTML =
         '<div class="topbar-inner">' +
           '<a class="brand" href="index.html" aria-label="Cape Codder Building & Remodeling">' +
-            '<span class="brand-mark">' + icon("wave", 22) + '</span>' +
+            '<img class="brand-logo" src="' + BRAND.logo + '" alt="">' +
             '<span class="brand-name"><span class="top">' + BRAND.name + '</span><br><span class="sub">' + BRAND.sub + '</span></span>' +
           '</a>' +
           '<a class="topbar-phone" href="' + BRAND.phoneHref + '">' + icon("phone", 16) + '<span class="lbl">' + BRAND.phone + '</span></a>' +
@@ -101,8 +102,7 @@
     if (footer) {
       footer.innerHTML =
         '<div class="footer-inner">' +
-          '<div class="brand"><span class="brand-mark">' + icon("wave", 22) + '</span>' +
-            '<span class="brand-name"><span class="top">' + BRAND.name + '</span><br><span class="sub">' + BRAND.sub + '</span></span></div>' +
+          '<img class="brand-logo lg" src="' + BRAND.logo + '" alt="Cape Codder Building & Remodeling">' +
           '<div class="footer-links">' +
             '<a href="' + BRAND.phoneHref + '">' + BRAND.phone + '</a>' +
             '<a href="mailto:' + BRAND.email + '">' + BRAND.email + '</a>' +
@@ -172,6 +172,7 @@
       '<p class="sub">' + F.intro.sub + "</p>" +
       '<ul class="intro-bullets">' + b + "</ul>" +
       '<button type="button" class="cta-btn" data-act="start">' + F.intro.cta + ' <span class="arrow">→</span></button>' +
+      '<br><button type="button" class="ghost-btn" data-act="skip">Skip to free estimate</button>' +
       '<p class="intro-note">' + icon("clock", 12) + " Takes about 60 seconds · 100% free, no obligation</p>" +
       '<div class="intro-trust">' +
         "<span>" + icon("star", 15) + " 2024 Nextdoor Neighborhood Fave</span>" +
@@ -231,13 +232,37 @@
       "</form></div>";
   }
 
+  // Personalized assessment: F.result = { urgentIf: {stepId: [labels]}, urgent, calm }
+  function assessmentText() {
+    var r = F.result;
+    if (!r) return null;
+    var urgent = false;
+    Object.keys(r.urgentIf || {}).forEach(function (id) {
+      var a = state.answers[id];
+      var hits = Array.isArray(a) ? a : [a];
+      hits.forEach(function (h) { if (r.urgentIf[id].indexOf(h) > -1) urgent = true; });
+    });
+    return urgent ? r.urgent : r.calm;
+  }
+
   function thanksHTML() {
+    var verdict = assessmentText();
+    var rows = F.steps.map(function (s) {
+      var a = state.answers[s.id];
+      if (!a || (Array.isArray(a) && !a.length)) return "";
+      return "<div><span>" + (s.short || s.title.replace(/<[^>]*>/g, "")) + "</span><strong>" +
+        (Array.isArray(a) ? a.join(", ") : a) + "</strong></div>";
+    }).join("");
     return '<div class="step-card thanks">' +
       '<div class="thanks-badge">' + icon("check", 44) + "</div>" +
-      "<h2>You're all set!</h2>" +
+      '<h2>Your assessment is <span class="script">complete</span></h2>' +
       "<p>Thanks for telling us about your " + (F.projectNoun || "project") + ". Our team will review your answers and reach out shortly with your free, no-obligation quote.</p>" +
-      '<p>Can’t wait? Call us right now — we’d love to talk.</p>' +
-      '<div class="thanks-call"><a class="cta-btn" href="' + BRAND.phoneHref + '">' + icon("phone", 18) + " " + BRAND.phone + "</a></div></div>";
+      (verdict ? '<div class="result-box">' + verdict + "</div>" : "") +
+      (rows ? '<div class="result-summary">' + rows + "</div>" : "") +
+      '<div class="thanks-call">' +
+        (F.bookingUrl ? '<a class="cta-btn" href="' + F.bookingUrl + '">Book My Free Estimate <span class="arrow">→</span></a>' : "") +
+        '<a class="' + (F.bookingUrl ? "ghost-btn" : "cta-btn") + '" href="' + BRAND.phoneHref + '">' + icon("phone", 16) + " Call " + BRAND.phone + "</a>" +
+      "</div></div>";
   }
 
   function render() {
@@ -251,6 +276,9 @@
   function wire() {
     var startBtn = app.querySelector('[data-act="start"]');
     if (startBtn) startBtn.addEventListener("click", function () { state.idx = 0; render(); });
+
+    var skipBtn = app.querySelector('[data-act="skip"]');
+    if (skipBtn) skipBtn.addEventListener("click", function () { state.idx = F.steps.length; render(); });
 
     var backBtn = app.querySelector('[data-act="back"]');
     if (backBtn) backBtn.addEventListener("click", function () {
@@ -298,7 +326,8 @@
         email: get("email"), town: get("town"), answers: state.answers,
         page: location.href, submittedAt: new Date().toISOString()
       };
-      // Wire F.endpoint to your CRM/webhook (Zapier, GoHighLevel, Formspree, etc.)
+      // Wire F.endpoint to a GoHighLevel Workflow Inbound Webhook URL
+      // (or Zapier/Formspree). Falls back to email when unset.
       if (F.endpoint) {
         fetch(F.endpoint, {
           method: "POST", headers: { "Content-Type": "application/json" },

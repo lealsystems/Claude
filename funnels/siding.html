@@ -30,6 +30,7 @@ window.FUNNEL = {
   steps: [
     {
       id: "scope",
+      short: "Project",
       title: "What kind of siding project is it?",
       options: [
         { icon: "refresh", label: "Full Replacement",  sub: "New siding for the whole home" },
@@ -40,6 +41,7 @@ window.FUNNEL = {
     },
     {
       id: "material",
+      short: "Material",
       title: "Which material are you leaning toward?",
       sub: "We'll bring samples either way.",
       options: [
@@ -51,6 +53,7 @@ window.FUNNEL = {
     },
     {
       id: "size",
+      short: "Home size",
       title: "Roughly how big is your home?",
       options: [
         { icon: "house", label: "Under 1,500 sq ft" },
@@ -61,6 +64,7 @@ window.FUNNEL = {
     },
     {
       id: "timeline",
+      short: "Timeline",
       title: "When would you like the work done?",
       options: [
         { icon: "bolt",     label: "As soon as possible" },
@@ -70,6 +74,12 @@ window.FUNNEL = {
       ]
     }
   ],
+  result: {
+    urgentIf: { scope: ["Repair / Partial"], timeline: ["As soon as possible"] },
+    urgent: "Based on your answers, it's worth having us take a look soon. Damaged or failing siding lets coastal moisture reach the structure underneath, and small problems grow fast through a Cape Cod winter. We'll inspect it, give you honest options, and price both repair and replacement.",
+    calm: "Your project sounds like a great candidate for a planned upgrade. We'll bring material samples, measure your home, and give you an exact quote so you can compare options — cedar, vinyl, and fiber cement all handle the coast differently, and we'll walk you through the trade-offs."
+  },
+  // bookingUrl: "https://your-ghl-calendar-link",
   form: {
     title: "Your free siding quote is ready to book",
     sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",

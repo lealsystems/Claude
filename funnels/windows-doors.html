@@ -32,6 +32,7 @@ window.FUNNEL = {
   steps: [
     {
       id: "need",
+      short: "Project",
       title: "What does your home need?",
       options: [
         { icon: "window", label: "Replacement Windows", sub: "Upgrade old or drafty windows" },
@@ -42,6 +43,7 @@ window.FUNNEL = {
     },
     {
       id: "count",
+      short: "Project size",
       title: "How many windows or doors are we talking about?",
       sub: "A rough guess is perfectly fine.",
       options: [
@@ -52,7 +54,22 @@ window.FUNNEL = {
       ]
     },
     {
+      id: "condition",
+      short: "You're noticing",
+      title: "What are you noticing with your current windows or doors?",
+      multi: true,
+      options: [
+        { icon: "snow",   label: "Drafts & Cold Spots",  sub: "Rooms never feel warm" },
+        { icon: "drop",   label: "Condensation",         sub: "Fog between the panes" },
+        { icon: "wrench", label: "Hard to Open / Close", sub: "Sticking, painted shut" },
+        { icon: "warn",   label: "Rot or Damage",        sub: "Soft frames, chipped sills" },
+        { icon: "dollar", label: "High Energy Bills",    sub: "Heating & cooling costs" },
+        { icon: "check",  label: "Nothing Obvious",      sub: "Just ready for an upgrade" }
+      ]
+    },
+    {
       id: "priority",
+      short: "Priorities",
       title: "What matters most to you?",
       multi: true,
       options: [
@@ -64,6 +81,7 @@ window.FUNNEL = {
     },
     {
       id: "property",
+      short: "Property",
       title: "What type of property is it?",
       options: [
         { icon: "house",    label: "Single-Family Home" },
@@ -74,6 +92,7 @@ window.FUNNEL = {
     },
     {
       id: "timeline",
+      short: "Timeline",
       title: "When would you like the work done?",
       options: [
         { icon: "bolt",     label: "As soon as possible" },
@@ -83,6 +102,14 @@ window.FUNNEL = {
       ]
     }
   ],
+  result: {
+    urgentIf: {
+      condition: ["Drafts & Cold Spots", "Condensation", "Hard to Open / Close", "Rot or Damage", "High Energy Bills"]
+    },
+    urgent: "Based on your answers, a professional window & door evaluation would be a smart next step. Drafts, condensation, sticking sashes, and damaged frames are classic signs that replacement will pay for itself in comfort and energy savings. As certified installers of Harvey and Andersen products, we'll inspect everything and walk you through your options — with no pressure.",
+    calm: "Good news — nothing in your answers suggests an emergency. A free evaluation is still worth it: we'll measure everything, check seals and operation, and give you exact numbers so you can plan the upgrade on your own timeline with Harvey or Andersen products."
+  },
+  // bookingUrl: "https://your-ghl-calendar-link", // adds a booking button to the results screen
   form: {
     title: "Your free windows &amp; doors quote is ready to book",
     sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",
