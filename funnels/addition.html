@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Home Addition Quote — Cape Codder Building &amp; Remodeling</title>
+<meta name="description" content="Room additions, second stories, in-law suites, and garages — answer a few quick questions, tell us your vision, and get a free quote from Cape Cod's trusted local builders.">
+<link rel="stylesheet" href="funnel.css">
+</head>
+<body>
+<header id="topbar" class="topbar"></header>
+<main class="stage"><div id="app"></div></main>
+<footer id="site-footer" class="site-footer"></footer>
+<script>
+window.FUNNEL = {
+  slug: "addition",
+  projectNoun: "home addition",
+  // endpoint: "https://your-ghl-webhook", // overrides LEAD_ENDPOINT in funnel.js
+  intro: {
+    kicker: "Home Additions",
+    headline: "More home, without <em>moving</em>",
+    sub: "Room additions, second stories, in-law suites, and garages — answer a few quick questions, tell us your vision, and get a free, no-obligation quote.",
+    cta: "Start My Free Quote",
+    bullets: [
+      "Certified General Contractors, permits handled",
+      "Designed to match your home's existing character",
+      "One local team from foundation to finish"
+    ]
+  },
+  steps: [
+    {
+      id: "type",
+      short: "Addition type",
+      title: "What kind of addition are you dreaming of?",
+      options: [
+        { icon: "plus",     label: "Room Addition",        sub: "Family room, primary suite, sunroom" },
+        { icon: "building", label: "Second Story",         sub: "Build up, not out" },
+        { icon: "house",    label: "In-Law / Guest Suite", sub: "Independent living space" },
+        { icon: "store",    label: "Garage / Workshop",    sub: "Attached or detached" }
+      ]
+    },
+    {
+      id: "size",
+      short: "Size",
+      title: "Roughly how big should it be?",
+      sub: "A ballpark is perfectly fine — we'll measure everything later.",
+      options: [
+        { icon: "ruler",    label: "Under 300 sq ft" },
+        { icon: "ruler",    label: "300 – 600 sq ft" },
+        { icon: "house",    label: "Over 600 sq ft" },
+        { icon: "question", label: "Not sure yet" }
+      ]
+    },
+    {
+      id: "details",
+      short: "Your vision",
+      title: "Tell us what you'd like done",
+      sub: "The more you share, the more accurate your quote — rooms, features, must-haves, anything.",
+      textarea: true,
+      placeholder: "Example: We'd like a 400 sq ft primary suite over the garage with a walk-in closet and full bath, matching our cedar shingles…",
+      optionalNote: "Optional — but details help us quote faster"
+    },
+    {
+      id: "timeline",
+      short: "Timeline",
+      title: "When would you like to start?",
+      options: [
+        { icon: "bolt",     label: "As soon as possible" },
+        { icon: "calendar", label: "In 1–3 months" },
+        { icon: "clock",    label: "In 3–6 months" },
+        { icon: "search",   label: "Just researching" }
+      ]
+    }
+  ],
+  result: {
+    urgentIf: { timeline: ["As soon as possible", "In 1–3 months"] },
+    urgent: "You're ready to build — let's get moving. Additions involve design and permitting lead time, so starting the conversation now is exactly right. We'll visit, review your vision on-site, and map out design, permits, budget, and schedule in one plan.",
+    calm: "An addition rewards good planning. We'll start with a free consultation — feasibility, design direction, a realistic budget, and the permitting path — so when you're ready to build, everything is already lined up."
+  },
+  // bookingUrl: "https://your-ghl-calendar-link",
+  form: {
+    title: "Your free addition quote is ready to book",
+    sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",
+    cta: "Get My Free Quote"
+  }
+};
+</script>
+<script src="funnel.js"></script>
+</body>
+</html>

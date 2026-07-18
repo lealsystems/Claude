@@ -19,8 +19,26 @@ logo_uri = f"data:image/png;base64,{logo_b64}"
 
 js_inline = js.replace('logo: "logo.png"', f'logo: "{logo_uri}"')
 
+# Embed official partner logos when the files are present; otherwise the
+# pages' onerror fallback shows the monogram badges.
+partner_logos = {}
+for partner in ("harvey", "andersen"):
+    p = SRC / f"{partner}-logo.png"
+    if p.exists():
+        partner_logos[partner] = (
+            "data:image/png;base64," + base64.b64encode(p.read_bytes()).decode()
+        )
+        print(f"embedding {partner}-logo.png")
+if partner_logos:
+    import json
+    js_inline = js_inline.replace(
+        "var PARTNER_LOGOS = {};",
+        "var PARTNER_LOGOS = " + json.dumps(partner_logos) + ";")
+
+
 pages = ["index.html", "quiz.html", "windows-doors.html", "siding.html",
-         "roofing.html", "kitchen.html", "bathroom.html"]
+         "roofing.html", "kitchen.html", "bathroom.html",
+         "addition.html", "custom.html"]
 
 for name in pages:
     html = (SRC / name).read_text(encoding="utf-8")

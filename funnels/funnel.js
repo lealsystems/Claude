@@ -6,6 +6,24 @@
 (function () {
   "use strict";
 
+  /* ============================================================
+     LEAD DELIVERY — set ONE of these and every funnel uses it.
+     1) LEAD_ENDPOINT: any webhook that accepts JSON POSTs.
+        - Email-to-inbox (free, 2 min): activate at formsubmit.co, then
+          "https://formsubmit.co/ajax/capecodderhi@gmail.com"
+        - GoHighLevel: Workflow → Inbound Webhook trigger → paste URL here
+        - Zapier: Catch Hook URL
+        A per-funnel `endpoint` in a page's FUNNEL config overrides this.
+     2) Leave blank: falls back to opening the visitor's email app
+        addressed to BRAND.email (works, but relies on the visitor).
+     See README.md for the exact JSON field list you can map.
+     ============================================================ */
+  var LEAD_ENDPOINT = "";
+
+  // Filled by build.py with data URIs when official partner logo files
+  // (harvey-logo.png / andersen-logo.png) exist next to the source pages.
+  var PARTNER_LOGOS = {};
+
   var BRAND = {
     name: "CAPE CODDER",
     sub: "Building & Remodeling",
@@ -129,15 +147,21 @@
     var partners = document.getElementById("partners");
     if (!partners) return;
     if (!F.partners) { partners.innerHTML = ""; return; }
+    // Drop official harvey-logo.png / andersen-logo.png files next to this
+    // page (then re-run build.py) and they replace the monogram fallbacks.
+    var badge = function (slug, name, sub) {
+      return '<div class="partner-badge">' +
+        '<img class="pb-logo" src="' + (PARTNER_LOGOS[slug] || slug + "-logo.png") + '" alt="' + name + '" ' +
+          'onerror="this.style.display=&quot;none&quot;;this.nextElementSibling.style.display=&quot;grid&quot;">' +
+        '<span class="pb-mark ' + slug + '" style="display:none">' + name.charAt(0) + '</span>' +
+        '<span><span class="pb-name">' + name + '</span><br><span class="pb-sub">' + sub + '</span></span></div>';
+    };
     partners.innerHTML =
-        '<div class="lbl">Proud Installer Of</div>' +
-        '<div class="partner-badges">' +
-          '<div class="partner-badge"><span class="pb-mark harvey">H</span>' +
-            '<span><span class="pb-name">Harvey</span><br><span class="pb-sub">Building Products — Windows & Doors</span></span></div>' +
-          '<div class="partner-badge"><span class="pb-mark andersen">A</span>' +
-            '<span><span class="pb-name">Andersen</span><br><span class="pb-sub">Windows & Doors</span></span></div>' +
-        '</div>';
-    // Swap the .pb-mark monograms for official brand logo image files when available.
+      '<div class="lbl">Proud Installer Of</div>' +
+      '<div class="partner-badges">' +
+        badge("harvey", "Harvey", "Building Products — Windows & Doors") +
+        badge("andersen", "Andersen", "Windows & Doors") +
+      '</div>';
   }
 
   /* ---------- Progress ---------- */
@@ -196,6 +220,18 @@
   }
 
   function questionHTML(step, qi) {
+    if (step.textarea) {
+      return '<div class="step-card">' +
+        metaBar(true, "Step " + (qi + 1) + " of " + totalSteps) +
+        '<h2 class="q-title">' + step.title + "</h2>" +
+        (step.sub ? '<p class="q-sub">' + step.sub + "</p>" : "") +
+        '<div class="q-textarea-wrap"><textarea id="qa-text" class="q-textarea" rows="6" placeholder="' +
+          (step.placeholder || "Tell us about your project…") + '">' +
+          (state.answers[step.id] || "") + "</textarea></div>" +
+        '<div class="multi-actions"><button type="button" class="cta-btn" data-act="next">Continue <span class="arrow">→</span></button>' +
+        (step.optionalNote ? '<span class="multi-hint">' + step.optionalNote + "</span>" : "") +
+        "</div></div>";
+    }
     var opts = step.options.map(function (o, i) {
       var picked = Array.isArray(state.answers[step.id]) ?
         state.answers[step.id].indexOf(o.label) > -1 : state.answers[step.id] === o.label;
@@ -220,7 +256,9 @@
     var chips = F.steps.map(function (s) {
       var a = state.answers[s.id];
       if (!a || (Array.isArray(a) && !a.length)) return "";
-      return '<span class="chip">' + (Array.isArray(a) ? a.join(" · ") : a) + "</span>";
+      var t = Array.isArray(a) ? a.join(" · ") : a;
+      if (t.length > 48) t = t.slice(0, 47) + "…";
+      return '<span class="chip">' + t + "</span>";
     }).join("");
     return '<div class="step-card">' +
       metaBar(true, "Last step") +
@@ -320,7 +358,11 @@
     });
 
     var nextBtn = app.querySelector('[data-act="next"]');
-    if (nextBtn) nextBtn.addEventListener("click", function () { state.idx += 1; render(); });
+    if (nextBtn) nextBtn.addEventListener("click", function () {
+      var ta = app.querySelector("#qa-text");
+      if (ta && step) state.answers[step.id] = ta.value.trim();
+      state.idx += 1; render();
+    });
 
     var form = app.querySelector("form.lead-form");
     if (form) form.addEventListener("submit", function (e) {
@@ -336,29 +378,39 @@
       mark("email", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(get("email")));
       if (!ok) return;
 
+      // Flat payload: every answer is a top-level q_* field, which makes
+      // mapping trivial in GHL/Zapier. `summary` is a ready-made email body.
+      var lines = [];
       var lead = {
-        funnel: F.slug, name: get("name"), phone: get("phone"),
-        email: get("email"), town: get("town"), answers: state.answers,
+        _subject: "New lead: " + (F.projectNoun || "project") + " — " + get("name"),
+        funnel: F.slug,
+        project: F.projectNoun || "project",
+        name: get("name"), phone: get("phone"),
+        email: get("email"), town: get("town"),
         page: location.href, submittedAt: new Date().toISOString()
       };
-      // Wire F.endpoint to a GoHighLevel Workflow Inbound Webhook URL
-      // (or Zapier/Formspree). Falls back to email when unset.
-      if (F.endpoint) {
-        fetch(F.endpoint, {
-          method: "POST", headers: { "Content-Type": "application/json" },
+      F.steps.forEach(function (s) {
+        var a = state.answers[s.id];
+        var v = Array.isArray(a) ? a.join(", ") : (a || "");
+        lead["q_" + s.id] = v;
+        if (v) lines.push((s.short || s.id) + ": " + v);
+      });
+      lead.summary =
+        "New " + lead.project + " lead from " + BRAND.site + "\n\n" +
+        "Name: " + lead.name + "\nPhone: " + lead.phone + "\nEmail: " + lead.email +
+        "\nTown/ZIP: " + (lead.town || "-") + "\n\n" + lines.join("\n");
+
+      var endpoint = F.endpoint || LEAD_ENDPOINT;
+      if (endpoint) {
+        fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
           body: JSON.stringify(lead)
         }).catch(function () {});
       } else {
-        var lines = ["New " + (F.projectNoun || "project") + " lead from " + BRAND.site,
-          "", "Name: " + lead.name, "Phone: " + lead.phone, "Email: " + lead.email,
-          "Town/ZIP: " + (lead.town || "-"), ""];
-        F.steps.forEach(function (s) {
-          var a = state.answers[s.id];
-          if (a) lines.push(s.title.replace(/<[^>]*>/g, "") + " " + (Array.isArray(a) ? a.join(", ") : a));
-        });
         window.open("mailto:" + BRAND.email +
-          "?subject=" + encodeURIComponent("New quote request — " + (F.projectNoun || "project")) +
-          "&body=" + encodeURIComponent(lines.join("\n")), "_self");
+          "?subject=" + encodeURIComponent(lead._subject) +
+          "&body=" + encodeURIComponent(lead.summary), "_self");
       }
       state.done = true;
       render();
