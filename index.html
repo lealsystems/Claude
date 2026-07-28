@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fisherman's Daughter — Hand-drawn on the docks. Printed on Cape Cod.</title>
+<style>
+  /* ============ TOKENS ============ */
+  :root {
+    --ground:    #EDEAE0;   /* salt-bleached canvas */
+    --ground-2:  #E3DFD1;   /* panel canvas */
+    --ink:       #22302A;   /* spruce-net ink */
+    --ink-soft:  #5A685F;
+    --hairline:  #C6C2B2;
+    --brass:     #96762F;   /* aged brass hook */
+    --buoy:      #B5482F;   /* buoy red — CTA only */
+    --card:      #F3F1E9;
+
+    --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --font-sans: "Gill Sans", "Gill Sans MT", "Avenir Next", Avenir, "Trebuchet MS", Verdana, sans-serif;
+    --font-mono: "American Typewriter", "Courier New", Courier, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground:   #141A17;  /* tarred hull */
+      --ground-2: #1B2420;
+      --ink:      #E8E3D3;  /* salt */
+      --ink-soft: #A6AFA3;
+      --hairline: #35413A;
+      --brass:    #C6A053;
+      --buoy:     #D2674B;
+      --card:     #1A211D;
+    }
+  }
+  :root[data-theme="light"] {
+    --ground:    #EDEAE0;
+    --ground-2:  #E3DFD1;
+    --ink:       #22302A;
+    --ink-soft:  #5A685F;
+    --hairline:  #C6C2B2;
+    --brass:     #96762F;
+    --buoy:      #B5482F;
+    --card:      #F3F1E9;
+  }
+  :root[data-theme="dark"] {
+    --ground:   #141A17;
+    --ground-2: #1B2420;
+    --ink:      #E8E3D3;
+    --ink-soft: #A6AFA3;
+    --hairline: #35413A;
+    --brass:    #C6A053;
+    --buoy:     #D2674B;
+    --card:     #1A211D;
+  }
+
+  /* ============ BASE ============ */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  img, svg { max-width: 100%; display: block; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 3px;
+  }
+  .wrap { max-width: 68rem; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 3rem); }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--brass);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .eyebrow .glyph { flex: none; color: var(--brass); }
+
+  .ledger-note {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+  }
+
+  /* ============ HEADER ============ */
+  header.site {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    white-space: nowrap;
+  }
+  .wordmark svg { color: var(--brass); }
+  nav.site {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.9rem, 2.5vw, 1.75rem);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  nav.site a { text-decoration: none; padding-block: 0.25rem; }
+  nav.site a:hover { color: var(--brass); }
+  .shop-pill {
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    padding: 0.45rem 1.1rem;
+    text-decoration: none;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+  .shop-pill:hover { background: var(--ink); color: var(--ground); }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    padding-block: clamp(4rem, 10vh, 7.5rem) clamp(4.5rem, 10vh, 7rem);
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero .hanging-hook {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    translate: -50% 0;
+    height: clamp(120px, 22vh, 190px);
+    color: var(--ink);
+    transform-origin: top center;
+    animation: sway 7s ease-in-out infinite;
+    opacity: 0.9;
+  }
+  @keyframes sway {
+    0%, 100% { rotate: -2.5deg; }
+    50%      { rotate: 2.5deg; }
+  }
+  .hero .eyebrow { justify-content: center; margin-top: clamp(110px, 20vh, 175px); }
+  .hero h1 {
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    line-height: 1.04;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+    margin-top: 1.4rem;
+  }
+  .hero h1 em { font-style: italic; }
+  .hero .deck {
+    max-width: 34rem;
+    margin: 1.6rem auto 0;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    text-wrap: balance;
+  }
+  .hero .actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2.4rem;
+    flex-wrap: wrap;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.85rem 1.9rem;
+    border-radius: 2px;
+  }
+  .btn-buoy { background: var(--buoy); color: #F6F2E6; }
+  .btn-buoy:hover { filter: brightness(1.08); }
+  .btn-ghost { border: 1.5px solid var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--ground); }
+  .hero .ledger-note { margin-top: 2.6rem; }
+
+  /* ============ LEADER-LINE DIVIDER ============ */
+  .leader {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    color: var(--hairline);
+    margin-block: 0.5rem;
+  }
+  .leader::before, .leader::after {
+    content: "";
+    flex: 1;
+    border-top: 1.5px solid currentColor;
+  }
+  .leader svg { flex: none; color: var(--brass); margin-inline: 0.9rem; }
+
+  /* ============ SECTIONS ============ */
+  section { padding-block: clamp(3.5rem, 8vh, 5.5rem); }
+  section h2 {
+    font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+    line-height: 1.12;
+    font-weight: 500;
+    text-wrap: balance;
+    margin-top: 1.1rem;
+  }
+  section h2 em { font-style: italic; }
+  .section-intro { max-width: 44rem; margin-top: 1.1rem; color: var(--ink-soft); }
+
+  /* ============ STORY ============ */
+  .story-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+    margin-top: 2.5rem;
+  }
+  .story-copy p + p { margin-top: 1.1rem; }
+  .story-copy .pull {
+    font-style: italic;
+    font-size: 1.35rem;
+    line-height: 1.45;
+    border-left: 2px solid var(--brass);
+    padding-left: 1.2rem;
+    margin-top: 1.8rem;
+    color: var(--ink);
+  }
+  .story-copy .signature {
+    margin-top: 1.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  /* ============ IMAGE SLOTS (Higgsfield) ============ */
+  .img-slot {
+    background: var(--ground-2);
+    border: 1.5px solid var(--hairline);
+    border-radius: 2px;
+    padding: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 20rem;
+  }
+  .img-slot .frame {
+    flex: 1;
+    border: 1px dashed var(--hairline);
+    border-radius: 2px;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    color: var(--ink-soft);
+  }
+  .img-slot .frame svg { opacity: 0.55; }
+  .img-slot .prompt {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .img-slot .prompt strong {
+    display: block;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 0.35rem;
+  }
+
+  /* ============ COLLECTION ============ */
+  .tackle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .tackle-card {
+    background: var(--card);
+    border: 1.5px solid var(--hairline);
+    border-radius: 2px;
+    padding: 1.75rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-decoration: none;
+    transition: border-color 160ms ease, translate 160ms ease;
+  }
+  .tackle-card:hover { border-color: var(--brass); translate: 0 -3px; }
+  .tackle-card .glyph { color: var(--brass); height: 44px; display: flex; align-items: flex-end; }
+  .tackle-card h3 {
+    font-size: 1.35rem;
+    font-weight: 500;
+  }
+  .tackle-card p { font-size: 0.95rem; color: var(--ink-soft); flex: 1; }
+  .tackle-card .card-note {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--hairline);
+    padding-top: 0.8rem;
+  }
+  .tackle-card .card-cta {
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+
+  /* ============ PROCESS STRIP ============ */
+  .process {
+    background: var(--ground-2);
+    border-block: 1.5px solid var(--hairline);
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin-top: 2.25rem;
+  }
+  .process-step .step-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brass);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .process-step h3 { font-size: 1.2rem; font-weight: 500; margin-top: 0.7rem; }
+  .process-step p { font-size: 0.95rem; color: var(--ink-soft); margin-top: 0.5rem; }
+
+  /* ============ MAKERS ============ */
+  .makers-band {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+    margin-top: 2.5rem;
+  }
+  .makers-stat {
+    font-family: var(--font-display);
+    text-align: center;
+    border: 1.5px solid var(--hairline);
+    border-radius: 2px;
+    background: var(--card);
+    padding: 2.5rem 1.5rem;
+  }
+  .makers-stat .big {
+    font-size: clamp(3.5rem, 8vw, 5rem);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .makers-stat .big sup { font-size: 0.4em; color: var(--brass); }
+  .makers-stat .label {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 0.8rem;
+  }
+  .makers-list {
+    margin-top: 1.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0;
+    align-items: center;
+  }
+  .makers-list span { white-space: nowrap; }
+  .makers-list .sep { color: var(--brass); margin-inline: 0.7rem; }
+
+  /* ============ VISIT ============ */
+  .visit-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    margin-top: 2.5rem;
+    align-items: stretch;
+  }
+  .visit-card {
+    border: 1.5px solid var(--hairline);
+    background: var(--card);
+    border-radius: 2px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+  .visit-card dl { display: grid; grid-template-columns: auto 1fr; gap: 0.6rem 1.5rem; }
+  .visit-card dt {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brass);
+    padding-top: 0.25rem;
+  }
+  .visit-card dd { font-size: 1.05rem; }
+  .visit-card .fine { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-soft); }
+
+  /* ============ FOOTER ============ */
+  footer.site {
+    border-top: 1.5px solid var(--hairline);
+    padding-block: 2.5rem 3rem;
+  }
+  .foot-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .foot-row nav { display: flex; gap: 1.5rem; font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; }
+  .foot-row nav a { text-decoration: none; }
+  .foot-row nav a:hover { color: var(--brass); }
+  footer .ledger-note { margin-top: 1.6rem; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 46rem) {
+    .story-grid, .makers-band, .visit-grid { grid-template-columns: 1fr; }
+    nav.site .hide-sm { display: none; }
+    .hero .eyebrow { margin-top: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="site">
+    <a class="wordmark" href="#top" aria-label="Fisherman's Daughter — home">
+      <svg width="16" height="26" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="10" cy="5" r="3"/>
+        <path d="M10 8 v14 a7 7 0 0 0 14 0 v-5 M24 17 l-4 5"/>
+      </svg>
+      Fisherman's Daughter
+    </a>
+    <nav class="site" aria-label="Primary">
+      <a href="#collection">Collection</a>
+      <a href="#story" class="hide-sm">Story</a>
+      <a href="#makers" class="hide-sm">Makers</a>
+      <a href="#visit">Visit</a>
+      <a href="#collection" class="shop-pill">Shop</a>
+    </nav>
+  </header>
+</div>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero wrap" aria-labelledby="hero-h">
+    <svg class="hanging-hook" viewBox="0 0 60 190" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+      <path d="M30 0 v96"/>
+      <circle cx="30" cy="104" r="7"/>
+      <path d="M30 111 v40 a15 15 0 0 0 30 0 v-12"/>
+      <path d="M60 139 l-9 12"/>
+    </svg>
+    <p class="eyebrow">
+      <svg class="glyph" width="20" height="10" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M1 6 q6 -7 12 0 q-6 7 -12 0 Z M13 6 l8 -5 v10 Z"/>
+      </svg>
+      Chatham &middot; Cape Cod &middot; Hand screen-printed
+    </p>
+    <h1 id="hero-h">Drawn on the docks.<br><em>Printed by hand.</em></h1>
+    <p class="deck">Original ocean-inspired illustrations by a Chatham fisherman's daughter — hand-pulled onto clothing and goods, one screen at a time, right here on Cape Cod.</p>
+    <div class="actions">
+      <a class="btn btn-buoy" href="#collection">Shop the Collection</a>
+      <a class="btn btn-ghost" href="#story">Read the Story</a>
+    </div>
+    <p class="ledger-note">№ 521 Main Street, Chatham, Mass. &mdash; est. on the Chatham Fish Pier</p>
+  </section>
+
+  <div class="wrap leader" role="presentation">
+    <svg width="46" height="14" viewBox="0 0 46 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+      <circle cx="10" cy="7" r="5"/>
+      <circle cx="24" cy="7" r="5"/>
+      <path d="M29 7 h16"/>
+    </svg>
+  </div>
+
+  <!-- ============ STORY ============ -->
+  <section id="story" class="wrap" aria-labelledby="story-h">
+    <p class="eyebrow">
+      <svg class="glyph" width="12" height="20" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+        <circle cx="10" cy="5" r="3"/>
+        <path d="M10 8 v14 a7 7 0 0 0 14 0 v-5 M24 17 l-4 5"/>
+      </svg>
+      The Story
+    </p>
+    <h2 id="story-h">Raised on the fish pier, <em>line by line.</em></h2>
+    <div class="story-grid">
+      <figure class="img-slot">
+        <div class="frame">
+          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M8 52 q14 -10 28 0 q14 10 28 0" />
+            <path d="M20 40 h32 l-5 -14 h-22 Z"/>
+            <path d="M36 26 v-10"/>
+            <circle cx="36" cy="12" r="3"/>
+          </svg>
+        </div>
+        <figcaption class="prompt">
+          <strong>Image slot — generate in Higgsfield</strong>
+          "Documentary 35mm photograph, dawn at Chatham Fish Pier, Cape Cod. A weathered fishing boat unloading, coiled lines and brass hooks in the foreground, soft grey-gold morning fog, muted film palette."
+        </figcaption>
+      </figure>
+      <div class="story-copy">
+        <p>Taylor Brown grew up on the docks of the Chatham Fish Pier, the daughter of a commercial fisherman — sketching the gear, the boats, and the water while the catch came in.</p>
+        <p>Those hand-drawn lines became Fisherman's Daughter. What started as a small idea more than two decades ago is now a full collection of clothing and accessories for women, men, kids, and infants — every design still drawn by hand, every piece still screen-printed on Cape Cod.</p>
+        <p class="pull">"Every print starts the way the day starts on the pier — with a line in the water."</p>
+        <p class="signature">— Taylor Brown, founder &amp; illustrator</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap leader" role="presentation">
+    <svg width="46" height="14" viewBox="0 0 46 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+      <path d="M1 7 h16"/>
+      <circle cx="23" cy="7" r="5"/>
+      <path d="M29 7 h16"/>
+    </svg>
+  </div>
+
+  <!-- ============ COLLECTION ============ -->
+  <section id="collection" class="wrap" aria-labelledby="collection-h">
+    <p class="eyebrow">
+      <svg class="glyph" width="20" height="10" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M1 6 q6 -7 12 0 q-6 7 -12 0 Z M13 6 l8 -5 v10 Z"/>
+      </svg>
+      The Collection
+    </p>
+    <h2 id="collection-h">Gear for the <em>whole crew.</em></h2>
+    <p class="section-intro">Hand-pulled screen prints of hooks, lines, and working waterfront gear — on tees, sweatshirts, totes, and more.</p>
+    <div class="tackle-grid">
+      <a class="tackle-card" href="#visit">
+        <span class="glyph">
+          <svg width="26" height="44" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="10" cy="5" r="3"/>
+            <path d="M10 8 v14 a7 7 0 0 0 14 0 v-5 M24 17 l-4 5"/>
+          </svg>
+        </span>
+        <h3>Women</h3>
+        <p>Tees, tanks, and cozy layers carrying the original dockside illustrations.</p>
+        <span class="card-note">screen-printed by hand — Cape Cod</span>
+        <span class="card-cta">Shop Women →</span>
+      </a>
+      <a class="tackle-card" href="#visit">
+        <span class="glyph">
+          <svg width="44" height="24" viewBox="0 0 44 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <path d="M2 12 q10 -11 20 0 q-10 11 -20 0 Z M22 12 l12 -8 v16 Z"/>
+            <circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <h3>Men</h3>
+        <p>Rugged tees and hoodies built for early mornings on the water.</p>
+        <span class="card-note">screen-printed by hand — Cape Cod</span>
+        <span class="card-cta">Shop Men →</span>
+      </a>
+      <a class="tackle-card" href="#visit">
+        <span class="glyph">
+          <svg width="30" height="40" viewBox="0 0 30 40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <path d="M15 2 c-6 8 -10 14 -10 21 a10 10 0 0 0 20 0 c0 -7 -4 -13 -10 -21 Z"/>
+          </svg>
+        </span>
+        <h3>Kids &amp; Infants</h3>
+        <p>Little deckhand sizes — the same hand-drawn prints, scaled down.</p>
+        <span class="card-note">screen-printed by hand — Cape Cod</span>
+        <span class="card-cta">Shop Kids →</span>
+      </a>
+      <a class="tackle-card" href="#visit">
+        <span class="glyph">
+          <svg width="36" height="40" viewBox="0 0 36 40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 14 h28 l-3 22 h-22 Z"/>
+            <path d="M12 14 v-4 a6 6 0 0 1 12 0 v4"/>
+          </svg>
+        </span>
+        <h3>Accessories</h3>
+        <p>Totes, hats, and goods for the beach, the boat, and back home.</p>
+        <span class="card-note">screen-printed by hand — Cape Cod</span>
+        <span class="card-cta">Shop Accessories →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section class="process" aria-labelledby="process-h">
+    <div class="wrap">
+      <p class="eyebrow">
+        <svg class="glyph" width="20" height="10" viewBox="0 0 46 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="10" cy="7" r="5"/>
+          <circle cx="24" cy="7" r="5"/>
+          <path d="M29 7 h16"/>
+        </svg>
+        From Sketch to Screen
+      </p>
+      <h2 id="process-h">Made the <em>slow way,</em> on purpose.</h2>
+      <div class="process-grid">
+        <div class="process-step">
+          <p class="step-label">Drawn</p>
+          <h3>Pen &amp; ink first</h3>
+          <p>Every design begins as an original hand-drawn illustration of the working waterfront — hooks, lines, boats, and catch.</p>
+        </div>
+        <div class="process-step">
+          <p class="step-label">Pulled</p>
+          <h3>One screen at a time</h3>
+          <p>Prints are pulled by hand on Cape Cod, so every piece carries the small variations of a real screen print.</p>
+        </div>
+        <div class="process-step">
+          <p class="step-label">Kept</p>
+          <h3>An eco boutique</h3>
+          <p>Small batches, thoughtful materials, and goods made to be worn for seasons — not landfilled after one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAKERS ============ -->
+  <section id="makers" class="wrap" aria-labelledby="makers-h">
+    <p class="eyebrow">
+      <svg class="glyph" width="12" height="20" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+        <circle cx="10" cy="5" r="3"/>
+        <path d="M10 8 v14 a7 7 0 0 0 14 0 v-5 M24 17 l-4 5"/>
+      </svg>
+      The Makers
+    </p>
+    <h2 id="makers-h">One shop, <em>seventy-five hands.</em></h2>
+    <div class="makers-band">
+      <div>
+        <p class="section-intro">The flagship shop on Main Street carries far more than our own prints — it's a working collection of independent artists, jewelers, and designers, gathered the way a good tackle box is: piece by piece, each one earning its place.</p>
+        <p class="makers-list">
+          <span>Sea-glass jewelry</span><span class="sep">&mdash;&#9675;&mdash;</span>
+          <span>Rope &amp; knotwork</span><span class="sep">&mdash;&#9675;&mdash;</span>
+          <span>Coastal ceramics</span><span class="sep">&mdash;&#9675;&mdash;</span>
+          <span>Prints &amp; paper goods</span><span class="sep">&mdash;&#9675;&mdash;</span>
+          <span>Small-batch apothecary</span>
+        </p>
+      </div>
+      <div class="makers-stat">
+        <p class="big">75<sup>+</sup></p>
+        <p class="label">Independent artists &amp; designers</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap leader" role="presentation">
+    <svg width="46" height="14" viewBox="0 0 46 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+      <path d="M1 7 h16"/>
+      <circle cx="23" cy="7" r="5"/>
+      <path d="M29 7 h16"/>
+    </svg>
+  </div>
+
+  <!-- ============ VISIT ============ -->
+  <section id="visit" class="wrap" aria-labelledby="visit-h">
+    <p class="eyebrow">
+      <svg class="glyph" width="14" height="18" viewBox="0 0 20 26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <circle cx="10" cy="4" r="2.5"/>
+        <path d="M4 12 a6 8 0 0 1 12 0 a6 8 0 0 1 -12 0 Z M4 12 h12"/>
+      </svg>
+      Visit the Shop
+    </p>
+    <h2 id="visit-h">Come see the prints <em>in person.</em></h2>
+    <div class="visit-grid">
+      <div class="visit-card">
+        <dl>
+          <dt>Address</dt>
+          <dd>521 Main Street<br>Chatham, Massachusetts<br>Cape Cod</dd>
+          <dt>Hours</dt>
+          <dd>Open daily in season<br><span class="fine">call or check socials for today's hours</span></dd>
+          <dt>Find us</dt>
+          <dd>A short walk from the Chatham Fish Pier — follow the gulls.</dd>
+        </dl>
+        <a class="btn btn-ghost" style="align-self:flex-start; font-family: var(--font-sans); font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase;" href="#top">Get Directions</a>
+      </div>
+      <figure class="img-slot">
+        <div class="frame">
+          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M12 60 v-28 l24 -16 24 16 v28 Z"/>
+            <path d="M28 60 v-16 h16 v16"/>
+            <path d="M20 40 h8 M44 40 h8"/>
+          </svg>
+        </div>
+        <figcaption class="prompt">
+          <strong>Image slot — generate in Higgsfield</strong>
+          "Golden-hour photograph of a cedar-shingled Cape Cod storefront on Main Street, Chatham. Hand-painted wooden sign, screen-printed tees in the window, hydrangeas, warm coastal evening light, editorial travel photography."
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+</main>
+
+<div class="wrap">
+  <footer class="site">
+    <div class="foot-row">
+      <a class="wordmark" href="#top">
+        <svg width="16" height="26" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="10" cy="5" r="3"/>
+          <path d="M10 8 v14 a7 7 0 0 0 14 0 v-5 M24 17 l-4 5"/>
+        </svg>
+        Fisherman's Daughter
+      </a>
+      <nav aria-label="Footer">
+        <a href="#collection">Collection</a>
+        <a href="#story">Story</a>
+        <a href="#makers">Makers</a>
+        <a href="#visit">Visit</a>
+      </nav>
+    </div>
+    <p class="ledger-note">Hand-drawn &amp; screen-printed on Cape Cod &middot; 521 Main Street, Chatham, Mass. &middot; Design concept — theme: "lines, hooks &amp; fishing gear"</p>
+  </footer>
+</div>
+
+</body>
+</html>
