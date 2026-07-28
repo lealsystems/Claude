@@ -3,55 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>Fisherman's Daughter — Hand-drawn on the docks. Printed on Cape Cod.</title>
 <style>
   /* ============ TOKENS ============ */
+  /* Single light theme by design: white ground, washed denim & aged
+     sailboat blues. The page always renders light, even in dark mode. */
   :root {
-    --ground:    #EDEAE0;   /* salt-bleached canvas */
-    --ground-2:  #E3DFD1;   /* panel canvas */
-    --ink:       #22302A;   /* spruce-net ink */
-    --ink-soft:  #5A685F;
-    --hairline:  #C6C2B2;
-    --brass:     #96762F;   /* aged brass hook */
-    --buoy:      #B5482F;   /* buoy red — CTA only */
-    --card:      #F3F1E9;
+    color-scheme: only light;
+    --ground:    #FFFFFF;   /* white sailcloth */
+    --ground-2:  #E9EEF2;   /* sun-bleached sail */
+    --ink:       #2C3E54;   /* dark denim indigo */
+    --ink-soft:  #5F7386;   /* faded denim */
+    --hairline:  #C9D5DE;   /* weathered hull seam */
+    --brass:     #4F739A;   /* washed denim blue — accents & glyphs */
+    --buoy:      #2F5578;   /* deep aged-indigo — CTA only */
+    --card:      #F6F8FA;   /* salt-washed panel */
 
     --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
     --font-sans: "Gill Sans", "Gill Sans MT", "Avenir Next", Avenir, "Trebuchet MS", Verdana, sans-serif;
     --font-mono: "American Typewriter", "Courier New", Courier, monospace;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --ground:   #141A17;  /* tarred hull */
-      --ground-2: #1B2420;
-      --ink:      #E8E3D3;  /* salt */
-      --ink-soft: #A6AFA3;
-      --hairline: #35413A;
-      --brass:    #C6A053;
-      --buoy:     #D2674B;
-      --card:     #1A211D;
-    }
-  }
-  :root[data-theme="light"] {
-    --ground:    #EDEAE0;
-    --ground-2:  #E3DFD1;
-    --ink:       #22302A;
-    --ink-soft:  #5A685F;
-    --hairline:  #C6C2B2;
-    --brass:     #96762F;
-    --buoy:      #B5482F;
-    --card:      #F3F1E9;
-  }
-  :root[data-theme="dark"] {
-    --ground:   #141A17;
-    --ground-2: #1B2420;
-    --ink:      #E8E3D3;
-    --ink-soft: #A6AFA3;
-    --hairline: #35413A;
-    --brass:    #C6A053;
-    --buoy:     #D2674B;
-    --card:     #1A211D;
-  }
+  :root[data-theme="dark"], :root[data-theme="light"] { color-scheme: only light; }
 
   /* ============ BASE ============ */
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -191,7 +164,7 @@
     padding: 0.85rem 1.9rem;
     border-radius: 2px;
   }
-  .btn-buoy { background: var(--buoy); color: #F6F2E6; }
+  .btn-buoy { background: var(--buoy); color: #FFFFFF; }
   .btn-buoy:hover { filter: brightness(1.08); }
   .btn-ghost { border: 1.5px solid var(--ink); }
   .btn-ghost:hover { background: var(--ink); color: var(--ground); }
@@ -455,6 +428,8 @@
 
 <div class="wrap">
   <header class="site">
+    <!-- LOGO SLOT: replace this inline lockup with the official logo file,
+         e.g. <img src="logo.png" alt="Fisherman's Daughter" style="height:2.5rem"> -->
     <a class="wordmark" href="#top" aria-label="Fisherman's Daughter — home">
       <svg width="16" height="26" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
         <circle cx="10" cy="5" r="3"/>
@@ -734,7 +709,7 @@
         <a href="#visit">Visit</a>
       </nav>
     </div>
-    <p class="ledger-note">Hand-drawn &amp; screen-printed on Cape Cod &middot; 521 Main Street, Chatham, Mass. &middot; Design concept — theme: "lines, hooks &amp; fishing gear"</p>
+    <p class="ledger-note">Hand-drawn &amp; screen-printed on Cape Cod &middot; 521 Main Street, Chatham, Mass. 02633 &middot; (508) 292-5463 &middot; Design concept — white sailcloth &amp; washed denim</p>
   </footer>
 </div>
 
