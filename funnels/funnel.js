@@ -117,7 +117,7 @@
     if (topbar) {
       topbar.innerHTML =
         '<div class="topbar-inner">' +
-          '<a class="brand" href="index.html" aria-label="Cape Codder Building & Remodeling">' +
+          '<a class="brand" href="https://www.capecodderinc.com" aria-label="Cape Codder Building & Remodeling">' +
             '<img class="brand-logo" src="' + BRAND.logo + '" alt="">' +
             '<span class="brand-name"><span class="top">' + BRAND.name + '</span><br><span class="sub">' + BRAND.sub + '</span></span>' +
           '</a>' +
@@ -138,6 +138,7 @@
           '</div>' +
           '<div class="footer-area">' + BRAND.area + '</div>' +
           '<div class="footer-fave">' + BRAND.fave + '</div>' +
+          '<a class="back-site" href="https://www.capecodderinc.com">&larr; Back to Our Main Website</a>' +
           '<div class="footer-area">© ' + new Date().getFullYear() + ' Cape Codder Building & Remodeling INC</div>' +
         '</div>';
     }
