@@ -442,7 +442,7 @@ window.FUNNEL = { slug: "hub", steps: [], intro: null };
         addressed to BRAND.email (works, but relies on the visitor).
      See README.md for the exact JSON field list you can map.
      ============================================================ */
-  var LEAD_ENDPOINT = "";
+  var LEAD_ENDPOINT = "https://services.leadconnectorhq.com/hooks/BbtQuQztOugpY9lxrsiO/webhook-trigger/c4afc70b-02ff-47c5-8d88-ec6315faec22";
 
   // Filled by build.py with data URIs when official partner logo files
   // (harvey-logo.png / andersen-logo.png) exist next to the source pages.
@@ -804,14 +804,23 @@ window.FUNNEL = { slug: "hub", steps: [], intro: null };
 
       // Flat payload: every answer is a top-level q_* field, which makes
       // mapping trivial in GHL/Zapier. `summary` is a ready-made email body.
+      // Field names mirror the site contact form's payload so one GHL
+      // workflow maps both sources identically.
+      var fullName = get("name");
+      var nameParts = fullName.split(/\s+/);
       var lines = [];
       var lead = {
-        _subject: "New lead: " + (F.projectNoun || "project") + " — " + get("name"),
+        _subject: "New lead: " + (F.projectNoun || "project") + " — " + fullName,
         funnel: F.slug,
         project: F.projectNoun || "project",
-        name: get("name"), phone: get("phone"),
+        first_name: nameParts[0] || "",
+        last_name: nameParts.slice(1).join(" "),
+        full_name: fullName,
+        name: fullName, phone: get("phone"),
         email: get("email"), town: get("town"),
-        page: location.href, submittedAt: new Date().toISOString()
+        source: "Quiz Funnel (/quiz) — " + (F.projectNoun || "project"),
+        page_url: location.href,
+        submitted_at: new Date().toISOString()
       };
       F.steps.forEach(function (s) {
         var a = state.answers[s.id];
