@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ================= SEO ================= -->
+<title>Munhoz Landscaping | Lawn Care &amp; Landscaping on Cape Cod</title>
+<meta name="description" content="Reliable lawn mowing, cleanups, trimming, mulch, edging, weeding and landscaping services on Cape Cod. Request a free estimate from Munhoz Landscaping.">
+<!-- CANONICAL: set to the live URL when published -->
+<link rel="canonical" href="https://REPLACE-WITH-LIVE-DOMAIN.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Munhoz Landscaping | Lawn Care &amp; Landscaping on Cape Cod">
+<meta property="og:description" content="Quality work. Beautiful results. Lawn mowing, cleanups, mulch, trimming and more on Cape Cod. Free estimates: (508) 838-9614.">
+<meta property="og:site_name" content="Munhoz Landscaping">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Munhoz Landscaping | Lawn Care &amp; Landscaping on Cape Cod">
+<meta name="twitter:description" content="Reliable lawn care and landscaping on Cape Cod. Free estimates: (508) 838-9614.">
+
+<!-- LocalBusiness schema (no street address on purpose — do not invent one) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Munhoz Landscaping",
+  "description": "Lawn mowing, edging, weeding, trimming, spring & fall cleanups, fertilizing, mulch installation, and flower beds on Cape Cod, Massachusetts.",
+  "telephone": "+1-508-838-9614",
+  "founder": { "@type": "Person", "name": "Jhonathan M" },
+  "slogan": "Quality Work. Beautiful Results.",
+  "areaServed": "Cape Cod, Massachusetts and surrounding communities",
+  "knowsAbout": ["Lawn mowing", "Edging", "Weeding", "Trimming", "Spring cleanups", "Fall cleanups", "Fertilizing", "Mulch installation", "Flower beds"]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   MUNHOZ LANDSCAPING — Design system
+   Palette + type from the Munhoz business card.
+   ============================================================ */
+:root {
+  --charcoal: #151815;      /* dark near-black */
+  --deep: #174D12;          /* deep green */
+  --lawn: #4E9F20;          /* primary lawn green */
+  --bright: #83C52B;        /* bright accent green */
+  --off: #F7F7F3;           /* off-white sections */
+  --white: #FFFFFF;
+  --ink: #181A18;           /* text black */
+  --ink-soft: #45483F;
+  --ink-faint: #7d8076;
+  --line: rgba(24, 26, 24, .12);
+  --line-light: rgba(255, 255, 255, .14);
+
+  --head: 'Oswald', 'Arial Narrow', sans-serif;
+  --body: 'Inter', 'Segoe UI', Arial, sans-serif;
+
+  --maxw: 1180px;
+  --radius: 6px;            /* squared corners — worksite, not web-app */
+  --shadow: 0 18px 40px -18px rgba(21, 24, 21, .35);
+  --pad: clamp(3.5rem, 8vw, 6.5rem);   /* vertical section rhythm */
+  --ease: cubic-bezier(.22, .8, .3, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body { overflow-x: clip; }
+body {
+  font-family: var(--body);
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--bright); outline-offset: 2px; }
+
+.wrap { width: min(var(--maxw), 92vw); margin-inline: auto; }
+
+/* Display type: condensed, bold, uppercase */
+h1, h2, h3, .display {
+  font-family: var(--head);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .015em;
+  line-height: 1.08;
+}
+.eyebrow {
+  display: inline-flex; align-items: center; gap: .7rem;
+  font-family: var(--head); font-weight: 500; font-size: .8rem;
+  letter-spacing: .3em; text-transform: uppercase; color: var(--lawn);
+}
+.eyebrow::before { content: ""; width: 2.2rem; height: 3px; background: var(--lawn); }
+.section-title { font-size: clamp(1.9rem, 4.6vw, 3rem); }
+.section-intro { color: var(--ink-soft); max-width: 40rem; margin-top: .9rem; font-size: 1.05rem; }
+
+/* Hard green divider bar between major sections — brand signature */
+.divider { height: 4px; background: linear-gradient(90deg, var(--deep), var(--lawn) 45%, var(--bright)); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  font-family: var(--head); font-weight: 600; font-size: .95rem;
+  letter-spacing: .09em; text-transform: uppercase; text-decoration: none;
+  padding: 1rem 1.9rem; border: 2px solid transparent; border-radius: var(--radius);
+  transition: transform .25s var(--ease), background .25s, color .25s, border-color .25s, box-shadow .25s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: none; }
+.btn-green { background: var(--lawn); color: var(--white); box-shadow: 0 12px 26px -10px rgba(78, 159, 32, .55); }
+.btn-green:hover { background: var(--bright); color: var(--charcoal); }
+.btn-dark { background: var(--charcoal); color: var(--white); }
+.btn-dark:hover { background: var(--deep); }
+.btn-outline-light { border-color: rgba(255,255,255,.55); color: var(--white); background: transparent; }
+.btn-outline-light:hover { background: var(--white); color: var(--charcoal); border-color: var(--white); }
+.btn-outline-dark { border-color: var(--charcoal); color: var(--charcoal); background: transparent; }
+.btn-outline-dark:hover { background: var(--charcoal); color: var(--white); }
+
+/* ============================================================
+   HEADER / NAV
+   ============================================================ */
+header.site-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--charcoal);
+  border-bottom: 3px solid var(--lawn);
+}
+.nav-inner {
+  width: min(var(--maxw), 94vw); margin-inline: auto;
+  display: flex; align-items: center; gap: 1.6rem;
+  padding: .7rem 0;
+}
+.logo { display: flex; align-items: center; gap: .65rem; text-decoration: none; margin-right: auto; }
+.logo-mark { width: 46px; height: 46px; flex: 0 0 auto; border-radius: 50%; box-shadow: 0 0 0 2px rgba(131,197,43,.25), 0 4px 14px rgba(0,0,0,.4); }
+.logo-text { line-height: 1.05; }
+.logo-text .l1 { font-family: var(--head); font-weight: 700; font-size: 1.12rem; letter-spacing: .06em; color: var(--white); text-transform: uppercase; }
+.logo-text .l2 { font-family: var(--head); font-weight: 500; font-size: .62rem; letter-spacing: .42em; color: var(--bright); text-transform: uppercase; }
+.nav-links { display: flex; gap: 1.7rem; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,.85); text-decoration: none;
+  font-size: .82rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  padding: .35rem 0; border-bottom: 2px solid transparent;
+  transition: color .25s, border-color .25s;
+}
+.nav-links a:hover { color: var(--bright); border-color: var(--bright); }
+.nav-phone {
+  display: inline-flex; align-items: center; gap: .5rem; text-decoration: none;
+  color: var(--white); font-weight: 700; font-size: .92rem; white-space: nowrap;
+}
+.nav-phone svg { color: var(--bright); }
+.nav-phone:hover { color: var(--bright); }
+.nav-cta { padding: .8rem 1.4rem; font-size: .82rem; white-space: nowrap; }
+
+/* Hamburger (mobile) */
+.burger { display: none; background: none; border: 0; padding: .5rem; margin-left: auto; }
+.burger span { display: block; width: 26px; height: 3px; background: var(--white); margin: 5px 0; border-radius: 2px; transition: .3s var(--ease); }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 99; background: var(--charcoal);
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1.4rem;
+  transform: translateX(100%); transition: transform .4s var(--ease);
+}
+.mobile-menu.open { transform: none; }
+.mobile-menu a {
+  color: var(--white); text-decoration: none; font-family: var(--head);
+  font-size: 1.4rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+}
+.mobile-menu a:hover { color: var(--bright); }
+.mobile-menu .btn { font-size: 1rem; }
+
+/* Sticky bottom CTA bar — mobile only, one CTA always visible */
+.mobile-cta {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 98;
+  display: none; grid-template-columns: 1fr 1fr;
+  background: var(--charcoal); border-top: 3px solid var(--lawn);
+  padding: .55rem .55rem calc(.55rem + env(safe-area-inset-bottom));
+  gap: .55rem;
+}
+.mobile-cta .btn { padding: .9rem .5rem; font-size: .85rem; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative; color: var(--white);
+  background: var(--charcoal);
+  min-height: min(92svh, 860px);
+  display: grid; align-items: center;
+  overflow: hidden;
+}
+/* HERO MEDIA — replace this CSS-drawn lawn with a real photo:
+   <img class="hero-photo" src="REAL-PHOTO.jpg" alt="Freshly mowed striped lawn on Cape Cod">
+   and delete .hero-art. Keep .hero-shade for text readability. */
+.hero-media { position: absolute; inset: 0; }
+.hero-photo { width: 100%; height: 100%; object-fit: cover; }
+.hero-art { position: absolute; inset: 0; }
+.hero-art .sky {
+  position: absolute; inset: 0 0 38% 0;
+  background: linear-gradient(180deg, #1a1e1a 0%, #232823 70%, #2c3527 100%);
+}
+.hero-art .field {
+  position: absolute; inset: 55% 0 0 0;
+  background: repeating-linear-gradient(100deg,
+    #3f8a1a 0 90px, #4E9F20 90px 180px, #46941d 180px 270px, #57a828 270px 360px);
+  transform: perspective(620px) rotateX(48deg) scale(1.6);
+  transform-origin: top center;
+}
+.hero-art .haze {
+  position: absolute; inset: 40% 0 30% 0;
+  background: linear-gradient(180deg, transparent, rgba(21,24,21,0) 30%, rgba(131,197,43,.14) 60%, transparent);
+  filter: blur(6px);
+}
+.hero-shade {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(21,24,21,.88) 0%, rgba(21,24,21,.55) 45%, rgba(21,24,21,.82) 100%),
+    radial-gradient(900px 420px at 18% 45%, rgba(21,24,21,.5), transparent 65%);
+}
+.hero-inner { position: relative; z-index: 2; padding: clamp(5rem, 12vw, 8rem) 0 6.5rem; }
+.hero h1 {
+  font-size: clamp(2.5rem, 7.2vw, 4.6rem);
+  font-weight: 700; max-width: 15ch; margin-top: 1.2rem;
+}
+.hero h1 .hl { color: var(--bright); }
+.hero .sub { max-width: 36rem; margin: 1.4rem 0 2.2rem; color: rgba(255,255,255,.85); font-size: clamp(1rem, 2.4vw, 1.15rem); }
+.hero-actions { display: flex; gap: .9rem; flex-wrap: wrap; }
+.hero-trust { display: flex; gap: 1.6rem 2.2rem; flex-wrap: wrap; margin-top: 2.1rem; }
+.hero-trust span { display: inline-flex; align-items: center; gap: .55rem; font-size: .88rem; font-weight: 600; color: rgba(255,255,255,.92); }
+.hero-trust svg { color: var(--bright); flex: 0 0 auto; }
+
+/* ============================================================
+   PROBLEM / BEFORE-AFTER
+   ============================================================ */
+.problem { background: var(--off); padding: var(--pad) 0; }
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.problem-copy .lines { margin: 1.4rem 0 1.6rem; font-family: var(--head); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; font-size: clamp(1.05rem, 2.6vw, 1.35rem); color: var(--ink-soft); display: grid; gap: .25rem; }
+.problem-copy .lines b { color: var(--deep); font-weight: 600; }
+.ba { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+.ba figure { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+/* BEFORE/AFTER placeholders — replace each .ph-yard with:
+   <img src="REAL-BEFORE.jpg" alt="Yard before cleanup" style="width:100%;height:100%;object-fit:cover;"> */
+.ph-yard { position: absolute; inset: 0; display: grid; place-items: center; color: rgba(255,255,255,.85); font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; text-align: center; }
+.ph-before { background:
+  radial-gradient(140px 70px at 30% 70%, #6b6b40, transparent 70%),
+  radial-gradient(180px 90px at 75% 40%, #7a7a48, transparent 70%),
+  linear-gradient(160deg, #5d6b45 0%, #4a5638 60%, #3c452e 100%); }
+.ph-after { background:
+  repeating-linear-gradient(100deg, #3f8a1a 0 26px, #4E9F20 26px 52px, #57a828 52px 78px),
+  linear-gradient(180deg, rgba(0,0,0,.08), transparent 40%); background-blend-mode: multiply; }
+.ba figcaption {
+  position: absolute; top: .8rem; left: .8rem; z-index: 2;
+  font-family: var(--head); font-weight: 600; font-size: .78rem; letter-spacing: .2em;
+  padding: .35rem .8rem; border-radius: 3px; text-transform: uppercase;
+}
+.ba .tag-before { background: var(--charcoal); color: var(--white); }
+.ba .tag-after { background: var(--bright); color: var(--charcoal); }
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+.services { background: var(--white); padding: var(--pad) 0; }
+.services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 3rem; border: 1px solid var(--line); }
+.svc {
+  padding: 2rem 1.6rem 1.9rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  position: relative; transition: background .3s;
+}
+.svc::after { /* grows a green baseline on hover */
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px;
+  background: var(--lawn); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease);
+}
+.svc:hover { background: var(--off); }
+.svc:hover::after { transform: scaleX(1); }
+.svc:nth-child(4n) { border-right: 0; }
+.svc:nth-child(n+5) { border-bottom: 0; }
+.svc .ico { color: var(--lawn); margin-bottom: 1rem; }
+.svc h3 { font-size: 1.15rem; margin-bottom: .5rem; }
+.svc p { font-size: .9rem; color: var(--ink-soft); }
+
+/* ============================================================
+   WHY MUNHOZ
+   ============================================================ */
+.why { background: var(--charcoal); color: var(--white); padding: var(--pad) 0; position: relative; }
+.why::before { /* faint bright-green mow lines in the dark */
+  content: ""; position: absolute; inset: 0; opacity: .05; pointer-events: none;
+  background: repeating-linear-gradient(100deg, transparent 0 120px, var(--bright) 120px 122px);
+}
+.why .section-intro { color: rgba(255,255,255,.7); }
+.why-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.6rem; margin-top: 3rem; position: relative; }
+.why-item { border-top: 3px solid var(--lawn); padding-top: 1.2rem; }
+.why-item h3 { font-size: 1.02rem; color: var(--bright); margin-bottom: .45rem; }
+.why-item p { font-size: .88rem; color: rgba(255,255,255,.75); }
+
+/* ============================================================
+   PROCESS — drawn as a mow path, not four cards
+   ============================================================ */
+.process { background: var(--off); padding: var(--pad) 0; }
+.mow-path { position: relative; margin-top: 3.4rem; }
+.mow-path::before { /* the mow line */
+  content: ""; position: absolute; top: 26px; left: 4%; right: 4%; height: 4px;
+  background: repeating-linear-gradient(90deg, var(--lawn) 0 26px, transparent 26px 40px);
+}
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; position: relative; }
+.step { text-align: left; }
+.step .no {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--charcoal); color: var(--bright);
+  display: grid; place-items: center; position: relative; z-index: 1;
+  font-family: var(--head); font-weight: 700; font-size: 1.1rem;
+  border: 3px solid var(--lawn); margin-bottom: 1.1rem;
+}
+.step h3 { font-size: 1.08rem; margin-bottom: .45rem; }
+.step p { font-size: .9rem; color: var(--ink-soft); }
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+.gallery { background: var(--white); padding: var(--pad) 0; }
+.filters { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1.8rem; }
+.filter-btn {
+  font-family: var(--head); font-weight: 600; font-size: .8rem; letter-spacing: .12em;
+  text-transform: uppercase; padding: .6rem 1.2rem; border-radius: 3px;
+  background: var(--off); color: var(--ink-soft); border: 1px solid var(--line);
+  transition: all .25s;
+}
+.filter-btn:hover { border-color: var(--lawn); color: var(--deep); }
+.filter-btn.active { background: var(--charcoal); color: var(--bright); border-color: var(--charcoal); }
+.gal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.gal-item { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.gal-item.hidden { display: none; }
+/* GALLERY placeholders — replace each .ph-yard block with a real
+   Munhoz project photo: <img src="..." alt="..." style="width:100%;height:100%;object-fit:cover;"> */
+.gal-item .badge {
+  position: absolute; bottom: .8rem; left: .8rem; z-index: 2;
+  font-family: var(--head); font-weight: 600; font-size: .72rem; letter-spacing: .18em;
+  text-transform: uppercase; background: rgba(21,24,21,.85); color: var(--bright);
+  padding: .35rem .8rem; border-radius: 3px;
+}
+.gal-item .ph-yard { font-size: .62rem; }
+.gal-item:hover .ph-yard { transform: scale(1.04); }
+.gal-item .ph-yard { transition: transform .6s var(--ease); }
+.g1 { background: repeating-linear-gradient(96deg, #3f8a1a 0 34px, #4E9F20 34px 68px, #57a828 68px 102px); }
+.g2 { background: linear-gradient(150deg, #4a5638, #333d28 70%); }
+.g3 { background: linear-gradient(140deg, #5b3d24, #3d2a1a 60%), repeating-linear-gradient(0deg, transparent 0 14px, rgba(0,0,0,.15) 14px 16px); background-blend-mode: overlay; }
+.g4 { background: linear-gradient(160deg, #3f5a2e, #27381d 70%); }
+.g5 { background: linear-gradient(140deg, #567c33, #33511f 60%); }
+.g6 { background: repeating-linear-gradient(90deg, #46941d 0 40px, #57a828 40px 80px); }
+
+/* ============================================================
+   RECURRING SERVICE BAND
+   ============================================================ */
+.recurring {
+  background: linear-gradient(120deg, var(--deep) 0%, #1d6117 55%, #256e1b 100%);
+  color: var(--white); padding: var(--pad) 0; position: relative; overflow: hidden;
+}
+.recurring::after { /* big soft stripe sweep */
+  content: ""; position: absolute; inset: -20% -10%; opacity: .12; pointer-events: none;
+  background: repeating-linear-gradient(105deg, transparent 0 140px, #fff 140px 143px);
+}
+.rec-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; position: relative; z-index: 1; }
+.rec-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: .8rem 2rem; margin: 1.8rem 0 2.2rem; }
+.rec-list li { display: flex; align-items: center; gap: .6rem; font-weight: 600; font-size: .95rem; }
+.rec-list svg { color: var(--bright); flex: 0 0 auto; }
+.rec-visual { aspect-ratio: 1; max-width: 380px; justify-self: center; position: relative; }
+.rec-visual .ring { position: absolute; inset: 0; border: 3px dashed rgba(255,255,255,.35); border-radius: 50%; animation: slow-turn 40s linear infinite; }
+@keyframes slow-turn { to { transform: rotate(360deg); } }
+.rec-visual .core {
+  position: absolute; inset: 12%; border-radius: 50%;
+  background: repeating-linear-gradient(100deg, #3f8a1a 0 22px, #4E9F20 22px 44px, #57a828 44px 66px);
+  display: grid; place-items: center; box-shadow: inset 0 0 60px rgba(0,0,0,.35);
+}
+.rec-visual .core span {
+  font-family: var(--head); font-weight: 700; font-size: 1.1rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--white); text-shadow: 0 2px 12px rgba(0,0,0,.5);
+  text-align: center; padding: 0 1.5rem;
+}
+
+/* ============================================================
+   REVIEWS
+   ============================================================ */
+.reviews { background: var(--off); padding: var(--pad) 0; }
+.rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.6rem; }
+.rev-card { background: var(--white); border: 1px solid var(--line); border-top: 4px solid var(--lawn); border-radius: var(--radius); padding: 1.8rem 1.6rem; }
+.stars { color: #E8A93C; letter-spacing: .2em; font-size: 1.05rem; margin-bottom: .8rem; }
+.rev-card .quote { color: var(--ink-soft); font-size: .95rem; font-style: italic; }
+.rev-card .who { margin-top: 1.1rem; font-family: var(--head); font-weight: 600; font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); }
+.rev-cta { margin-top: 2.2rem; }
+
+/* ============================================================
+   SERVICE AREA
+   ============================================================ */
+.area { background: var(--white); padding: var(--pad) 0; }
+.area-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+.area-map {
+  aspect-ratio: 4 / 3; border-radius: var(--radius); position: relative; overflow: hidden;
+  background: linear-gradient(180deg, #223224 0%, #1a241b 100%); box-shadow: var(--shadow);
+}
+/* stylized Cape Cod arm */
+.area-map svg { position: absolute; inset: 8%; width: 84%; height: 84%; }
+.area-name {
+  position: absolute; bottom: 1rem; left: 0; right: 0; text-align: center;
+  font-family: var(--head); font-weight: 600; letter-spacing: .3em; font-size: .72rem;
+  text-transform: uppercase; color: var(--bright);
+}
+.zip-check { margin-top: 1.8rem; }
+.zip-row { display: flex; gap: .7rem; margin-top: .9rem; max-width: 420px; }
+.zip-row input {
+  flex: 1; min-width: 0; padding: .95rem 1.1rem; font: inherit; font-size: 1rem;
+  border: 2px solid var(--line); border-radius: var(--radius); background: var(--off);
+}
+.zip-row input:focus { outline: none; border-color: var(--lawn); }
+.zip-msg { margin-top: .8rem; font-weight: 600; font-size: .92rem; min-height: 1.4em; }
+.zip-msg.ok { color: var(--deep); }
+.zip-msg.maybe { color: var(--ink-soft); }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about { background: var(--off); padding: var(--pad) 0; }
+.about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3.5rem; align-items: center; }
+.about-photo {
+  aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden; position: relative;
+  box-shadow: var(--shadow); border-bottom: 5px solid var(--lawn);
+}
+/* ABOUT PHOTO — replace with a real photo of Jhonathan / the crew */
+.about-photo .ph-yard { background: linear-gradient(165deg, #2c3527 0%, #1c231c 70%); font-size: .68rem; }
+.about-copy p { color: var(--ink-soft); margin-top: 1.1rem; }
+.about-sign { margin-top: 1.8rem; font-family: var(--head); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.about-sign small { display: block; color: var(--ink-faint); letter-spacing: .22em; font-size: .68rem; margin-top: .2rem; }
+
+/* ============================================================
+   ESTIMATE FORM
+   ============================================================ */
+.estimate { background: var(--charcoal); color: var(--white); padding: var(--pad) 0; position: relative; }
+.estimate::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 6px; background: linear-gradient(90deg, var(--deep), var(--lawn), var(--bright)); }
+.est-grid { display: grid; grid-template-columns: .9fr 1.4fr; gap: 3.5rem; align-items: start; }
+.est-side .section-intro { color: rgba(255,255,255,.72); }
+.est-points { list-style: none; display: grid; gap: .9rem; margin-top: 1.8rem; }
+.est-points li { display: flex; gap: .7rem; align-items: flex-start; font-size: .95rem; color: rgba(255,255,255,.88); }
+.est-points svg { color: var(--bright); flex: 0 0 auto; margin-top: .2rem; }
+.est-call { margin-top: 2rem; padding-top: 1.6rem; border-top: 1px solid var(--line-light); font-size: .95rem; color: rgba(255,255,255,.7); }
+.est-call a { color: var(--bright); font-weight: 700; text-decoration: none; font-size: 1.25rem; font-family: var(--head); letter-spacing: .05em; }
+
+.est-form { background: var(--white); color: var(--ink); border-radius: var(--radius); padding: clamp(1.4rem, 3.5vw, 2.4rem); box-shadow: 0 30px 70px -25px rgba(0,0,0,.6); }
+.est-form h3 { font-size: 1.35rem; margin-bottom: 1.4rem; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.f-field { margin-bottom: 1rem; }
+.f-field label { display: block; font-weight: 600; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: .4rem; }
+.f-field input[type="text"], .f-field input[type="tel"], .f-field input[type="email"], .f-field textarea, .f-field select {
+  width: 100%; padding: .9rem 1rem; font: inherit; font-size: .98rem;
+  border: 2px solid var(--line); border-radius: var(--radius); background: var(--off);
+  transition: border-color .25s; appearance: none;
+}
+.f-field textarea { min-height: 110px; resize: vertical; }
+.f-field :is(input, textarea, select):focus { outline: none; border-color: var(--lawn); background: var(--white); }
+.f-field.error :is(input, textarea) { border-color: #C0492F; }
+.f-field .err { display: none; color: #C0492F; font-size: .78rem; font-weight: 600; margin-top: .3rem; }
+.f-field.error .err { display: block; }
+fieldset { border: 0; margin-bottom: 1.1rem; }
+fieldset legend { font-weight: 600; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: .6rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.chip-opt { position: relative; }
+.chip-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.chip-opt span {
+  display: inline-block; padding: .55rem 1rem; border-radius: 3px; cursor: pointer;
+  border: 2px solid var(--line); font-size: .85rem; font-weight: 600; color: var(--ink-soft);
+  transition: all .2s; user-select: none;
+}
+.chip-opt input:checked + span { background: var(--deep); border-color: var(--deep); color: var(--white); }
+.chip-opt input:focus-visible + span { outline: 3px solid var(--bright); outline-offset: 2px; }
+.chip-opt:hover span { border-color: var(--lawn); }
+.upload {
+  border: 2px dashed var(--line); border-radius: var(--radius); background: var(--off);
+  padding: 1.3rem; text-align: center; cursor: pointer; transition: border-color .25s;
+  font-size: .9rem; color: var(--ink-soft);
+}
+.upload:hover { border-color: var(--lawn); }
+.upload input { display: none; }
+.upload .picked { display: block; margin-top: .4rem; font-weight: 600; color: var(--deep); font-size: .82rem; }
+.est-submit { width: 100%; margin-top: 1.2rem; padding: 1.15rem; font-size: 1.02rem; }
+.form-note { font-size: .8rem; color: var(--ink-faint); margin-top: .8rem; text-align: center; }
+/* Thank-you state */
+.est-thanks { display: none; text-align: center; padding: 3rem 1rem; }
+.est-thanks.show { display: block; }
+.est-thanks .tick-big {
+  width: 74px; height: 74px; margin: 0 auto 1.3rem; border-radius: 50%;
+  background: var(--lawn); color: var(--white); display: grid; place-items: center;
+}
+.est-thanks h3 { font-size: 1.5rem; margin-bottom: .5rem; }
+.est-thanks p { color: var(--ink-soft); }
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq { background: var(--white); padding: var(--pad) 0; }
+.faq-list { margin-top: 2.4rem; border-top: 1px solid var(--line); max-width: 60rem; }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-q {
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  background: none; border: 0; text-align: left; padding: 1.15rem .2rem;
+  font-family: var(--head); font-weight: 600; font-size: 1.02rem; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--ink); transition: color .25s;
+}
+.faq-q:hover { color: var(--deep); }
+.faq-q .chev { flex: 0 0 auto; color: var(--lawn); transition: transform .3s var(--ease); }
+.faq-q[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.faq-a { overflow: hidden; max-height: 0; transition: max-height .35s var(--ease); }
+.faq-a p { padding: 0 .2rem 1.2rem; color: var(--ink-soft); max-width: 54rem; }
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final-cta {
+  position: relative; color: var(--white); text-align: center;
+  padding: calc(var(--pad) * 1.15) 0; overflow: hidden;
+  background: linear-gradient(115deg, var(--charcoal) 0%, #1b2418 45%, var(--deep) 100%);
+}
+.final-cta::before { content: ""; position: absolute; inset: 0; opacity: .07; pointer-events: none;
+  background: repeating-linear-gradient(100deg, transparent 0 110px, var(--bright) 110px 113px); }
+.final-cta h2 { font-size: clamp(2rem, 5.6vw, 3.4rem); max-width: 20ch; margin: 0 auto; position: relative; }
+.final-cta p { color: rgba(255,255,255,.75); margin: 1.1rem auto 2.2rem; position: relative; }
+.final-cta .hero-actions { justify-content: center; position: relative; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer { background: var(--charcoal); color: rgba(255,255,255,.72); border-top: 4px solid var(--lawn); }
+.foot-grid {
+  width: min(var(--maxw), 92vw); margin-inline: auto;
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.6rem;
+  padding: 3.5rem 0 2.6rem;
+}
+.foot-brand .logo-text .l1 { font-size: 1.25rem; }
+.foot-brand .tag { margin-top: .9rem; font-family: var(--head); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; font-size: .8rem; color: var(--bright); }
+.foot-brand a.tel { display: inline-block; margin-top: 1rem; color: var(--white); font-weight: 700; font-size: 1.15rem; text-decoration: none; }
+.foot-brand a.tel:hover { color: var(--bright); }
+footer h4 { font-family: var(--head); font-weight: 600; font-size: .8rem; letter-spacing: .24em; text-transform: uppercase; color: var(--white); margin-bottom: 1rem; }
+footer ul { list-style: none; display: grid; gap: .45rem; font-size: .9rem; }
+footer ul a { text-decoration: none; transition: color .25s; }
+footer ul a:hover { color: var(--bright); }
+.foot-bottom { border-top: 1px solid var(--line-light); }
+.foot-bottom-inner {
+  width: min(var(--maxw), 92vw); margin-inline: auto;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
+  padding: 1.3rem 0; font-size: .78rem; color: rgba(255,255,255,.5);
+}
+.foot-bottom-inner a { color: rgba(255,255,255,.6); }
+.foot-bottom-inner a:hover { color: var(--bright); }
+
+/* ============================================================
+   REVEAL ANIMATION
+   ============================================================ */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .rec-visual .ring { animation: none; }
+  .btn, .svc::after, .gal-item .ph-yard { transition: none; }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .svc:nth-child(2n) { border-right: 0; }
+  .svc:nth-child(-n+6) { border-bottom: 1px solid var(--line); }
+  .svc:nth-child(n+7) { border-bottom: 0; }
+  .why-grid { grid-template-columns: repeat(3, 1fr); }
+  .gal-grid { grid-template-columns: repeat(2, 1fr); }
+  .est-grid { grid-template-columns: 1fr; gap: 2.4rem; }
+}
+@media (max-width: 860px) {
+  .nav-links, .nav-phone { display: none; }
+  .burger { display: block; }
+  .nav-cta { display: none; }
+  .mobile-cta { display: grid; }
+  body { padding-bottom: 72px; } /* room for sticky bottom bar */
+  .problem-grid, .area-grid, .about-grid, .rec-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; gap: 1.6rem; }
+  .mow-path::before { top: 0; bottom: 0; left: 25px; right: auto; width: 4px; height: auto;
+    background: repeating-linear-gradient(180deg, var(--lawn) 0 26px, transparent 26px 40px); }
+  .step { display: grid; grid-template-columns: 54px 1fr; gap: 1.1rem; align-items: start; }
+  .step .no { margin-bottom: 0; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .rev-grid { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .svc { border-right: 0 !important; border-bottom: 1px solid var(--line) !important; }
+  .svc:last-child { border-bottom: 0 !important; }
+  .gal-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .f-row { grid-template-columns: 1fr; }
+  .ba { grid-template-columns: 1fr 1fr; }
+  .foot-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Vector recreation of the Munhoz badge logo.
+         Swap for the real logo file (as an <img>) when the PNG is provided. -->
+    <symbol id="munhoz-badge" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="58" fill="#FFFFFF"/>
+      <circle cx="60" cy="60" r="58" fill="none" stroke="#6B8F2E" stroke-width="3.4"/>
+      <circle cx="60" cy="60" r="52.5" fill="none" stroke="#6B8F2E" stroke-width="1.1"/>
+      <clipPath id="mb-scene"><path d="M14 52c8-24 26-38 46-38s38 14 46 38l-2 4H16z"/></clipPath>
+      <g clip-path="url(#mb-scene)">
+        <rect x="10" y="10" width="100" height="48" fill="#FDF3DC"/>
+        <circle cx="74" cy="46" r="16" fill="#E8862B"/>
+        <g stroke="#5F8A28" stroke-width="1.6" stroke-linecap="round">
+          <path d="M18 56V42M22 56V38M26 56V44M30 56V39M34 56V45M88 56V42M92 56V38M96 56V44M100 56V40M84 56V46"/>
+        </g>
+        <g fill="#171717">
+          <path d="M44 22l2-2 4 1-1 3 12 12-3 3-12-12z"/>
+          <path d="M52 36h18c4 0 7 3 7 7v5H48v-7c0-3 2-5 4-5z"/>
+          <rect x="66" y="30" width="9" height="7" rx="2"/>
+        </g>
+        <circle cx="53" cy="50" r="5" fill="#171717"/>
+        <circle cx="53" cy="50" r="2" fill="#FDF3DC"/>
+        <circle cx="72" cy="50" r="5" fill="#171717"/>
+        <circle cx="72" cy="50" r="2" fill="#FDF3DC"/>
+      </g>
+      <path d="M14 56h92" stroke="#6B8F2E" stroke-width="2.4"/>
+      <text x="60" y="74" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="19" fill="#FFFFFF" stroke="#171717" stroke-width="1.05" paint-order="stroke" letter-spacing=".5">MUNHOZ</text>
+      <path d="M18 80h84l-3 11H21z" fill="#7AA338"/>
+      <text x="60" y="88.6" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="7.4" fill="#171717" letter-spacing="1.6">LANDSCAPING</text>
+      <path id="mb-arc" d="M22 92c10 12 23 18 38 18s28-6 38-18" fill="none"/>
+      <text font-family="Arial, sans-serif" font-weight="600" font-size="5.6" fill="#8a8348" letter-spacing=".9">
+        <textPath href="#mb-arc" startOffset="50%" text-anchor="middle">QUALITY WORK. BEAUTIFUL RESULTS.</textPath>
+      </text>
+      <path d="M56 95c2-2 4-2 4 0 0-2 2-2 4 0" stroke="#7AA338" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============================================================
+     STICKY NAV
+============================================================ -->
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top" aria-label="Munhoz Landscaping — home">
+      <!-- Logo mark: mower + grass monogram (swap for the real business-card artwork when available) -->
+      <svg class="logo-mark" aria-hidden="true"><use href="#munhoz-badge"/></svg>
+      <span class="logo-text">
+        <span class="l1">Munhoz</span><br>
+        <span class="l2">Landscaping</span>
+      </span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Our Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#area">Service Area</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#estimate">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="nav-phone" href="tel:+15088389614">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.97.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.83.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg>
+      (508) 838-9614
+    </a>
+    <a class="btn btn-green nav-cta" href="#estimate">Get a Free Estimate</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="#services">Services</a>
+  <a href="#work">Our Work</a>
+  <a href="#about">About</a>
+  <a href="#area">Service Area</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#estimate">Contact</a>
+  <a class="btn btn-green" href="#estimate">Get a Free Estimate</a>
+  <a class="btn btn-outline-light" href="tel:+15088389614">Call (508) 838-9614</a>
+</div>
+
+<main id="top">
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero" aria-label="Munhoz Landscaping — Cape Cod lawn care">
+    <div class="hero-media" aria-hidden="true">
+      <!-- REPLACE with real photo:
+           <img class="hero-photo" src="hero.jpg" alt="Freshly mowed striped lawn at a Cape Cod home">
+           then delete the .hero-art block below. -->
+      <div class="hero-art">
+        <div class="sky"></div>
+        <div class="field"></div>
+        <div class="haze"></div>
+      </div>
+      <div class="hero-shade"></div>
+    </div>
+    <div class="wrap hero-inner">
+      <span class="eyebrow" style="color: var(--bright);">Local Landscaping &bull; Cape Cod, MA</span>
+      <h1>A better-looking yard <span class="hl">without giving up your weekend.</span></h1>
+      <p class="sub">From routine lawn care to seasonal cleanups, mulch, trimming, and flower beds, Munhoz Landscaping keeps your property clean, sharp, and ready to enjoy.</p>
+      <div class="hero-actions">
+        <a class="btn btn-green" href="#estimate">Get My Free Estimate</a>
+        <a class="btn btn-outline-light" href="tel:+15088389614">Call (508) 838-9614</a>
+      </div>
+      <div class="hero-trust">
+        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Reliable Service</span>
+        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Attention to Detail</span>
+        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Free Estimates</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       PROBLEM / BEFORE-AFTER
+  ============================================================ -->
+  <section class="problem">
+    <div class="wrap problem-grid">
+      <div class="problem-copy reveal">
+        <span class="eyebrow">The Problem</span>
+        <h2 class="section-title" style="margin-top:.9rem;">Your property shouldn't look like another job waiting for you.</h2>
+        <div class="lines">
+          <span>Grass keeps growing.</span>
+          <span>Beds get overgrown.</span>
+          <span>Leaves pile up.</span>
+          <span><b>And the weekend disappears fast.</b></span>
+        </div>
+        <p class="section-intro">Munhoz Landscaping gives you one reliable person to call to keep the property looking the way it should.</p>
+        <div style="margin-top:1.8rem;"><a class="btn btn-dark" href="#estimate">Get It Handled</a></div>
+      </div>
+      <div class="ba reveal" aria-label="Before and after comparison">
+        <figure>
+          <figcaption class="tag-before">Before</figcaption>
+          <!-- REPLACE with real before photo -->
+          <div class="ph-yard ph-before">Real "before"<br>photo here</div>
+        </figure>
+        <figure>
+          <figcaption class="tag-after">After</figcaption>
+          <!-- REPLACE with real after photo -->
+          <div class="ph-yard ph-after">Real "after"<br>photo here</div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       SERVICES
+  ============================================================ -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">Services</span>
+        <h2 class="section-title" style="margin-top:.9rem;">Everything your yard needs.</h2>
+        <p class="section-intro">Simple, dependable property care from one local team.</p>
+      </div>
+      <div class="services-grid reveal">
+        <article class="svc">
+          <div class="ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M5 20c0-4 1.5-6 4-6h6l2.5-6h4M7 14V9M10 14v-3M13 14v-4"/><circle cx="8" cy="20" r="0"/></svg></div>
+          <h3>Lawn Mowing</h3>
+          <p>Consistent mowing that keeps your lawn clean, even, and professionally maintained.</p>
+        </article>
+        <article class="svc">
+          <div class="ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L20 4M4 20h6M4 20v-6M13 11l3 3"/></svg></div>
+          <h3>Edging</h3>
+          <p>Clean edges around driveways, walkways, beds, and property lines.</p>
+        </article>
+        <article class="svc">
+          <div class="ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8M12 13c0-3-2-5-5-5 0 3 2 5 5 5zM12 13c0-3 2-5 5-5 0 3-2 5-5 5zM8 21h8"/></svg></div>
+          <h3>Weeding</h3>
+          <p>Remove unwanted growth and keep garden beds looking maintained.</p>
+        </article>
+        <article class="svc">
+          <div class="ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 4-2 5-2 8H8c0-3-2-4-2-8zM9 21h6M12 3v2"/></svg></div>
+          <h3>Trimming</h3>
+          <p>Shape shrubs, hedges, and landscape plants for a clean finished appearance.</p>
+        </article>
+        <article class="svc">
+          <div class="ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21c8 0 14-6 14-14v-2h-2C9 5 3 11 3 19v2h2zM3 21c6-6 10-10 16-16"/></svg></div>
+          <h3>Spring &amp; Fall Cleanups</h3>
+          <p>Leaves, branches, overgrowth, and seasonal debris removed and cleaned up.</p>
+        </article>
+        <article class="svc">
+          <div class="ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21V9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12M7 21h10M7 13h10M12 7V3M9 3h6"/></svg></div>
+          <h3>Fertilizing</h3>
+          <p>Seasonal lawn feeding designed to support greener, healthier turf.</p>
+        </article>
+        <article class="svc">
+          <div class="ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M5 20l3-9h8l3 9M9 11V8a3 3 0 0 1 6 0v3"/></svg></div>
+          <h3>Mulch</h3>
+          <p>Fresh mulch installation that improves curb appeal and protects planting beds.</p>
+        </article>
+        <article class="svc">
+          <div class="ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="2.6"/><path d="M12 10.6V21M12 15c-2 0-4-1.4-4-4M12 13c2 0 4-1.4 4-4M6 21h12"/></svg></div>
+          <h3>Flower Beds</h3>
+          <p>Bed cleanup, preparation, planting, edging, and seasonal improvements.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY MUNHOZ
+  ============================================================ -->
+  <section class="why">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow" style="color: var(--bright);">Why Munhoz</span>
+        <h2 class="section-title" style="margin-top:.9rem; color: var(--white);">Landscaping without the runaround.</h2>
+      </div>
+      <div class="why-grid reveal">
+        <div class="why-item"><h3>Reliable Scheduling</h3><p>We show up when your service is scheduled.</p></div>
+        <div class="why-item"><h3>Attention to Detail</h3><p>Edges, beds, cleanup, and finishing touches matter.</p></div>
+        <div class="why-item"><h3>Clear Communication</h3><p>Questions, schedule changes, and estimates are handled directly.</p></div>
+        <div class="why-item"><h3>Local Service</h3><p>A local landscaping company built around long-term customer relationships.</p></div>
+        <div class="why-item"><h3>Clean Finish</h3><p>We clean up after the work so you're left with the result, not the mess.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROCESS — mow path
+  ============================================================ -->
+  <section class="process">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">How It Works</span>
+        <h2 class="section-title" style="margin-top:.9rem;">From overgrown to done.</h2>
+      </div>
+      <div class="mow-path reveal">
+        <div class="steps">
+          <div class="step">
+            <div class="no">01</div>
+            <div>
+              <h3>Tell us what you need</h3>
+              <p>Call, text, or request an estimate online.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="no">02</div>
+            <div>
+              <h3>We look at the property</h3>
+              <p>Send photos or schedule a quick property visit.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="no">03</div>
+            <div>
+              <h3>Get a clear price</h3>
+              <p>You'll know what the work includes before we begin.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="no">04</div>
+            <div>
+              <h3>We take care of it</h3>
+              <p>Your landscaping gets completed professionally and cleaned up when we're finished.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       GALLERY
+  ============================================================ -->
+  <section class="gallery" id="work">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">Our Work</span>
+        <h2 class="section-title" style="margin-top:.9rem;">The difference is in the details.</h2>
+      </div>
+      <div class="filters reveal" role="group" aria-label="Filter projects by category">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="lawns">Lawns</button>
+        <button class="filter-btn" data-filter="cleanups">Cleanups</button>
+        <button class="filter-btn" data-filter="mulch">Mulch</button>
+        <button class="filter-btn" data-filter="trimming">Trimming</button>
+        <button class="filter-btn" data-filter="beds">Flower Beds</button>
+      </div>
+      <!-- Each tile: replace .ph-yard with a real Munhoz project photo -->
+      <div class="gal-grid reveal" id="galGrid">
+        <figure class="gal-item" data-cat="lawns"><div class="ph-yard g1">Replace with real<br>lawn photo</div><span class="badge">Lawns</span></figure>
+        <figure class="gal-item" data-cat="cleanups"><div class="ph-yard g2">Replace with real<br>cleanup photo</div><span class="badge">Cleanups</span></figure>
+        <figure class="gal-item" data-cat="mulch"><div class="ph-yard g3">Replace with real<br>mulch photo</div><span class="badge">Mulch</span></figure>
+        <figure class="gal-item" data-cat="trimming"><div class="ph-yard g4">Replace with real<br>trimming photo</div><span class="badge">Trimming</span></figure>
+        <figure class="gal-item" data-cat="beds"><div class="ph-yard g5">Replace with real<br>flower bed photo</div><span class="badge">Flower Beds</span></figure>
+        <figure class="gal-item" data-cat="lawns"><div class="ph-yard g6">Replace with real<br>lawn photo</div><span class="badge">Lawns</span></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RECURRING LAWN CARE
+  ============================================================ -->
+  <section class="recurring">
+    <div class="wrap rec-grid">
+      <div class="reveal">
+        <span class="eyebrow" style="color: var(--bright);">Recurring Service</span>
+        <h2 class="section-title" style="margin-top:.9rem;">Put your lawn care on autopilot.</h2>
+        <p class="section-intro" style="color: rgba(255,255,255,.78);">Choose weekly or biweekly lawn service and stop wondering when the yard is going to get done.</p>
+        <ul class="rec-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Weekly Service</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Biweekly Service</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Mowing</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Edging</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Blow-Off / Cleanup</li>
+        </ul>
+        <!-- Scrolls to the estimate form and preselects Lawn Mowing (see JS) -->
+        <a class="btn btn-green" href="#estimate" id="recurringCta">Ask About Recurring Service</a>
+      </div>
+      <div class="rec-visual reveal" aria-hidden="true">
+        <div class="ring"></div>
+        <div class="core"><span>Weekly &middot; Biweekly<br>Lawn Care</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       REVIEWS
+  ============================================================ -->
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">Reviews</span>
+        <h2 class="section-title" style="margin-top:.9rem;">Good work should speak for itself.</h2>
+        <p class="section-intro">What neighbors say about working with Munhoz Landscaping.</p>
+      </div>
+      <!-- REPLACE WITH VERIFIED GOOGLE / GHL REVIEW DATA.
+           These cards are intentionally placeholders — do not ship fabricated
+           quotes. Wire to GHL Reputation Management or paste real Google
+           reviews (with the reviewer's permission / public data). -->
+      <div class="rev-grid reveal">
+        <article class="rev-card">
+          <div class="stars" aria-label="5 star rating">★★★★★</div>
+          <p class="quote">Customer review will appear here.</p>
+          <div class="who">Customer Review</div>
+        </article>
+        <article class="rev-card">
+          <div class="stars" aria-label="5 star rating">★★★★★</div>
+          <p class="quote">Customer review will appear here.</p>
+          <div class="who">Customer Review</div>
+        </article>
+        <article class="rev-card">
+          <div class="stars" aria-label="5 star rating">★★★★★</div>
+          <p class="quote">Customer review will appear here.</p>
+          <div class="who">Customer Review</div>
+        </article>
+      </div>
+      <div class="rev-cta reveal">
+        <!-- Link to the Google Business Profile when available -->
+        <a class="btn btn-outline-dark" href="#" aria-disabled="true">See Our Reviews</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       SERVICE AREA
+  ============================================================ -->
+  <section class="area" id="area">
+    <div class="wrap area-grid">
+      <div class="reveal">
+        <span class="eyebrow">Service Area</span>
+        <h2 class="section-title" style="margin-top:.9rem;">Local landscaping service on Cape Cod.</h2>
+        <p class="section-intro"><strong>Cape Cod, Massachusetts</strong> and surrounding communities.</p>
+        <div class="zip-check">
+          <p style="font-weight:600;">Not sure if we service your address? Send us your ZIP code.</p>
+          <div class="zip-row">
+            <input type="text" id="zipInput" inputmode="numeric" maxlength="5" placeholder="ZIP code" aria-label="Your ZIP code">
+            <button class="btn btn-dark" id="zipBtn" type="button">Check Service Area</button>
+          </div>
+          <p class="zip-msg" id="zipMsg" role="status"></p>
+        </div>
+      </div>
+      <div class="area-map reveal" aria-hidden="true">
+        <!-- Stylized Cape Cod arm -->
+        <svg viewBox="0 0 200 150" fill="none">
+          <path d="M18 96c18-8 38-12 56-12 16 0 30 3 44 3 14 0 26-4 34-12 6-6 10-14 10-22 0-6-4-10-10-8-6 2-8 10-6 16 2 8 8 14 16 16" stroke="#83C52B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 106c20-6 40-9 58-9 30 0 52 6 74 2" stroke="#4E9F20" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+          <circle cx="96" cy="88" r="4" fill="#83C52B"/>
+          <circle cx="96" cy="88" r="9" stroke="#83C52B" stroke-width="1.4" opacity=".45"/>
+        </svg>
+        <div class="area-name">Cape Cod &middot; Massachusetts</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT
+  ============================================================ -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div class="about-photo reveal">
+        <!-- REPLACE with a real photo of Jhonathan / the team -->
+        <div class="ph-yard">Jhonathan / team<br>photo here</div>
+      </div>
+      <div class="about-copy reveal">
+        <span class="eyebrow">About</span>
+        <h2 class="section-title" style="margin-top:.9rem;">Local work. Personal service.</h2>
+        <p>Munhoz Landscaping is owned and operated by Jhonathan M. We help homeowners keep their properties clean, maintained, and looking their best with dependable lawn and landscape services.</p>
+        <p>You deal directly with the people responsible for the work, so communication stays simple and the details don't get lost.</p>
+        <div class="about-sign">
+          Jhonathan M
+          <small>Owner, Munhoz Landscaping</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SMART ESTIMATE FORM  (#estimate — all CTAs land here)
+  ============================================================ -->
+  <section class="estimate" id="estimate">
+    <div class="wrap est-grid">
+      <div class="est-side reveal">
+        <span class="eyebrow" style="color: var(--bright);">Free Estimate</span>
+        <h2 class="section-title" style="margin-top:.9rem; color: var(--white);">Get a fast landscaping estimate.</h2>
+        <p class="section-intro">Tell us about the property and what you need done. We'll follow up with a clear price — no pressure, no obligation.</p>
+        <ul class="est-points">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Free estimates on all services</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Photos help us quote faster</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> One-time or recurring service</li>
+        </ul>
+        <div class="est-call">
+          Prefer to talk?<br>
+          <a href="tel:+15088389614">(508) 838-9614</a>
+        </div>
+      </div>
+
+      <div class="est-form reveal">
+        <!-- ==========================================================
+             GHL FORM INTEGRATION
+             Option A (recommended): replace this whole <form> with the
+             GHL form embed iframe for full attribution + file uploads.
+             Option B: keep this custom form and paste a GHL Inbound
+             Webhook URL into GHL_WEBHOOK_URL in the script below —
+             fields post as clean JSON ready to map in a workflow.
+        =========================================================== -->
+        <form id="estimateForm" novalidate>
+          <h3>Request My Free Estimate</h3>
+          <div class="f-row">
+            <div class="f-field" data-f="name">
+              <label for="ef-name">Full Name *</label>
+              <input id="ef-name" name="full_name" type="text" autocomplete="name" required>
+              <span class="err">Please enter your name</span>
+            </div>
+            <div class="f-field" data-f="phone">
+              <label for="ef-phone">Phone *</label>
+              <input id="ef-phone" name="phone" type="tel" autocomplete="tel" required>
+              <span class="err">Please enter a valid phone number</span>
+            </div>
+          </div>
+          <div class="f-row">
+            <div class="f-field" data-f="email">
+              <label for="ef-email">Email *</label>
+              <input id="ef-email" name="email" type="email" autocomplete="email" required>
+              <span class="err">Please enter a valid email</span>
+            </div>
+            <div class="f-field">
+              <label for="ef-address">Property Address</label>
+              <input id="ef-address" name="address" type="text" autocomplete="street-address">
+            </div>
+          </div>
+
+          <fieldset>
+            <legend>What do you need?</legend>
+            <div class="chips">
+              <label class="chip-opt"><input type="checkbox" name="services" value="Lawn Mowing"><span>Lawn Mowing</span></label>
+              <label class="chip-opt"><input type="checkbox" name="services" value="Cleanup"><span>Cleanup</span></label>
+              <label class="chip-opt"><input type="checkbox" name="services" value="Mulch"><span>Mulch</span></label>
+              <label class="chip-opt"><input type="checkbox" name="services" value="Trimming"><span>Trimming</span></label>
+              <label class="chip-opt"><input type="checkbox" name="services" value="Weeding"><span>Weeding</span></label>
+              <label class="chip-opt"><input type="checkbox" name="services" value="Edging"><span>Edging</span></label>
+              <label class="chip-opt"><input type="checkbox" name="services" value="Fertilizing"><span>Fertilizing</span></label>
+              <label class="chip-opt"><input type="checkbox" name="services" value="Flower Beds"><span>Flower Beds</span></label>
+              <label class="chip-opt"><input type="checkbox" name="services" value="Other"><span>Other</span></label>
+            </div>
+          </fieldset>
+
+          <div class="f-row">
+            <div class="f-field">
+              <label for="ef-size">Property Size</label>
+              <select id="ef-size" name="property_size">
+                <option>Not sure</option>
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+              </select>
+            </div>
+            <div class="f-field">
+              <label for="ef-freq">Service Type</label>
+              <select id="ef-freq" name="service_type">
+                <option>Not sure</option>
+                <option>One-time</option>
+                <option>Weekly</option>
+                <option>Biweekly</option>
+                <option>Monthly</option>
+              </select>
+            </div>
+          </div>
+
+          <fieldset>
+            <legend>When do you need service?</legend>
+            <div class="chips">
+              <label class="chip-opt"><input type="radio" name="timeline" value="As soon as possible" checked><span>As soon as possible</span></label>
+              <label class="chip-opt"><input type="radio" name="timeline" value="This week"><span>This week</span></label>
+              <label class="chip-opt"><input type="radio" name="timeline" value="This month"><span>This month</span></label>
+              <label class="chip-opt"><input type="radio" name="timeline" value="Just getting prices"><span>Just getting prices</span></label>
+            </div>
+          </fieldset>
+
+          <div class="f-field">
+            <label for="ef-msg">Message / Project Details</label>
+            <textarea id="ef-msg" name="message" placeholder="Tell us about the property and the work you'd like done…"></textarea>
+          </div>
+
+          <div class="f-field">
+            <label class="upload" for="ef-photos">
+              <strong>Upload photos of your yard</strong><br>
+              Tap to choose photos (optional)
+              <input id="ef-photos" name="photos" type="file" accept="image/*" multiple>
+              <span class="picked" id="photoPicked"></span>
+            </label>
+            <!-- NOTE: file contents can't ride along a plain JSON webhook.
+                 For real photo uploads, use the GHL form embed (Option A),
+                 or a GHL media-upload endpoint. This custom form sends the
+                 photo file names so the team knows photos exist. -->
+          </div>
+
+          <button class="btn btn-green est-submit" type="submit">Request My Free Estimate</button>
+          <p class="form-note">Free estimate. No obligation. We'll only use this to follow up about your property.</p>
+        </form>
+
+        <!-- Thank-you state (shown after successful submit) -->
+        <div class="est-thanks" id="estThanks" role="status">
+          <div class="tick-big"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h3>Thank you! We'll be in touch shortly.</h3>
+          <p>Your estimate request came through. Want to talk sooner? Call <a href="tel:+15088389614" style="color: var(--deep); font-weight:700;">(508) 838-9614</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ
+  ============================================================ -->
+  <section class="faq">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="section-title" style="margin-top:.9rem;">Questions, answered.</h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span>Do you offer free estimates?</span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faq-a"><p>Yes — estimates are free. Call, text, or use the estimate form above and we'll follow up with a clear price.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span>Do you offer weekly or biweekly mowing?</span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faq-a"><p>Yes, we offer recurring weekly and biweekly lawn service. Contact us and we'll confirm availability for your property.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span>Can I send photos for an estimate?</span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faq-a"><p>Absolutely — photos of the yard help us quote faster. You can attach them to the estimate form or send them by text.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span>Do you handle spring and fall cleanups?</span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faq-a"><p>Yes — seasonal cleanups are one of our core services. Leaves, branches, overgrowth, and debris removed and hauled away.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span>Do you install mulch?</span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faq-a"><p>Yes, we install fresh mulch and prepare beds. Contact us for an estimate based on the size of your beds.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span>Do you provide one-time landscaping services?</span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faq-a"><p>Yes — both one-time projects and recurring service are available. Tell us what you need and we'll confirm availability.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span>What areas do you service?</span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faq-a"><p>We serve Cape Cod, Massachusetts and surrounding communities. Not sure about your address? Send us your ZIP code and we'll confirm.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span>How do I schedule service?</span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faq-a"><p>Call or text (508) 838-9614, or request a free estimate through the form above — we'll get back to you and take it from there.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FINAL CTA
+  ============================================================ -->
+  <section class="final-cta">
+    <div class="wrap reveal">
+      <h2>Ready to take your yard off your to-do list?</h2>
+      <p>Tell us what you need and we'll take it from there.</p>
+      <div class="hero-actions">
+        <a class="btn btn-green" href="#estimate">Get My Free Estimate</a>
+        <a class="btn btn-outline-light" href="tel:+15088389614">Call (508) 838-9614</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <a class="logo" href="#top" aria-label="Munhoz Landscaping — back to top">
+        <svg class="logo-mark" aria-hidden="true"><use href="#munhoz-badge"/></svg>
+        <span class="logo-text">
+          <span class="l1">Munhoz</span><br>
+          <span class="l2">Landscaping</span>
+        </span>
+      </a>
+      <div class="tag">Quality Work. Beautiful Results.</div>
+      <a class="tel" href="tel:+15088389614">(508) 838-9614</a>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Mowing</a></li>
+        <li><a href="#services">Cleanups</a></li>
+        <li><a href="#services">Trimming</a></li>
+        <li><a href="#services">Mulch</a></li>
+        <li><a href="#services">Weeding</a></li>
+        <li><a href="#services">Edging</a></li>
+        <li><a href="#services">Fertilizing</a></li>
+        <li><a href="#services">Flower Beds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Our Work</a></li>
+        <li><a href="#area">Service Area: Cape Cod, MA</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#estimate">Free Estimate</a></li>
+        <li><a href="#" aria-disabled="true">Privacy Policy</a></li>
+        <li><a href="#" aria-disabled="true">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div class="foot-bottom-inner">
+      <span>© <span id="year"></span> Munhoz Landscaping. All rights reserved.</span>
+      <!-- Subtle agency credit — keep small -->
+      <span>Smart Website Powered by <a href="https://lealsystems.io" rel="noopener">Leal Systems</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile sticky bottom CTA -->
+<div class="mobile-cta" aria-label="Quick actions">
+  <a class="btn btn-outline-light" href="tel:+15088389614" style="border-color: rgba(255,255,255,.4);">Call Now</a>
+  <a class="btn btn-green" href="#estimate">Get Estimate</a>
+</div>
+
+<!-- ============================================================
+     LEAL SYSTEMS / GHL INTEGRATION SLOTS
+     (paste real snippets when connecting — do not hardcode keys)
+============================================================ -->
+<!-- GHL CALENDAR INTEGRATION: embed booking widget on a /book page or modal -->
+<!-- LEAL SYSTEMS CHAT WIDGET: paste GHL conversation widget snippet here -->
+<!-- CALL TRACKING: swap tel links to the tracking number when provisioned -->
+<!-- ANALYTICS: paste Google Analytics (GA4) tag here -->
+<!-- META PIXEL: paste Meta Pixel base code here -->
+
+<script>
+/* ============================================================
+   MUNHOZ LANDSCAPING — interactions (vanilla JS, no dependencies)
+   ============================================================ */
+
+/* ---------- GHL WEBHOOK ----------
+   Paste a GoHighLevel Workflow > Inbound Webhook URL here to receive
+   estimate requests as JSON (fields listed in buildLead below).
+   Leave "" while testing: the form still shows the thank-you state
+   and logs the payload to the console. */
+var GHL_WEBHOOK_URL = "";
+
+/* ---------- Mobile menu ---------- */
+var burger = document.getElementById('burger');
+var mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', function () {
+  var open = mobileMenu.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+  mobileMenu.setAttribute('aria-hidden', !open);
+});
+mobileMenu.querySelectorAll('a').forEach(function (a) {
+  a.addEventListener('click', function () {
+    mobileMenu.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+  });
+});
+
+/* ---------- Scroll reveals ---------- */
+var io = new IntersectionObserver(function (entries) {
+  entries.forEach(function (e) {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+/* ---------- Gallery filters ---------- */
+var filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    filterBtns.forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.dataset.filter;
+    document.querySelectorAll('.gal-item').forEach(function (item) {
+      item.classList.toggle('hidden', f !== 'all' && item.dataset.cat !== f);
+    });
+  });
+});
+
+/* ---------- FAQ accordion (keyboard accessible) ---------- */
+document.querySelectorAll('.faq-q').forEach(function (q) {
+  q.addEventListener('click', function () {
+    var expanded = q.getAttribute('aria-expanded') === 'true';
+    // close others
+    document.querySelectorAll('.faq-q').forEach(function (other) {
+      other.setAttribute('aria-expanded', 'false');
+      other.nextElementSibling.style.maxHeight = null;
+    });
+    if (!expanded) {
+      q.setAttribute('aria-expanded', 'true');
+      var a = q.nextElementSibling;
+      a.style.maxHeight = a.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ---------- ZIP code checker ----------
+   Add confirmed ZIPs to APPROVED_ZIPS, e.g. ["02601","02632","02655"].
+   While the list is empty every ZIP gets the "we'll confirm" message. */
+var APPROVED_ZIPS = [];
+var zipBtn = document.getElementById('zipBtn');
+var zipInput = document.getElementById('zipInput');
+var zipMsg = document.getElementById('zipMsg');
+function checkZip() {
+  var z = (zipInput.value || '').trim();
+  zipMsg.classList.remove('ok', 'maybe');
+  if (!/^\d{5}$/.test(z)) {
+    zipMsg.textContent = 'Please enter a 5-digit ZIP code.';
+    zipMsg.classList.add('maybe');
+    return;
+  }
+  if (APPROVED_ZIPS.indexOf(z) > -1) {
+    zipMsg.textContent = '✓ Good news — you\'re in our service area! Request your free estimate below.';
+    zipMsg.classList.add('ok');
+  } else {
+    zipMsg.textContent = 'Send us your request and we\'ll confirm availability for ' + z + ' — most Cape Cod addresses qualify.';
+    zipMsg.classList.add('maybe');
+    var msgField = document.getElementById('ef-msg');
+    if (msgField && !msgField.value) msgField.value = 'ZIP code: ' + z + '\n';
+  }
+}
+zipBtn.addEventListener('click', checkZip);
+zipInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); checkZip(); } });
+
+/* ---------- Recurring CTA preselects Lawn Mowing ---------- */
+document.getElementById('recurringCta').addEventListener('click', function () {
+  var mow = document.querySelector('input[name="services"][value="Lawn Mowing"]');
+  if (mow) mow.checked = true;
+  var freq = document.getElementById('ef-freq');
+  if (freq) freq.value = 'Weekly';
+});
+
+/* ---------- Photo upload label ---------- */
+var photoInput = document.getElementById('ef-photos');
+var photoPicked = document.getElementById('photoPicked');
+photoInput.addEventListener('change', function () {
+  photoPicked.textContent = photoInput.files.length ?
+    photoInput.files.length + ' photo(s) selected' : '';
+});
+
+/* ---------- Estimate form submit ---------- */
+var form = document.getElementById('estimateForm');
+var thanks = document.getElementById('estThanks');
+
+function buildLead() {
+  var get = function (n) { return (form.querySelector('[name="' + n + '"]') || {}).value || ''; };
+  var services = Array.prototype.map.call(
+    form.querySelectorAll('input[name="services"]:checked'),
+    function (c) { return c.value; });
+  var timeline = (form.querySelector('input[name="timeline"]:checked') || {}).value || '';
+  var name = get('full_name').trim();
+  var photos = Array.prototype.map.call(photoInput.files, function (f) { return f.name; });
+  return {
+    _subject: 'New estimate request — ' + name,
+    source: 'Munhoz Landscaping Website',
+    first_name: name.split(/\s+/)[0] || '',
+    last_name: name.split(/\s+/).slice(1).join(' '),
+    full_name: name,
+    phone: get('phone').trim(),
+    email: get('email').trim(),
+    address: get('address').trim(),
+    services: services.join(', '),
+    property_size: get('property_size'),
+    service_type: get('service_type'),
+    timeline: timeline,
+    message: get('message').trim(),
+    photo_names: photos.join(', '),
+    page_url: window.location.href,
+    submitted_at: new Date().toISOString()
+  };
+}
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  var ok = true;
+  var mark = function (f, bad) {
+    form.querySelector('[data-f="' + f + '"]').classList.toggle('error', bad);
+    if (bad) ok = false;
+  };
+  mark('name', form.full_name.value.trim().length < 2);
+  mark('phone', form.phone.value.replace(/\D/g, '').length < 10);
+  mark('email', !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim()));
+  if (!ok) return;
+
+  var lead = buildLead();
+
+  if (GHL_WEBHOOK_URL) {
+    fetch(GHL_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(lead)
+    }).catch(function () { /* still show thanks; GHL retries are not client-side */ });
+  } else {
+    console.warn('GHL_WEBHOOK_URL not set — lead payload:', lead);
+  }
+
+  form.style.display = 'none';
+  thanks.classList.add('show');
+});
+
+/* ---------- Footer year ---------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
