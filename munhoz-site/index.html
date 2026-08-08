@@ -134,7 +134,7 @@ header.site-nav {
   padding: .7rem 0;
 }
 .logo { display: flex; align-items: center; gap: .65rem; text-decoration: none; margin-right: auto; }
-.logo-mark { width: 46px; height: 46px; flex: 0 0 auto; border-radius: 50%; box-shadow: 0 0 0 2px rgba(131,197,43,.25), 0 4px 14px rgba(0,0,0,.4); }
+.logo-mark { width: 46px; height: 40px; flex: 0 0 auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,.45)); }
 .logo-text { line-height: 1.05; }
 .logo-text .l1 { font-family: var(--head); font-weight: 700; font-size: 1.12rem; letter-spacing: .06em; color: var(--white); text-transform: uppercase; }
 .logo-text .l2 { font-family: var(--head); font-weight: 500; font-size: .62rem; letter-spacing: .42em; color: var(--bright); text-transform: uppercase; }
@@ -609,36 +609,35 @@ footer ul a:hover { color: var(--bright); }
   <defs>
     <!-- Vector recreation of the Munhoz badge logo.
          Swap for the real logo file (as an <img>) when the PNG is provided. -->
-    <symbol id="munhoz-badge" viewBox="0 0 120 120">
-      <circle cx="60" cy="60" r="58" fill="#FFFFFF"/>
-      <circle cx="60" cy="60" r="58" fill="none" stroke="#6B8F2E" stroke-width="3.4"/>
-      <circle cx="60" cy="60" r="52.5" fill="none" stroke="#6B8F2E" stroke-width="1.1"/>
-      <clipPath id="mb-scene"><path d="M14 52c8-24 26-38 46-38s38 14 46 38l-2 4H16z"/></clipPath>
-      <g clip-path="url(#mb-scene)">
-        <rect x="10" y="10" width="100" height="48" fill="#FDF3DC"/>
-        <circle cx="74" cy="46" r="16" fill="#E8862B"/>
-        <g stroke="#5F8A28" stroke-width="1.6" stroke-linecap="round">
-          <path d="M18 56V42M22 56V38M26 56V44M30 56V39M34 56V45M88 56V42M92 56V38M96 56V44M100 56V40M84 56V46"/>
-        </g>
-        <g fill="#171717">
-          <path d="M44 22l2-2 4 1-1 3 12 12-3 3-12-12z"/>
-          <path d="M52 36h18c4 0 7 3 7 7v5H48v-7c0-3 2-5 4-5z"/>
-          <rect x="66" y="30" width="9" height="7" rx="2"/>
-        </g>
-        <circle cx="53" cy="50" r="5" fill="#171717"/>
-        <circle cx="53" cy="50" r="2" fill="#FDF3DC"/>
-        <circle cx="72" cy="50" r="5" fill="#171717"/>
-        <circle cx="72" cy="50" r="2" fill="#FDF3DC"/>
+    <symbol id="munhoz-badge" viewBox="0 0 120 104">
+      <defs>
+        <linearGradient id="mzM" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#A9C93A"/>
+          <stop offset=".5" stop-color="#6FA82B"/>
+          <stop offset="1" stop-color="#4E7D18"/>
+        </linearGradient>
+        <linearGradient id="mzRoadMid" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#1B5E14"/>
+          <stop offset="1" stop-color="#4E9F20"/>
+        </linearGradient>
+      </defs>
+      <!-- Monogram M -->
+      <path fill="url(#mzM)" d="M8 6h24l28 40L88 6h24v92H90V40L64 76h-8L30 40v58H8Z"/>
+      <!-- white separation slits echoing the artwork -->
+      <path d="M33 9L59 46M87 9L61 46" stroke="#FFFFFF" stroke-width="2.6" opacity=".9"/>
+      <!-- grass blades under the left slope -->
+      <g fill="#3F7D18">
+        <path d="M38 62l3-14 3 14z"/>
+        <path d="M46 66l2.6-11 2.6 11z"/>
+        <path d="M53 69l2.2-8 2.2 8z"/>
       </g>
-      <path d="M14 56h92" stroke="#6B8F2E" stroke-width="2.4"/>
-      <text x="60" y="74" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="19" fill="#FFFFFF" stroke="#171717" stroke-width="1.05" paint-order="stroke" letter-spacing=".5">MUNHOZ</text>
-      <path d="M18 80h84l-3 11H21z" fill="#7AA338"/>
-      <text x="60" y="88.6" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="7.4" fill="#171717" letter-spacing="1.6">LANDSCAPING</text>
-      <path id="mb-arc" d="M22 92c10 12 23 18 38 18s28-6 38-18" fill="none"/>
-      <text font-family="Arial, sans-serif" font-weight="600" font-size="5.6" fill="#8a8348" letter-spacing=".9">
-        <textPath href="#mb-arc" startOffset="50%" text-anchor="middle">QUALITY WORK. BEAUTIFUL RESULTS.</textPath>
-      </text>
-      <path d="M56 95c2-2 4-2 4 0 0-2 2-2 4 0" stroke="#7AA338" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <!-- sunset sun at the vanishing point -->
+      <circle cx="74" cy="56" r="7" fill="#E8A93C"/>
+      <circle cx="74" cy="56" r="7" fill="none" stroke="#E8862B" stroke-width="1.6"/>
+      <!-- mow-stripe road sweeping through the M -->
+      <path fill="#174D12" d="M2 104C26 88 52 74 96 62l8 4c-40 12-64 24-86 38z"/>
+      <path fill="url(#mzRoadMid)" d="M22 104c20-14 42-26 82-38l6 5c-36 11-58 21-76 33z"/>
+      <path fill="#83C52B" d="M44 104c16-11 34-20 66-30l4 5c-28 9-46 16-58 25z"/>
     </symbol>
   </defs>
 </svg>
