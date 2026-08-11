@@ -1,0 +1,66 @@
+<!-- ================================================================
+  Cape Codder — Ghost CTA bar (v2) for www.capecodderinc.com
+  Bottom-LEFT so it never collides with the chat widget bottom-right.
+  Idle: near-transparent frosted glass. Hover/tap: full gold.
+  Paste this whole block into your site's footer / custom-code area.
+  Set the quiz href below to wherever quiz.html is hosted.
+================================================================= -->
+<div id="cc-cta-bar">
+  <a class="cc-cta cc-cta-quiz" href="https://www.capecodderinc.com/quiz" aria-label="Start your free project quote">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4l6 6-2 2-6-6 2-2zM12 6L3 15l3 3 9-9M9 3l4 1"/></svg>
+    <span>Build With Us</span>
+  </a>
+  <a class="cc-cta cc-cta-call" href="tel:+17744086091" aria-label="Call Cape Codder Building and Remodeling now">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.97.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.83.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg>
+    <span>Call Now</span>
+  </a>
+</div>
+<style>
+  #cc-cta-bar {
+    position: fixed; z-index: 99999;
+    left: 14px; bottom: max(14px, env(safe-area-inset-bottom));
+    display: flex; gap: 8px; align-items: center;
+    font-family: "Avenir Next", Avenir, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    /* leave the bottom-right corner free for the chat widget */
+    max-width: calc(100vw - 110px);
+  }
+  #cc-cta-bar .cc-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    text-decoration: none; border-radius: 999px;
+    font-weight: 700; font-size: 13px; letter-spacing: .05em;
+    padding: 12px 18px; white-space: nowrap;
+    /* ghost idle state: frosted, barely-there */
+    background: rgba(10, 10, 8, .32);
+    -webkit-backdrop-filter: blur(9px); backdrop-filter: blur(9px);
+    border: 1px solid rgba(201, 162, 75, .38);
+    color: rgba(241, 207, 121, .85) !important;
+    opacity: .6;
+    box-shadow: none;
+    transition: opacity .3s ease, background .3s ease, color .3s ease,
+                border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+  }
+  /* any interaction with the bar wakes both buttons up a little */
+  #cc-cta-bar:hover .cc-cta, #cc-cta-bar:focus-within .cc-cta { opacity: .92; }
+  /* the button actually being touched goes full gold */
+  #cc-cta-bar .cc-cta:hover, #cc-cta-bar .cc-cta:focus-visible, #cc-cta-bar .cc-cta:active {
+    opacity: 1;
+    background: linear-gradient(135deg, #f1cf79, #d7a94a 55%, #a87f2e);
+    border-color: #a87f2e;
+    color: #14100a !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px -10px rgba(215, 169, 74, .55);
+  }
+  @media (max-width: 560px) {
+    #cc-cta-bar .cc-cta { font-size: 12px; padding: 11px 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #cc-cta-bar .cc-cta { transition: none; }
+  }
+</style>
+<!-- =============================================================
+  OPTIONAL: in-page hero button (drop inside any page section):
+
+  <a href="https://www.capecodderinc.com/quiz"
+     style="display:inline-block;background:linear-gradient(135deg,#f1cf79,#d7a94a 55%,#a87f2e);color:#14100a;text-decoration:none;font-weight:800;letter-spacing:.05em;padding:18px 34px;border-radius:999px;font-size:16px;box-shadow:0 14px 34px -10px rgba(0,0,0,.4);">
+    What Can We Build For You? &rarr;</a>
+============================================================== -->

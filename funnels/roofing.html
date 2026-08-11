@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Roofing Quote — Cape Codder Building &amp; Remodeling</title>
+<meta name="description" content="Leak, storm damage, or time for a new roof? Answer a few quick questions and get a free, no-obligation roofing quote from Cape Cod's trusted local pros.">
+<link rel="stylesheet" href="funnel.css">
+</head>
+<body>
+<header id="topbar" class="topbar"></header>
+<main class="stage"><div id="app"></div></main>
+<footer id="site-footer" class="site-footer"></footer>
+<script>
+window.FUNNEL = {
+  slug: "roofing",
+  projectNoun: "roofing project",
+  // endpoint: "https://your-crm-webhook-here",
+  intro: {
+    kicker: "Roofing",
+    headline: "A roof that stands up to <em>Cape Cod weather</em>",
+    sub: "Nor'easters, salt air, and summer sun are tough on roofs. Answer a few quick questions and get a free roofing quote from a local team that builds for it.",
+    cta: "Start My Free Quote",
+    bullets: [
+      "Fast response for leaks &amp; storm damage",
+      "Architectural shingles, cedar &amp; metal options",
+      "Clean job sites and honest, detailed estimates"
+    ]
+  },
+  steps: [
+    {
+      id: "situation",
+      short: "Situation",
+      title: "What's going on with your roof?",
+      options: [
+        { icon: "drop",     label: "Leak / Storm Damage", sub: "Something needs attention now" },
+        { icon: "clock",    label: "Old & Worn",          sub: "It's showing its age" },
+        { icon: "calendar", label: "Planning Ahead",      sub: "Budgeting a replacement" },
+        { icon: "plus",     label: "New Construction",    sub: "Addition or new build" }
+      ]
+    },
+    {
+      id: "material",
+      short: "Material",
+      title: "Which roofing material do you prefer?",
+      sub: "We'll walk you through pros, cons, and cost either way.",
+      options: [
+        { icon: "shingle", label: "Asphalt Shingles", sub: "The proven all-rounder" },
+        { icon: "cedar",   label: "Cedar",            sub: "Natural New England character" },
+        { icon: "metal",   label: "Metal",            sub: "Modern & ultra-durable" },
+        { icon: "sparkle", label: "Help Me Choose",   sub: "Show me the options" }
+      ]
+    },
+    {
+      id: "age",
+      short: "Roof age",
+      title: "How old is your current roof?",
+      options: [
+        { icon: "roof",     label: "Under 10 years" },
+        { icon: "roof",     label: "10 – 20 years" },
+        { icon: "roof",     label: "Over 20 years" },
+        { icon: "question", label: "Not sure" }
+      ]
+    },
+    {
+      id: "timeline",
+      short: "Timeline",
+      title: "When would you like the work done?",
+      options: [
+        { icon: "bolt",     label: "As soon as possible" },
+        { icon: "calendar", label: "In 1–3 months" },
+        { icon: "clock",    label: "In 3–6 months" },
+        { icon: "search",   label: "Just researching" }
+      ]
+    }
+  ],
+  result: {
+    urgentIf: { situation: ["Leak / Storm Damage", "Old & Worn"], age: ["Over 20 years"] },
+    urgent: "Based on your answers, we recommend an inspection soon. Leaks, visible wear, or a roof past the 20-year mark can turn into interior damage quickly — especially with Cape Cod nor'easters. We'll get eyes on it fast, document everything, and give you straight answers on repair vs. replacement.",
+    calm: "Your roof doesn't sound like an emergency — which is the best time to plan. A free inspection gives you a clear picture of its remaining life and an exact replacement number, so a surprise never forces your hand. We'll walk the roof, photograph everything, and put it in writing."
+  },
+  // bookingUrl: "https://your-ghl-calendar-link",
+  form: {
+    title: "Your free roofing quote is ready to book",
+    sub: "Tell us where to send it — a member of our local team will follow up, usually within one business day.",
+    cta: "Get My Free Quote"
+  }
+};
+</script>
+<script src="funnel.js"></script>
+</body>
+</html>
