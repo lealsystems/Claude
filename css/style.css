@@ -126,11 +126,17 @@ img { max-width: 100%; display: block; }
   height: 68px;
 }
 .brand-logo {
-  height: 56px;
+  height: 74px;
   width: auto;
-  transition: height .35s ease;
+  transition: height .35s ease, filter .35s ease;
+  /* transparent PNG blends with the page; soft white halo lifts it off imagery */
+  filter: drop-shadow(0 0 10px rgba(255,255,255,.85));
 }
-.site-header.scrolled .brand-logo { height: 44px; }
+.site-header.scrolled .brand-logo { height: 54px; }
+@media (max-width: 560px) {
+  .brand-logo { height: 58px; }
+  .site-header.scrolled .brand-logo { height: 46px; }
+}
 
 /* While the menu is open, lift the header above the overlay so the
    X stays clickable, and fade the white-boxed logo out of the navy. */
@@ -501,10 +507,42 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
 .point span { font-size: .88rem; color: var(--mist); }
 
 .about-mark { display: flex; justify-content: center; }
-.about-logo {
-  width: min(300px, 70vw);
-  border-radius: 6px;
-  box-shadow: 0 30px 70px rgba(0,0,0,.35);
+.about-logo { width: min(300px, 70vw); }
+
+/* ------------------------------------------------------------
+   Glowing logo treatment — a radial gradient halo melts the
+   mark into whatever ground it sits on, plus a soft glow.
+------------------------------------------------------------ */
+.logo-glow {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(28px, 5vw, 56px);
+  border-radius: 50%;
+}
+/* On the navy About section: faint white aura, white/gold glow */
+.logo-glow-navy {
+  background: radial-gradient(closest-side,
+    rgba(255,255,255,.14) 0%,
+    rgba(209,216,224,.07) 45%,
+    transparent 72%);
+}
+.logo-glow-navy img {
+  filter: brightness(0) invert(1)
+          drop-shadow(0 0 14px rgba(255,255,255,.55))
+          drop-shadow(0 0 40px rgba(176,141,87,.35));
+  opacity: .96;
+}
+/* On the light gray footer: white core fading out, warm gold breath */
+.logo-glow-light {
+  background: radial-gradient(closest-side,
+    #ffffff 0%,
+    rgba(255,255,255,.75) 40%,
+    rgba(255,255,255,0) 74%);
+}
+.logo-glow-light img {
+  filter: drop-shadow(0 0 16px rgba(255,255,255,.95))
+          drop-shadow(0 0 44px rgba(176,141,87,.28));
 }
 
 @media (max-width: 860px) {
@@ -588,7 +626,8 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   color: #55606B;
   font-size: .9rem;
 }
-.footer-logo { height: 74px; width: auto; margin: 0 auto 22px; }
+.site-footer .logo-glow { margin-bottom: 10px; }
+.footer-logo { height: 96px; width: auto; }
 .footer-fine { margin-top: 14px; font-size: .78rem; letter-spacing: .08em; color: var(--stone); }
 
 /* ------------------------------------------------------------
