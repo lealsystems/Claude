@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="SA Construction plate mark">
+  <title>SA Construction — Plate mark</title>
+  <!-- Letters are cut as true holes so any background shows through. -->
+  <mask id="sa-plate-knockout">
+    <rect x="0" y="0" width="120" height="120" fill="#FFFFFF"/>
+    <g transform="translate(21 36) scale(0.4756)" fill="none" stroke="#000000" stroke-width="16" stroke-linejoin="miter" stroke-miterlimit="6">
+      <path d="M64 24 L64 18 L54 8 L18 8 L8 18 L8 40 L18 50 L54 50 L64 60 L64 82 L54 92 L18 92 L8 82 L8 76"/>
+      <path d="M92 92 L114 8 L134 8 L156 92"/>
+      <path d="M100 62 H148"/>
+    </g>
+  </mask>
+  <rect x="6" y="6" width="108" height="108" fill="#191A18" mask="url(#sa-plate-knockout)"/>
+  <path d="M114 74 L114 114 L74 114 Z" fill="#DB4F16"/>
+</svg>

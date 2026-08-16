@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 252 100" width="252" height="100" role="img" aria-label="SA Construction">
+  <title>SA Construction — Horizontal lockup</title>
+
+  <!-- Mark -->
+  <g transform="translate(0 6) scale(0.7333)">
+    <path d="M60 12 L112 104 L8 104 Z M60 54 L90 94 L30 94 Z" fill="#191A18" fill-rule="evenodd"/>
+    <rect x="2" y="70" width="116" height="11" fill="#DB4F16"/>
+  </g>
+
+  <!-- SA, drawn as geometry -->
+  <g transform="translate(116 8) scale(0.62)" fill="none" stroke="#191A18" stroke-width="16" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="6">
+    <path d="M64 24 L64 18 L54 8 L18 8 L8 18 L8 40 L18 50 L54 50 L64 60 L64 82 L54 92 L18 92 L8 82 L8 76"/>
+    <path d="M92 92 L114 8 L134 8 L156 92"/>
+    <path d="M100 62 H148"/>
+  </g>
+
+  <rect x="116" y="78" width="133" height="4" fill="#DB4F16"/>
+
+  <!-- NOTE: still live type. Convert to outlines before production use — see README. -->
+  <text x="116" y="96"
+        font-family="Helvetica Neue, Helvetica, Liberation Sans, Arial, sans-serif"
+        font-size="10" font-weight="500" letter-spacing="3.4" fill="#191A18">CONSTRUCTION</text>
+</svg>
