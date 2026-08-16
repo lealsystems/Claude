@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timothy William Fenney Building &amp; Remodeling | West Barnstable, Cape Cod MA</title>
+  <meta name="description" content="Timothy William Fenney Building & Remodeling — premium decking, siding, and skilled finish carpentry on Cape Cod. West Barnstable, MA. Call +1 (774) 994-0314.">
+  <link rel="icon" type="image/png" href="assets/logo-square.png">
+
+  <!-- Fonts: Cinzel (serif caps, matches logo wordmark) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ======================================================
+       CUSTOM CURSOR — saw blade, spins counterclockwise on scroll
+       (hidden automatically on touch devices via CSS media query)
+  ======================================================= -->
+  <div class="cursor-blade" id="cursorBlade" aria-hidden="true">
+    <svg viewBox="0 0 100 100" class="blade-svg">
+      <use href="#sawblade"></use>
+    </svg>
+  </div>
+
+  <!-- ======================================================
+       SCROLL CUT-LINE — right edge. The larger blade travels
+       down the dashed line and rotates counterclockwise as it
+       "cuts" through the page while you scroll.
+  ======================================================= -->
+  <div class="cutline" id="cutline" aria-hidden="true">
+    <span class="cutline-track"></span>
+    <span class="cutline-cut" id="cutlineCut"></span>
+    <div class="cutline-blade" id="cutlineBlade">
+      <svg viewBox="0 0 100 100" class="blade-svg">
+        <use href="#sawblade"></use>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Reusable saw blade symbol -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="sawblade" viewBox="0 0 100 100">
+        <g class="sawblade-g">
+          <path d="M50 4 L57 14 A38 38 0 0 1 66 17 L78 12 L79 24 A38 38 0 0 1 86 31 L98 30 L93 41 A38 38 0 0 1 95 50 L96 50 A38 38 0 0 1 95 59 L98 70 L86 69 A38 38 0 0 1 79 76 L78 88 L66 83 A38 38 0 0 1 57 86 L50 96 L43 86 A38 38 0 0 1 34 83 L22 88 L21 76 A38 38 0 0 1 14 69 L2 70 L7 59 A38 38 0 0 1 4 50 A38 38 0 0 1 7 41 L2 30 L14 31 A38 38 0 0 1 21 24 L22 12 L34 17 A38 38 0 0 1 43 14 Z"
+                fill="currentColor"/>
+          <circle cx="50" cy="50" r="26" fill="var(--blade-inner, #fff)"/>
+          <circle cx="50" cy="50" r="5"  fill="currentColor"/>
+          <circle cx="50" cy="33" r="3.2" fill="currentColor" opacity=".55"/>
+          <circle cx="65" cy="42" r="3.2" fill="currentColor" opacity=".55"/>
+          <circle cx="59" cy="60" r="3.2" fill="currentColor" opacity=".55"/>
+          <circle cx="41" cy="60" r="3.2" fill="currentColor" opacity=".55"/>
+          <circle cx="35" cy="42" r="3.2" fill="currentColor" opacity=".55"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ======================================================
+       HEADER — fixed, logo left / hamburger right
+  ======================================================= -->
+  <header class="site-header" id="siteHeader">
+    <a href="#home" class="brand" aria-label="Timothy William Fenney Building & Remodeling — home">
+      <img src="assets/logo.png" alt="Timothy William Fenney Building & Remodeling logo" class="brand-logo">
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navOverlay">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ======================================================
+       FULLSCREEN NAV OVERLAY (hamburger menu)
+  ======================================================= -->
+  <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
+    <ul class="nav-links">
+      <li><a href="#home"            data-navlink><span>01</span>Home</a></li>
+      <li><a href="#services"        data-navlink><span>02</span>Services</a></li>
+      <li><a href="#transformations" data-navlink><span>03</span>Before &amp; After</a></li>
+      <li><a href="#about"           data-navlink><span>04</span>About</a></li>
+      <li><a href="#contact"         data-navlink><span>05</span>Free Estimate</a></li>
+    </ul>
+    <div class="nav-meta">
+      <a href="tel:+17749940314">+1 (774) 994-0314</a>
+      <a href="mailto:twfbuilding@outlook.com">twfbuilding@outlook.com</a>
+      <p>West Barnstable, MA 02668</p>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ====================================================
+         01 · HERO
+    ===================================================== -->
+    <section class="hero section" id="home">
+      <div class="hero-inner">
+        <p class="eyebrow reveal">West Barnstable &middot; Cape Cod, Massachusetts</p>
+        <h1 class="reveal">Timothy William Fenney<br><em>Building &amp; Remodeling</em></h1>
+        <p class="hero-sub reveal">Premium materials. Honest craftsmanship. Cape&nbsp;Cod character —
+           built to weather generations by the shore.</p>
+        <div class="hero-cta reveal">
+          <a href="#contact" class="btn btn-solid">Request a Free Estimate</a>
+          <a href="#services" class="btn btn-ghost">Our Craft</a>
+        </div>
+      </div>
+
+      <!-- subtle roofline / wave motif -->
+      <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,90 C240,30 480,110 720,70 C960,30 1200,100 1440,50 L1440,120 L0,120 Z" fill="#F4F6F8"/>
+      </svg>
+
+      <div class="scroll-hint" aria-hidden="true"><span></span>Scroll</div>
+    </section>
+
+    <!-- ====================================================
+         02 · SERVICES
+    ===================================================== -->
+    <section class="services section section-gray" id="services">
+      <div class="container">
+        <p class="eyebrow reveal">What We Build</p>
+        <h2 class="reveal">Premium Materials, <em>Master Execution</em></h2>
+        <p class="section-lead reveal">Every project starts with the best material for a salt-air climate
+           and ends with detail work you can run your hand across.</p>
+
+        <div class="service-grid">
+          <article class="service-card reveal">
+            <div class="service-num">01</div>
+            <svg class="service-icon" viewBox="0 0 64 64" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M6 26 H58 M6 36 H58 M6 46 H58"/>
+                <path d="M14 26 V22 M32 26 V22 M50 26 V22"/>
+                <path d="M12 46 V54 M52 46 V54"/>
+              </g>
+            </svg>
+            <h3>Premium Decking</h3>
+            <p>Outdoor living built for the Cape — composite and hardwood decks in premium,
+               low-maintenance materials engineered to shrug off salt, sun, and nor'easters.
+               Framing, railings, and stairs finished square and true.</p>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-num">02</div>
+            <svg class="service-icon" viewBox="0 0 64 64" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 30 L32 10 L56 30"/>
+                <path d="M14 28 V52 H50 V28"/>
+                <path d="M14 36 H50 M14 44 H50"/>
+              </g>
+            </svg>
+            <h3>Premium Siding</h3>
+            <p>Classic Cape Cod exteriors — red cedar shingles, clapboard, and premium engineered
+               siding installed with proper flashing and trim details, so the weathered-gray look
+               stays beautiful and watertight for decades.</p>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-num">03</div>
+            <svg class="service-icon" viewBox="0 0 64 64" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 50 L38 22 L46 30 L18 58 L8 60 Z"/>
+                <path d="M38 22 L46 14 L54 22 L46 30"/>
+                <path d="M22 46 L30 38"/>
+              </g>
+            </svg>
+            <h3>Skilled Finish Carpentry</h3>
+            <p>The last five percent that makes the whole project — custom built-ins, wainscoting,
+               crown, casing, mantels, and stair work. Tight miters, scribed fits, and furniture-grade
+               finishes by hand.</p>
+          </article>
+        </div>
+
+        <p class="services-more reveal">Also serving Cape Cod homeowners with fireplace &amp; chimney masonry,
+           interior remodeling, and home repairs — <a href="#contact">ask about your project</a>.</p>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         03 · BEFORE / AFTER — draggable comparison slider
+    ===================================================== -->
+    <section class="transformations section" id="transformations">
+      <div class="container">
+        <p class="eyebrow reveal">Before &amp; After</p>
+        <h2 class="reveal">The Fenney <em>Transformation</em></h2>
+        <p class="section-lead reveal">Drag the blade across each project to see the difference
+           premium materials and patient hands make.</p>
+
+        <!-- BA ITEM · Example restoration project — fine carpentry.
+             To add more projects: duplicate one .ba-figure block and
+             swap the before/after images + captions. -->
+        <figure class="ba-figure reveal" data-ba>
+          <div class="ba-frame">
+            <div class="ba-after">
+              <img src="assets/ba-mantel-after.svg" alt="After — restored fireplace surround with custom mantel and paneling">
+              <span class="ba-tag ba-tag-after">After</span>
+            </div>
+            <div class="ba-before" data-ba-before>
+              <img src="assets/ba-mantel-before.svg" alt="Before — worn fireplace surround with damaged trim">
+              <span class="ba-tag ba-tag-before">Before</span>
+            </div>
+            <div class="ba-handle" data-ba-handle aria-hidden="true">
+              <span class="ba-handle-line"></span>
+              <span class="ba-handle-knob">
+                <svg viewBox="0 0 100 100" class="blade-svg"><use href="#sawblade"></use></svg>
+              </span>
+            </div>
+            <input type="range" class="ba-range" data-ba-range min="0" max="100" value="50"
+                   aria-label="Reveal before and after comparison">
+          </div>
+          <figcaption>
+            <strong>Fine Carpentry Restoration — Fireplace Surround, Bourne MA</strong>
+            A cracked, dated surround rebuilt with fresh masonry, a hand-fitted custom mantel,
+            and painted paneling — square, level, and properly finished.
+          </figcaption>
+        </figure>
+
+        <p class="ba-note reveal">More project photography coming soon — new transformations are added as jobs wrap up.</p>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         04 · ABOUT
+    ===================================================== -->
+    <section class="about section section-navy" id="about">
+      <div class="container about-grid">
+        <div class="about-copy">
+          <p class="eyebrow reveal">The Builder</p>
+          <h2 class="reveal">Built the Cape Cod Way — <em>Or Not at All</em></h2>
+          <p class="reveal">From West Barnstable, Timothy William Fenney builds and remodels homes
+             across Cape Cod with a simple standard: protect the home, use premium materials,
+             leave every line straight and every work area clean.</p>
+          <p class="reveal">Whether it's a new deck over the marsh, cedar shingles on a village
+             colonial, or the finish carpentry that makes a house feel finished, the work is
+             done secure, level, and properly finished — then stood behind.</p>
+          <div class="about-points">
+            <div class="point reveal"><strong>Premium Materials</strong><span>Specified for salt air &amp; New England weather</span></div>
+            <div class="point reveal"><strong>Craftsman-Led</strong><span>Tim is on your project, not just your paperwork</span></div>
+            <div class="point reveal"><strong>Clean Sites</strong><span>Protected work areas, debris removed daily</span></div>
+            <div class="point reveal"><strong>Clear Estimates</strong><span>Written scope, honest exclusions, no surprises</span></div>
+          </div>
+        </div>
+        <div class="about-mark reveal" aria-hidden="true">
+          <img src="assets/logo-square.png" alt="" class="about-logo">
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         05 · CONTACT — GoHighLevel-ready form
+    ===================================================== -->
+    <section class="contact section" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-copy">
+          <p class="eyebrow reveal">Free Estimate</p>
+          <h2 class="reveal">Let's Talk About <em>Your Project</em></h2>
+          <p class="reveal">Tell us what you're planning and we'll get back to you with a clear,
+             written estimate — scope, materials, and price.</p>
+          <ul class="contact-list reveal">
+            <li><a href="tel:+17749940314">+1 (774) 994-0314</a></li>
+            <li><a href="mailto:twfbuilding@outlook.com">twfbuilding@outlook.com</a></li>
+            <li>West Barnstable, MA 02668</li>
+            <li>Serving all of Cape Cod</li>
+          </ul>
+        </div>
+
+        <!-- ============ GHL FORM ============
+             Option A (active): native form posts JSON to the GoHighLevel
+             inbound webhook set in js/main.js  →  GHL_CONFIG.webhookUrl
+             Option B: replace this whole <form> with your GHL form embed
+             <iframe> snippet, same as the other builds.
+        ==================================== -->
+        <form class="lead-form reveal" id="leadForm" novalidate>
+          <div class="field-row">
+            <label class="field">
+              <span>Full Name *</span>
+              <input type="text" name="full_name" autocomplete="name" required>
+            </label>
+            <label class="field">
+              <span>Phone *</span>
+              <input type="tel" name="phone" autocomplete="tel" required>
+            </label>
+          </div>
+          <label class="field">
+            <span>Email *</span>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label class="field">
+            <span>Service</span>
+            <select name="service">
+              <option value="Premium Decking">Premium Decking</option>
+              <option value="Premium Siding">Premium Siding</option>
+              <option value="Finish Carpentry">Skilled Finish Carpentry</option>
+              <option value="Masonry / Chimney">Fireplace &amp; Chimney Masonry</option>
+              <option value="Remodeling">Remodeling</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Tell us about the project</span>
+            <textarea name="message" rows="4" placeholder="Town, timeline, and what you'd like built…"></textarea>
+          </label>
+          <button type="submit" class="btn btn-solid btn-block" id="leadSubmit">Send My Request</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================
+       FOOTER
+  ======================================================= -->
+  <footer class="site-footer">
+    <img src="assets/logo.png" alt="Timothy William Fenney Building & Remodeling" class="footer-logo">
+    <p>Premium Decking &middot; Premium Siding &middot; Skilled Finish Carpentry</p>
+    <p class="footer-fine">&copy; <span id="year"></span> Timothy William Fenney Building &amp; Remodeling &middot; West Barnstable, MA</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
