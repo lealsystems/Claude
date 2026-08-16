@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="32" height="32" role="img" aria-label="SA Construction">
+  <title>SA Construction</title>
+  <!-- Truss mark, bled to the edges so it holds up at 16px. -->
+  <path d="M60 4 L118 108 L2 108 Z M60 52 L92 96 L28 96 Z" fill="#191A18" fill-rule="evenodd"/>
+  <rect x="0" y="68" width="120" height="13" fill="#DB4F16"/>
+</svg>

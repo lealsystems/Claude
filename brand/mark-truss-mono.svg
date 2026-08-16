@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="SA Construction truss mark, one colour">
+  <title>SA Construction — Truss mark, one colour</title>
+  <!-- Inherits the surrounding text colour. Safe on any ground, and on any single-colour process. -->
+  <path d="M60 12 L112 104 L8 104 Z M60 54 L90 94 L30 94 Z" fill="currentColor" fill-rule="evenodd"/>
+  <rect x="2" y="70" width="116" height="11" fill="currentColor"/>
+</svg>

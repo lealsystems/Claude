@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164 100" width="164" height="100" role="img" aria-label="SA">
+  <title>SA Construction — SA wordmark</title>
+  <!-- Drawn as geometry, not type: no font dependency, renders identically anywhere. -->
+  <g fill="none" stroke="#191A18" stroke-width="16" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="6">
+    <!-- Chamfered corners throughout: with square corners the S reads as a 5. -->
+    <path d="M64 24 L64 18 L54 8 L18 8 L8 18 L8 40 L18 50 L54 50 L64 60 L64 82 L54 92 L18 92 L8 82 L8 76"/>
+    <path d="M92 92 L114 8 L134 8 L156 92"/>
+    <path d="M100 62 H148"/>
+  </g>
+</svg>
