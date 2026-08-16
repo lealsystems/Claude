@@ -310,7 +310,37 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
     var(--paper);
   overflow: hidden;
 }
-.hero-inner { max-width: 880px; padding: 120px 24px 60px; }
+.hero-inner { max-width: 880px; padding: 110px 24px 60px; }
+
+/* Hero line-art — chimney + Cape Cod arm, strokes draw in on load */
+.hero-art {
+  max-width: 680px;
+  margin: 0 auto 6px;
+}
+.hero-art svg { width: 100%; height: auto; display: block; }
+.hero-art path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawline 1.5s var(--ease) forwards;
+}
+.ln-navy  { stroke: var(--navy);  opacity: .88; }
+.ln-gold  { stroke: var(--gold);  opacity: .85; }
+.ln-stone { stroke: var(--stone); opacity: .75; }
+.ln-w3  { stroke-width: 3; }
+.ln-w25 { stroke-width: 2.5; }
+.ln-w2  { stroke-width: 2; }
+.ln-w15 { stroke-width: 1.5; }
+.hero-art .d1 { animation-delay: .2s; }
+.hero-art .d2 { animation-delay: .55s; }
+.hero-art .d3 { animation-delay: .8s; }
+.hero-art .d4 { animation-delay: 1.35s; }
+.hero-art .d5 { animation-delay: 1.05s; animation-duration: 1.8s; }
+.hero-art .d6 { animation-delay: 1.5s;  animation-duration: 1.6s; }
+@keyframes drawline { to { stroke-dashoffset: 0; } }
+@media (max-width: 560px) { .hero-art { margin-bottom: 0; } }
 .hero .eyebrow { letter-spacing: .4em; }
 .hero h1 em { display: block; font-size: .62em; letter-spacing: .12em; margin-top: .35em; color: var(--slate); }
 .hero-sub {
@@ -637,4 +667,5 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .cursor-blade, .cutline { display: none; }
+  .hero-art path { animation: none; stroke-dashoffset: 0; }
 }
