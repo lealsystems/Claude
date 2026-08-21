@@ -44,6 +44,15 @@
   <!-- Reusable saw blade symbol -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
+      <!-- Running-bond brick, used by the masonry feature card -->
+      <pattern id="brickFace" width="72" height="34" patternUnits="userSpaceOnUse">
+        <rect width="72" height="34" fill="#D9CFBC"/>
+        <rect x="2"   y="2"  width="32" height="15" rx="1.5" fill="#9E5A45"/>
+        <rect x="38"  y="2"  width="32" height="15" rx="1.5" fill="#8F5140"/>
+        <rect x="-14" y="19" width="32" height="15" rx="1.5" fill="#94553F"/>
+        <rect x="22"  y="19" width="32" height="15" rx="1.5" fill="#A6614A"/>
+        <rect x="58"  y="19" width="32" height="15" rx="1.5" fill="#8B4E3C"/>
+      </pattern>
       <symbol id="sawblade" viewBox="0 0 100 100">
         <g class="sawblade-g">
           <path d="M50 4 L57 14 A38 38 0 0 1 66 17 L78 12 L79 24 A38 38 0 0 1 86 31 L98 30 L93 41 A38 38 0 0 1 95 50 L96 50 A38 38 0 0 1 95 59 L98 70 L86 69 A38 38 0 0 1 79 76 L78 88 L66 83 A38 38 0 0 1 57 86 L50 96 L43 86 A38 38 0 0 1 34 83 L22 88 L21 76 A38 38 0 0 1 14 69 L2 70 L7 59 A38 38 0 0 1 4 50 A38 38 0 0 1 7 41 L2 30 L14 31 A38 38 0 0 1 21 24 L22 12 L34 17 A38 38 0 0 1 43 14 Z"
@@ -97,177 +106,16 @@
          01 · HERO
     ===================================================== -->
     <section class="hero section" id="home">
+
+      <!-- Photograph of Tim's work, dissolving into the page at the roofline
+           so the wordmark floats just beneath the ridge. Swap the file at
+           assets/hero-chimney.jpg to change the shot. -->
+      <div class="hero-photo" aria-hidden="true"></div>
+
       <div class="hero-inner">
-
-        <!-- ============================================================
-             HERO SCENE — brick chimney on a Cape Cod roof, composed to
-             match the logo: chimney centered, roof sweeping down both
-             sides, the Cape Cod arm curling behind. Brick and cedar
-             shingle are SVG patterns, so the whole scene stays sharp at
-             any size. Smoke drifts from the flues.
-        ============================================================= -->
-        <div class="hero-art" aria-hidden="true">
-          <svg viewBox="0 0 900 430" preserveAspectRatio="xMidYMax meet" class="chimney-scene">
-            <defs>
-              <!-- Running-bond brick, front (sunlit) face -->
-              <pattern id="brickFace" width="72" height="34" patternUnits="userSpaceOnUse">
-                <rect width="72" height="34" fill="#D9CFBC"/>
-                <g>
-                  <rect x="2"   y="2"  width="32" height="15" rx="1.5" fill="#9E5A45"/>
-                  <rect x="38"  y="2"  width="32" height="15" rx="1.5" fill="#8F5140"/>
-                  <rect x="-14" y="19" width="32" height="15" rx="1.5" fill="#94553F"/>
-                  <rect x="22"  y="19" width="32" height="15" rx="1.5" fill="#A6614A"/>
-                  <rect x="58"  y="19" width="32" height="15" rx="1.5" fill="#8B4E3C"/>
-                </g>
-              </pattern>
-              <!-- Same bond, shaded return face -->
-              <pattern id="brickSide" width="72" height="34" patternUnits="userSpaceOnUse">
-                <rect width="72" height="34" fill="#A79C8B"/>
-                <g>
-                  <rect x="2"   y="2"  width="32" height="15" rx="1.5" fill="#6E3E30"/>
-                  <rect x="38"  y="2"  width="32" height="15" rx="1.5" fill="#653A2C"/>
-                  <rect x="-14" y="19" width="32" height="15" rx="1.5" fill="#6A3B2D"/>
-                  <rect x="22"  y="19" width="32" height="15" rx="1.5" fill="#734235"/>
-                  <rect x="58"  y="19" width="32" height="15" rx="1.5" fill="#613829"/>
-                </g>
-              </pattern>
-              <!-- Weathered cedar shingle courses, staggered joints -->
-              <pattern id="shingleL" width="60" height="48" patternUnits="userSpaceOnUse"
-                       patternTransform="skewY(-9.5)">
-                <rect width="60" height="48" fill="#AFA491"/>
-                <rect y="21" width="60" height="3" fill="#8B8271"/>
-                <rect y="45" width="60" height="3" fill="#8B8271"/>
-                <rect x="14" width="1.4" height="21" fill="#A29886"/>
-                <rect x="44" width="1.4" height="21" fill="#A29886"/>
-                <rect x="0"  y="24" width="1.4" height="21" fill="#A29886"/>
-                <rect x="29" y="24" width="1.4" height="21" fill="#A29886"/>
-              </pattern>
-              <pattern id="shingleR" width="60" height="48" patternUnits="userSpaceOnUse"
-                       patternTransform="skewY(9.5)">
-                <rect width="60" height="48" fill="#A69B88"/>
-                <rect y="21" width="60" height="3" fill="#847B6A"/>
-                <rect y="45" width="60" height="3" fill="#847B6A"/>
-                <rect x="14" width="1.4" height="21" fill="#9A907E"/>
-                <rect x="44" width="1.4" height="21" fill="#9A907E"/>
-                <rect x="0"  y="24" width="1.4" height="21" fill="#9A907E"/>
-                <rect x="29" y="24" width="1.4" height="21" fill="#9A907E"/>
-              </pattern>
-
-              <!-- Light raking across the brick face -->
-              <linearGradient id="faceLight" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%"   stop-color="#fff" stop-opacity=".28"/>
-                <stop offset="45%"  stop-color="#fff" stop-opacity=".05"/>
-                <stop offset="100%" stop-color="#000" stop-opacity=".14"/>
-              </linearGradient>
-              <linearGradient id="capLight" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%"   stop-color="#fff" stop-opacity=".5"/>
-                <stop offset="100%" stop-color="#fff" stop-opacity=".12"/>
-              </linearGradient>
-              <linearGradient id="flueGrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%"   stop-color="#B4664A"/>
-                <stop offset="55%"  stop-color="#96543C"/>
-                <stop offset="100%" stop-color="#7A422F"/>
-              </linearGradient>
-
-              <!-- Roof falls away into shadow toward the eaves -->
-              <linearGradient id="roofShade" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%"   stop-color="#000" stop-opacity="0"/>
-                <stop offset="100%" stop-color="#2E2A20" stop-opacity=".38"/>
-              </linearGradient>
-
-              <!-- Roof dissolves into the page instead of cutting off -->
-              <linearGradient id="roofFade" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%"   stop-color="#fff" stop-opacity="1"/>
-                <stop offset="46%"  stop-color="#fff" stop-opacity="1"/>
-                <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
-              </linearGradient>
-              <mask id="roofMask">
-                <rect x="0" y="250" width="900" height="180" fill="url(#roofFade)"/>
-              </mask>
-            </defs>
-
-            <!-- Cape Cod arm curling behind, as in the logo -->
-            <g class="scene-cape">
-              <path d="M604 300 C 642 202, 662 132, 708 90 C 754 48, 824 60, 840 114
-                       C 854 160, 832 208, 794 224 C 766 236, 744 222, 742 198
-                       C 740 178, 754 166, 770 170"/>
-              <path class="cape-inner" d="M640 296 C 668 224, 684 166, 718 130 C 746 100, 786 104, 798 136"/>
-            </g>
-
-            <!-- Roof planes, shingled, fading out at the bottom. The two
-                 slopes overlap behind the chimney so no gap shows through. -->
-            <g mask="url(#roofMask)">
-              <path d="M-10 368 C 120 344, 280 314, 524 292 L 524 430 L -10 430 Z" fill="url(#shingleL)"/>
-              <path d="M396 292 C 620 314, 780 342, 910 368 L 910 430 L 396 430 Z" fill="url(#shingleR)"/>
-              <!-- depth: the slopes darken as they fall away -->
-              <path d="M-10 368 C 120 344, 280 314, 524 292 L 524 430 L -10 430 Z" fill="url(#roofShade)"/>
-              <path d="M396 292 C 620 314, 780 342, 910 368 L 910 430 L 396 430 Z" fill="url(#roofShade)"/>
-              <!-- chimney's cast shadow falling across the right slope -->
-              <path d="M520 300 C 570 309, 616 317, 660 326 L 628 430 L 520 430 Z"
-                    fill="#40392C" opacity=".2"/>
-            </g>
-
-            <!-- Ridge lines + the logo's gold echo -->
-            <g fill="none" stroke-linecap="round">
-              <path class="ridge"      d="M-10 368 C 120 344, 274 316, 404 298"/>
-              <path class="ridge"      d="M518 300 C 648 320, 786 344, 910 368"/>
-              <path class="ridge-gold" d="M20 386 C 150 362, 292 336, 402 318"/>
-              <path class="ridge-gold" d="M540 320 C 660 340, 790 364, 890 386"/>
-            </g>
-
-            <!-- Smoke drifting from the flues -->
-            <g class="smoke" fill="none" stroke="#8C93A0" stroke-linecap="round">
-              <path class="wisp w1" d="M450 88 C 442 66, 460 54, 452 32 C 446 16, 458 8, 456 -4"/>
-              <path class="wisp w2" d="M498 88 C 508 68, 490 56, 500 34 C 508 18, 496 10, 500 -2"/>
-              <path class="wisp w3" d="M474 84 C 466 60, 484 48, 476 24"/>
-            </g>
-
-            <!-- ===== CHIMNEY ===== -->
-            <!-- clay flue tiles -->
-            <g class="flues">
-              <path d="M430 96 L 466 96 L 466 148 L 430 148 Z" fill="url(#flueGrad)"/>
-              <path d="M430 96 L 448 90 L 484 90 L 466 96 Z" fill="#C0745A"/>
-              <path d="M466 96 L 484 90 L 484 142 L 466 148 Z" fill="#6E3B2A"/>
-              <path d="M478 92 L 496 86 L 532 86 L 514 92 Z" fill="#C0745A"/>
-              <path d="M478 92 L 514 92 L 514 144 L 478 144 Z" fill="url(#flueGrad)"/>
-              <path d="M514 92 L 532 86 L 532 138 L 514 144 Z" fill="#6E3B2A"/>
-            </g>
-
-            <!-- cap slab: top surface, front edge, return edge -->
-            <path d="M388 146 L 424 132 L 560 132 L 524 146 Z" fill="#CFC6B4"/>
-            <path d="M388 146 L 524 146 L 524 160 L 388 160 Z" fill="#BDB3A0"/>
-            <path d="M388 146 L 524 146 L 524 160 L 388 160 Z" fill="url(#capLight)"/>
-            <path d="M524 146 L 560 132 L 560 146 L 524 160 Z" fill="#948B79"/>
-
-            <!-- corbelled course under the cap -->
-            <path d="M396 160 L 516 160 L 516 176 L 396 176 Z" fill="url(#brickFace)"/>
-            <path d="M396 160 L 516 160 L 516 176 L 396 176 Z" fill="url(#faceLight)"/>
-            <path d="M516 160 L 548 148 L 548 164 L 516 176 Z" fill="url(#brickSide)"/>
-
-            <!-- main shaft -->
-            <path d="M404 176 L 508 176 L 508 306 L 404 306 Z" fill="url(#brickFace)"/>
-            <path d="M404 176 L 508 176 L 508 306 L 404 306 Z" fill="url(#faceLight)"/>
-            <path d="M508 176 L 540 164 L 540 296 L 508 306 Z" fill="url(#brickSide)"/>
-
-            <!-- lead flashing where the shaft meets the shingles -->
-            <path d="M398 292 L 514 292 L 514 306 L 398 306 Z" fill="#9AA0A8"/>
-            <path d="M398 292 L 514 292 L 514 297 L 398 297 Z" fill="#C3C8CE"/>
-            <path d="M514 292 L 544 281 L 544 295 L 514 306 Z" fill="#7C838B"/>
-
-            <!-- crisp outline so the mass reads at small sizes -->
-            <g class="chimney-line" fill="none">
-              <path d="M388 146 L 424 132 L 560 132 L 560 146 L 524 160 L 524 146 Z"/>
-              <path d="M388 146 L 524 146"/>
-              <path d="M404 176 L 508 176 L 508 306"/>
-              <path d="M508 176 L 540 164 L 540 296"/>
-              <path d="M404 306 L 404 176"/>
-            </g>
-          </svg>
-        </div>
-
         <p class="eyebrow reveal">West Barnstable &middot; Cape Cod, Massachusetts</p>
         <h1 class="reveal">Timothy William Fenney<br><em>Building &amp; Remodeling</em></h1>
-        <p class="hero-sub reveal">Premium materials. Honest craftsmanship. Cape&nbsp;Cod character —
+        <p class="hero-sub reveal">Chimneys, brickwork, and the craft that finishes a home —
            built to weather generations by the shore.</p>
         <div class="hero-cta reveal">
           <a href="#contact" class="btn btn-solid">Request a Free Estimate</a>
