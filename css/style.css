@@ -6,7 +6,7 @@
      --stone  #8A8A8A   stone gray
      --mist   #D1D8E0   light blue-gray
      --gold   #B08D57   brass/gold accent
-     --paper  #FFFFFF / #F4F6F8
+     --paper  Lancaster Whitewash HC-174 warm off-white
    ============================================================ */
 
 :root {
@@ -15,9 +15,17 @@
   --stone: #8A8A8A;
   --mist:  #D1D8E0;
   --gold:  #B08D57;
-  --paper: #FFFFFF;
-  --paper-gray: #F4F6F8;
-  --ink:   #1C2733;
+
+  /* Ground: Benjamin Moore Lancaster Whitewash HC-174 — a warm, soft
+     off-white. Card stock sits a shade lighter, alternating bands a
+     shade deeper, so nothing on the page is ever raw white. */
+  --paper:      #EDE8DB;
+  --paper-card: #F6F2E9;
+  --paper-gray: #E2DCCB;
+  --brick:      #9E5A45;
+
+  --ink:   #1F2830;
+  --body:  #565C60;
 
   --serif: "Cinzel", "Times New Roman", serif;
   --sans:  "Inter", "Helvetica Neue", Arial, sans-serif;
@@ -116,11 +124,11 @@ img { max-width: 100%; display: block; }
   justify-content: space-between;
   padding: 0 clamp(20px, 4vw, 48px);
   z-index: 1200;
-  background: rgba(255,255,255,0);
+  background: rgba(237,232,219,0);
   transition: background .35s ease, box-shadow .35s ease, height .35s ease;
 }
 .site-header.scrolled {
-  background: rgba(255,255,255,.94);
+  background: rgba(237,232,219,.93);
   backdrop-filter: blur(10px);
   box-shadow: 0 1px 0 rgba(11,49,88,.08);
   height: 68px;
@@ -130,7 +138,7 @@ img { max-width: 100%; display: block; }
   width: auto;
   transition: height .35s ease, filter .35s ease;
   /* transparent PNG blends with the page; soft white halo lifts it off imagery */
-  filter: drop-shadow(0 0 10px rgba(255,255,255,.85));
+  filter: drop-shadow(0 0 10px rgba(246,242,233,.9));
 }
 .site-header.scrolled .brand-logo { height: 54px; }
 @media (max-width: 560px) {
@@ -262,7 +270,7 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
 
 .section-lead {
   max-width: 620px;
-  color: #55606B;
+  color: var(--body);
   margin-bottom: clamp(40px, 6vw, 70px);
 }
 .section-navy .section-lead { color: var(--mist); }
@@ -305,49 +313,75 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   justify-content: center;
   text-align: center;
   background:
-    radial-gradient(1100px 500px at 80% -10%, rgba(209,216,224,.4), transparent 60%),
-    radial-gradient(900px 460px at 8% 110%, rgba(176,141,87,.12), transparent 55%),
+    radial-gradient(1200px 560px at 78% -12%, rgba(209,216,224,.34), transparent 62%),
+    radial-gradient(900px 460px at 8% 108%, rgba(176,141,87,.14), transparent 55%),
     var(--paper);
   overflow: hidden;
 }
 .hero-inner { max-width: 880px; padding: 110px 24px 60px; }
 
-/* Hero line-art — chimney + Cape Cod arm, strokes draw in on load */
+/* ------------------------------------------------------------
+   Hero scene — brick chimney on a Cape Cod roof
+------------------------------------------------------------ */
 .hero-art {
-  max-width: 680px;
-  margin: 0 auto 6px;
+  max-width: 720px;
+  margin: 0 auto 4px;
+  filter: drop-shadow(0 26px 40px rgba(31,40,48,.13));
+  animation: sceneRise 1.4s var(--ease) both;
 }
 .hero-art svg { width: 100%; height: auto; display: block; }
-.hero-art path {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: drawline 1.5s var(--ease) forwards;
+@keyframes sceneRise {
+  from { opacity: 0; transform: translateY(26px) scale(.985); }
+  to   { opacity: 1; transform: none; }
 }
-.ln-navy  { stroke: var(--navy);  opacity: .88; }
-.ln-gold  { stroke: var(--gold);  opacity: .85; }
-.ln-stone { stroke: var(--stone); opacity: .75; }
-.ln-w3  { stroke-width: 3; }
-.ln-w25 { stroke-width: 2.5; }
-.ln-w2  { stroke-width: 2; }
-.ln-w15 { stroke-width: 1.5; }
-.hero-art .d1 { animation-delay: .2s; }
-.hero-art .d2 { animation-delay: .55s; }
-.hero-art .d3 { animation-delay: .8s; }
-.hero-art .d4 { animation-delay: 1.35s; }
-.hero-art .d5 { animation-delay: 1.05s; animation-duration: 1.8s; }
-.hero-art .d6 { animation-delay: 1.5s;  animation-duration: 1.6s; }
-@keyframes drawline { to { stroke-dashoffset: 0; } }
-@media (max-width: 560px) { .hero-art { margin-bottom: 0; } }
+
+/* Cape Cod arm behind the chimney */
+.scene-cape path {
+  fill: none;
+  stroke: var(--navy);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: .17;
+}
+.scene-cape .cape-inner { stroke-width: 1.6; opacity: .12; }
+
+/* Roof edges + the logo's gold echo */
+.ridge      { stroke: #3E3A31; stroke-width: 2.5; opacity: .55; }
+.ridge-gold { stroke: var(--gold); stroke-width: 1.6; opacity: .55; }
+
+/* Outline that keeps the chimney reading at small sizes */
+.chimney-line path {
+  stroke: #4A3229;
+  stroke-width: 1.6;
+  opacity: .42;
+  stroke-linejoin: round;
+}
+
+/* Smoke curling from the flues */
+.smoke .wisp {
+  stroke-width: 3;
+  opacity: 0;
+  stroke-dasharray: 120;
+  animation: drift 9s ease-in-out infinite;
+}
+.smoke .w1 { animation-delay: .6s; }
+.smoke .w2 { animation-delay: 3.2s; }
+.smoke .w3 { animation-delay: 5.6s; stroke-width: 2.2; }
+@keyframes drift {
+  0%   { opacity: 0;   stroke-dashoffset: 120; transform: translate(0, 14px); }
+  22%  { opacity: .30; }
+  70%  { opacity: .16; }
+  100% { opacity: 0;   stroke-dashoffset: -40; transform: translate(-16px, -26px); }
+}
+
+@media (max-width: 560px) { .hero-art { margin-bottom: 0; max-width: 100%; } }
 .hero .eyebrow { letter-spacing: .4em; }
 .hero h1 em { display: block; font-size: .62em; letter-spacing: .12em; margin-top: .35em; color: var(--slate); }
 .hero-sub {
   max-width: 560px;
   margin: 28px auto 42px;
   font-size: 1.05rem;
-  color: #55606B;
+  color: var(--body);
 }
 .hero-cta { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
 
@@ -386,7 +420,7 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   gap: 28px;
 }
 .service-card {
-  background: #fff;
+  background: var(--paper-card);
   border: 1px solid rgba(11,49,88,.08);
   padding: 46px 38px 42px;
   position: relative;
@@ -407,12 +441,12 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
 }
 .service-icon { width: 52px; height: 52px; color: var(--gold); margin-bottom: 26px; }
 .service-card h3 { font-size: 1.25rem; margin-bottom: 14px; letter-spacing: .03em; }
-.service-card p { font-size: .95rem; color: #55606B; }
+.service-card p { font-size: .95rem; color: var(--body); }
 
 .services-more {
   margin-top: 54px;
   text-align: center;
-  color: #55606B;
+  color: var(--body);
   font-size: .95rem;
 }
 .services-more a { color: var(--navy); font-weight: 500; }
@@ -492,7 +526,7 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
 .ba-figure figcaption {
   margin-top: 26px;
   font-size: .95rem;
-  color: #55606B;
+  color: var(--body);
   max-width: 720px;
 }
 .ba-figure figcaption strong {
@@ -566,13 +600,13 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
 /* On the light gray footer: white core fading out, warm gold breath */
 .logo-glow-light {
   background: radial-gradient(closest-side,
-    #ffffff 0%,
-    rgba(255,255,255,.75) 40%,
-    rgba(255,255,255,0) 74%);
+    #F6F2E9 0%,
+    rgba(246,242,233,.72) 40%,
+    rgba(246,242,233,0) 74%);
 }
 .logo-glow-light img {
-  filter: drop-shadow(0 0 16px rgba(255,255,255,.95))
-          drop-shadow(0 0 44px rgba(176,141,87,.28));
+  filter: drop-shadow(0 0 16px rgba(246,242,233,.95))
+          drop-shadow(0 0 44px rgba(176,141,87,.32));
 }
 
 @media (max-width: 860px) {
@@ -589,7 +623,7 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   grid-template-columns: 1fr 1.1fr;
   gap: clamp(40px, 6vw, 90px);
 }
-.contact-copy p { color: #55606B; max-width: 460px; }
+.contact-copy p { color: var(--body); max-width: 460px; }
 .contact-list {
   list-style: none;
   margin-top: 34px;
@@ -601,7 +635,7 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
 .contact-list a:hover { color: var(--gold); }
 
 .lead-form {
-  background: #fff;
+  background: var(--paper-card);
   border: 1px solid rgba(11,49,88,.1);
   box-shadow: 0 26px 60px rgba(11,49,88,.1);
   padding: clamp(28px, 4vw, 48px);
@@ -624,9 +658,9 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   font-family: var(--sans);
   font-size: .98rem;
   color: var(--ink);
-  background: var(--paper-gray);
+  background: #EAE4D6;
   border: 1px solid transparent;
-  border-bottom: 2px solid var(--mist);
+  border-bottom: 2px solid #CFC6B2;
   padding: 13px 14px;
   outline: none;
   transition: border-color .3s ease, background .3s ease;
@@ -636,7 +670,7 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
 .field textarea { resize: vertical; }
 .field input:focus, .field select:focus, .field textarea:focus {
   border-bottom-color: var(--gold);
-  background: #fff;
+  background: var(--paper-card);
   border-color: rgba(176,141,87,.35);
 }
 .form-status { font-size: .9rem; min-height: 1.4em; color: var(--slate); }
@@ -653,7 +687,7 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   border-top: 1px solid rgba(11,49,88,.08);
   text-align: center;
   padding: 70px 24px 46px;
-  color: #55606B;
+  color: var(--body);
   font-size: .9rem;
 }
 .site-footer .logo-glow { margin-bottom: 10px; }
@@ -667,5 +701,122 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .cursor-blade, .cutline { display: none; }
-  .hero-art path { animation: none; stroke-dashoffset: 0; }
+  .hero-art { animation: none; }
+  .smoke .wisp { animation: none; opacity: .18; stroke-dashoffset: 0; }
 }
+
+/* ------------------------------------------------------------
+   Signature service — chimney & brick masonry
+------------------------------------------------------------ */
+.service-feature {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(200px, .8fr) 1.6fr;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  border-color: rgba(176,141,87,.4);
+}
+.feature-brick { position: relative; min-height: 260px; }
+.feature-brick svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.feature-copy { padding: clamp(32px, 4vw, 52px); }
+.feature-tag {
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.service-feature h3 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin-bottom: 16px; }
+.service-feature p { color: var(--body); font-size: .97rem; max-width: 62ch; }
+.feature-list {
+  list-style: none;
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px 28px;
+}
+.feature-list li {
+  position: relative;
+  padding-left: 22px;
+  font-size: .9rem;
+  color: var(--body);
+}
+.feature-list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .62em;
+  width: 9px; height: 9px;
+  background: var(--brick);
+  border-radius: 1px;
+}
+@media (max-width: 760px) {
+  .service-feature { grid-template-columns: 1fr; }
+  .feature-brick { min-height: 120px; }
+}
+
+/* ------------------------------------------------------------
+   Credential strip — quiet proof under the hero
+------------------------------------------------------------ */
+.creds {
+  border-top: 1px solid rgba(31,40,48,.1);
+  border-bottom: 1px solid rgba(31,40,48,.1);
+  padding: 26px 0;
+  background: var(--paper);
+}
+.creds-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px clamp(28px, 5vw, 64px);
+}
+.creds-inner span {
+  font-size: .74rem;
+  font-weight: 500;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--slate);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.creds-inner span::before {
+  content: "";
+  width: 7px; height: 7px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+/* ------------------------------------------------------------
+   Lead form additions
+------------------------------------------------------------ */
+.form-head { margin-bottom: 4px; }
+.form-head strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--navy);
+  letter-spacing: .03em;
+}
+.form-head span { font-size: .86rem; color: var(--body); }
+.form-fine {
+  font-size: .76rem;
+  color: var(--stone);
+  line-height: 1.6;
+  margin-top: -4px;
+}
+.contact-promise {
+  margin-top: 30px;
+  padding: 22px 24px;
+  border-left: 3px solid var(--gold);
+  background: rgba(176,141,87,.09);
+}
+.contact-promise strong {
+  display: block;
+  font-family: var(--serif);
+  color: var(--navy);
+  letter-spacing: .03em;
+  margin-bottom: 6px;
+}
+.contact-promise span { font-size: .89rem; color: var(--body); }
