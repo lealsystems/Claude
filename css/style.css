@@ -323,9 +323,9 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   z-index: 2;
   max-width: 880px;
   padding: 0 24px 40px;
-  margin-top: 50vh;            /* drops the wordmark just under the roofline */
+  margin-top: 54vh;            /* drops the wordmark just under the roofline */
 }
-@media (max-width: 700px) { .hero-inner { margin-top: 40vh; } }
+@media (max-width: 700px) { .hero-inner { margin-top: 44vh; } }
 
 /* ------------------------------------------------------------
    Hero photograph — the roofline sits just above the wordmark,
@@ -335,35 +335,70 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
 .hero-photo {
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 74%;
+  height: 76%;
   background-image: url("../assets/hero-chimney.jpg");
   background-size: cover;
   background-position: center 34%;
-  /* fade out just below the ridge */
+  /* warm the photograph very slightly so a blue sky sits comfortably
+     against Lancaster Whitewash instead of fighting it */
+  filter: saturate(.94) contrast(1.02) sepia(.05);
+  /* long, soft dissolve so the bottom edge is never a visible seam */
   -webkit-mask-image: linear-gradient(to bottom,
-      rgba(0,0,0,1) 0%, rgba(0,0,0,1) 54%, rgba(0,0,0,.55) 74%, rgba(0,0,0,0) 100%);
+      #000 0%, #000 46%,
+      rgba(0,0,0,.94) 58%,
+      rgba(0,0,0,.78) 68%,
+      rgba(0,0,0,.52) 78%,
+      rgba(0,0,0,.26) 87%,
+      rgba(0,0,0,.08) 94%,
+      transparent 100%);
           mask-image: linear-gradient(to bottom,
-      rgba(0,0,0,1) 0%, rgba(0,0,0,1) 54%, rgba(0,0,0,.55) 74%, rgba(0,0,0,0) 100%);
+      #000 0%, #000 46%,
+      rgba(0,0,0,.94) 58%,
+      rgba(0,0,0,.78) 68%,
+      rgba(0,0,0,.52) 78%,
+      rgba(0,0,0,.26) 87%,
+      rgba(0,0,0,.08) 94%,
+      transparent 100%);
   animation: photoIn 1.6s var(--ease) both;
 }
 @keyframes photoIn {
   from { opacity: 0; transform: scale(1.04); }
   to   { opacity: 1; transform: none; }
 }
-/* warm veil ties the photograph to the page palette */
+
+/* Lancaster Whitewash washes in from every edge so the photograph has
+   no rectangle to it — it simply becomes the page. */
 .hero-photo::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom,
-      rgba(237,232,219,.16) 0%,
-      rgba(237,232,219,.05) 40%,
-      rgba(237,232,219,.5) 82%,
-      rgba(237,232,219,.9) 100%);
+  background:
+    /* bottom: carries the dissolve the rest of the way home */
+    linear-gradient(to bottom,
+      rgba(237,232,219,0)    52%,
+      rgba(237,232,219,.28)  70%,
+      rgba(237,232,219,.62)  84%,
+      rgba(237,232,219,.88)  94%,
+      rgba(237,232,219,1)   100%),
+    /* left and right edges feather away */
+    linear-gradient(to right,
+      rgba(237,232,219,.52) 0%,
+      rgba(237,232,219,.14) 8%,
+      rgba(237,232,219,0)   20%,
+      rgba(237,232,219,0)   80%,
+      rgba(237,232,219,.14) 92%,
+      rgba(237,232,219,.52) 100%),
+    /* a breath of warmth across the sky, heaviest at the very top so
+       the navy logo stays legible */
+    linear-gradient(to bottom,
+      rgba(237,232,219,.42) 0%,
+      rgba(237,232,219,.14) 14%,
+      rgba(237,232,219,.04) 34%,
+      rgba(237,232,219,0)   50%);
 }
 
 @media (max-width: 700px) {
-  .hero-photo { height: 62%; background-position: center 38%; }
+  .hero-photo { height: 64%; background-position: center 38%; }
 }
 .hero .eyebrow {
   letter-spacing: .4em;
