@@ -338,26 +338,26 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   height: 76%;
   background-image: url("../assets/hero-chimney.jpg");
   background-size: cover;
-  background-position: center 34%;
+  background-position: center 26%;
   /* warm the photograph very slightly so a blue sky sits comfortably
      against Lancaster Whitewash instead of fighting it */
   filter: saturate(.94) contrast(1.02) sepia(.05);
   /* long, soft dissolve so the bottom edge is never a visible seam */
   -webkit-mask-image: linear-gradient(to bottom,
-      #000 0%, #000 46%,
-      rgba(0,0,0,.94) 58%,
-      rgba(0,0,0,.78) 68%,
-      rgba(0,0,0,.52) 78%,
-      rgba(0,0,0,.26) 87%,
-      rgba(0,0,0,.08) 94%,
+      #000 0%, #000 40%,
+      rgba(0,0,0,.92) 52%,
+      rgba(0,0,0,.70) 62%,
+      rgba(0,0,0,.42) 72%,
+      rgba(0,0,0,.18) 82%,
+      rgba(0,0,0,.05) 91%,
       transparent 100%);
           mask-image: linear-gradient(to bottom,
-      #000 0%, #000 46%,
-      rgba(0,0,0,.94) 58%,
-      rgba(0,0,0,.78) 68%,
-      rgba(0,0,0,.52) 78%,
-      rgba(0,0,0,.26) 87%,
-      rgba(0,0,0,.08) 94%,
+      #000 0%, #000 40%,
+      rgba(0,0,0,.92) 52%,
+      rgba(0,0,0,.70) 62%,
+      rgba(0,0,0,.42) 72%,
+      rgba(0,0,0,.18) 82%,
+      rgba(0,0,0,.05) 91%,
       transparent 100%);
   animation: photoIn 1.6s var(--ease) both;
 }
@@ -375,11 +375,11 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   background:
     /* bottom: carries the dissolve the rest of the way home */
     linear-gradient(to bottom,
-      rgba(237,232,219,0)    52%,
-      rgba(237,232,219,.28)  70%,
-      rgba(237,232,219,.62)  84%,
-      rgba(237,232,219,.88)  94%,
-      rgba(237,232,219,1)   100%),
+      rgba(237,232,219,0)    40%,
+      rgba(237,232,219,.34)  56%,
+      rgba(237,232,219,.68)  70%,
+      rgba(237,232,219,.90)  84%,
+      rgba(237,232,219,1)    94%),
     /* left and right edges feather away */
     linear-gradient(to right,
       rgba(237,232,219,.52) 0%,
@@ -402,7 +402,11 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
 }
 .hero .eyebrow {
   letter-spacing: .4em;
-  text-shadow: 0 1px 14px rgba(237,232,219,.9);
+  color: #8A6A3A;
+  text-shadow:
+    0 0 10px rgba(237,232,219,1),
+    0 0 22px rgba(237,232,219,.95),
+    0 1px 2px rgba(237,232,219,1);
 }
 .hero h1 { text-shadow: 0 2px 22px rgba(237,232,219,.85), 0 1px 3px rgba(237,232,219,.9); }
 .hero-sub { text-shadow: 0 1px 14px rgba(237,232,219,.9); }
