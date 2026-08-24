@@ -1,0 +1,7 @@
+# Photos staged for conversion — the converted output in site/assets/img/ is
+# what gets committed, not the full-size originals.
+tools/incoming/
+
+.DS_Store
+Thumbs.db
+node_modules/
