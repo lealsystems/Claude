@@ -78,6 +78,98 @@ Tune a single instance with `data-type-stagger`, `data-type-duration` and
 
 ---
 
+## The noticeboard: announcements, social feeds, highlights
+
+The `#news` section holds three independent pieces. Each works on its own, so
+one being unconfigured never blanks the others.
+
+### Announcements — edit one file, no code
+
+`site/content/announcements.json`. Add an entry, save, done. The page sorts
+newest-first, floats anything with `"pinned": true` to the top, and hides an
+entry once its optional `"expires"` date has passed. Field-by-field notes are
+inside the file itself.
+
+This block is deliberately styled for reading rather than for looks — a real
+reading measure, body type a step larger than the rest of the page, and no
+animation on the text.
+
+Everything from the JSON is inserted as text, never as markup, and links are
+restricted to same-page anchors plus `http(s)`, `mailto:` and `tel:` — so no
+amount of stray punctuation in a notice can turn into live HTML.
+
+### Facebook feed — works today, free
+
+The official Facebook Page Plugin. No API key, no token, no expiry. Point
+`data-fb-page` on the Facebook panel in `index.html` at the real Page URL and
+it renders that Page's recent posts.
+
+It shows **Facebook posts only**. There is no Facebook widget that displays
+Instagram posts — they are separate products. That is why there are two
+panels here rather than one.
+
+### Instagram feed — needs a decision before it shows anything
+
+Instagram shut down the free Basic Display API on **4 December 2024**, which
+is what nearly every "free Instagram feed embed" tutorial still describes.
+There is no zero-cost official replacement. Two real options:
+
+**A hosted widget** — Behold, LightWidget, SnapWidget, Elfsight or
+EmbedSocial. They hold the token and refresh it. Usually a few dollars a
+month, and it is a five-minute job: set two attributes on the Instagram panel
+in `index.html`.
+
+```html
+data-ig-provider="behold"  data-ig-id="your-feed-id"
+```
+
+Adapters for all five are already written in `site/assets/js/social.js`.
+
+**Your own Graph API proxy** — needs an Instagram Professional account linked
+to a Facebook Page, a Meta app, and a long-lived token refreshed every 60
+days. The token cannot live in the page, so it needs a small serverless
+function. Then set `data-ig-provider="custom"` and
+`data-ig-endpoint="/api/instagram"`; the endpoint should return
+`{ "items": [ { "image": "...", "permalink": "...", "caption": "..." } ] }`.
+
+Until one of those is configured, the panel explains itself on screen rather
+than sitting there empty.
+
+### Why the feeds ask before loading
+
+Both embeds pull third-party scripts that set cookies and profile the
+visitor. Loading them on every page view would throw away this site's
+"nothing leaves our origin" property, add roughly 200KB before anyone asked
+to see a feed, and create a GDPR problem for a business serving visitors from
+anywhere.
+
+So each panel shows a small card and loads the real embed only on click. The
+visitor's choice is remembered on their device. If a load fails — an ad
+blocker, a flaky connection — the panel puts the button back and offers a
+retry rather than dying silently.
+
+If the client would rather accept the trade and have the feeds load
+immediately, add `data-autoload="true"` to a panel.
+
+### Highlights slideshow — local images by necessity
+
+Instagram Story Highlights are exposed by **no** Instagram API — not the
+Graph API, and not the paid widget services either; they can only reach
+regular feed posts. So the slideshow runs on images saved out of Instagram.
+
+Drop them in `site/assets/img/highlights/`, run `tools/convert_images.py` to
+generate the AVIF and WebP versions, and list them in
+`site/content/highlights.json`.
+
+That constraint turns out well: no token to expire, no rate limit, no consent
+gate, and the images are served from our own origin at our own sizes.
+
+The carousel has real buttons, arrow-key support, swipe, and a live region.
+Autoplay pauses on hover, on focus, when the tab is hidden and when the
+section scrolls out of view — and stops for good once the visitor takes
+manual control. Under `prefers-reduced-motion` it never autoplays.
+
+
 ## Robustness
 
 Three failure modes are handled deliberately, because each one otherwise

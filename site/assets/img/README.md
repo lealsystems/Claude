@@ -46,6 +46,39 @@ your framing alone as long as the aspect ratio already matches.
   plausible-but-invented project names and towns. Replace them with real
   projects before launch.
 
+## Instagram highlights (`highlights/`)
+
+These are **not** fetched from Instagram. No Instagram API exposes Story
+Highlights — not the Graph API, not the paid widget services. So they are
+images you save out of the app.
+
+1. Save each highlight frame from Instagram.
+2. Drop the files into `highlights/` — any name, no spaces, e.g.
+   `outdoor-shower-2026.jpg`.
+3. Run `python3 tools/convert_images.py` to generate the `.avif` and `.webp`
+   versions beside each `.jpg`.
+4. List them in `site/content/highlights.json`, using the filename **without**
+   its extension:
+
+```json
+{ "file": "outdoor-shower-2026",
+  "alt": "Cedar outdoor shower with teak slats",
+  "caption": "Falmouth, finished June",
+  "href": "https://www.instagram.com/p/XXXXXXXX/" }
+```
+
+`alt` is required — it is what screen readers announce and what shows if the
+image fails. `caption` and `href` are optional.
+
+The three sample slides currently in `highlights/` are copies of the gallery
+placeholders. Delete them once real highlights are in.
+
+**Note on the placeholders:** the generated placeholder artwork has
+"— photo pending" drawn into the image itself. The carousel crops with
+`object-fit: cover`, so on narrow screens you may see a fragment of that text
+at the left edge. It is part of the placeholder image, not a layout bug, and
+it goes away with the first real photo.
+
 ## Regenerating placeholders
 
 `python3 tools/make_placeholders.py` rewrites every slot back to a placeholder.

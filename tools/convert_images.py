@@ -15,6 +15,14 @@ the HTML needs editing.
     tools/incoming/deck-harbour.jpg
         -> site/assets/img/gallery/deck-harbour.{avif,webp,jpg}
 
+Instagram highlights work differently: they have no fixed slots, so anything
+dropped into tools/incoming/highlights/ is converted under its own name.
+
+    tools/incoming/highlights/falmouth-shower.jpg
+        -> site/assets/img/highlights/falmouth-shower.{avif,webp,jpg}
+
+Then list the stem ("falmouth-shower") in site/content/highlights.json.
+
 Run with --list to print the slot names and the crop each one uses.
 """
 
@@ -43,11 +51,18 @@ SLOTS = {
     "og-cover":             ("og-cover",                     1200,  630),
 }
 
+# Highlights have no fixed slots — whatever is dropped in gets converted.
+HIGHLIGHTS_IN = os.path.join(INCOMING, "highlights")
+
+# 4:3 is the forgiving middle ground: the carousel is 16/9 on desktop and 4/5
+# on mobile, and `object-fit: cover` crops to whichever is showing. A source
+# at either extreme would lose too much on the other.
+HIGHLIGHT_SIZE = (1600, 1200)
+
 EXTS = (".jpg", ".jpeg", ".png", ".webp", ".heic", ".tif", ".tiff")
 
 
-def convert(src, slot):
-    rel, w, h = SLOTS[slot]
+def encode(src, rel, w, h):
     img = Image.open(src)
 
     # Respect the EXIF orientation flag, or phone photos land sideways.
@@ -55,7 +70,7 @@ def convert(src, slot):
     if img.mode not in ("RGB", "L"):
         img = img.convert("RGB")
 
-    # Centre-crop to the slot's aspect ratio, then resize down.
+    # Centre-crop to the target aspect ratio, then resize down.
     img = ImageOps.fit(img, (w, h), method=Image.LANCZOS, centering=(0.5, 0.45))
 
     dest = os.path.join(OUT, rel)
@@ -74,6 +89,33 @@ def convert(src, slot):
           % (os.path.basename(src), rel, ",".join(sizes), w, h))
 
 
+def convert(src, slot):
+    rel, w, h = SLOTS[slot]
+    encode(src, rel, w, h)
+
+
+def convert_highlights():
+    """Everything in tools/incoming/highlights/, under its own filename."""
+    if not os.path.isdir(HIGHLIGHTS_IN):
+        return 0
+
+    names = [n for n in sorted(os.listdir(HIGHLIGHTS_IN))
+             if os.path.splitext(n)[1].lower() in EXTS]
+    if not names:
+        return 0
+
+    print("\nHighlights:")
+    w, h = HIGHLIGHT_SIZE
+    for name in names:
+        stem = os.path.splitext(name)[0]
+        encode(os.path.join(HIGHLIGHTS_IN, name),
+               os.path.join("highlights", stem), w, h)
+    print("  Now list these stems in site/content/highlights.json:")
+    for name in names:
+        print("    %s" % os.path.splitext(name)[0])
+    return len(names)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--list", action="store_true",
@@ -85,6 +127,10 @@ def main():
         print("-" * 64)
         for slot, (rel, w, h) in SLOTS.items():
             print("%-22s %-29s %dx%d" % (slot, rel, w, h))
+        print()
+        print("Instagram highlights have no fixed slots. Drop any number of")
+        print("files into tools/incoming/highlights/ and they are converted")
+        print("under their own names at %dx%d." % HIGHLIGHT_SIZE)
         return
 
     os.makedirs(INCOMING, exist_ok=True)
@@ -94,7 +140,7 @@ def main():
     for name in sorted(os.listdir(INCOMING)):
         stem, ext = os.path.splitext(name)
         if ext.lower() not in EXTS:
-            continue
+            continue   # skips the highlights/ directory too
         if stem not in SLOTS:
             unknown.append(name)
             continue
@@ -106,6 +152,8 @@ def main():
         for n in unknown:
             print("  %s" % n)
         print("Run  python3 tools/convert_images.py --list  to see valid names.")
+
+    found += convert_highlights()
 
     if not found:
         print("No matching photos in %s" % INCOMING)

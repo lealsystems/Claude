@@ -98,7 +98,24 @@
 
   var revealables = document.querySelectorAll('[data-reveal]');
 
+  /* Elements injected after load (announcement cards, for one) missed both
+     the initial observe pass and the sweep, so they would sit at opacity 0
+     forever. announcements.js fires this once its fetch resolves. */
+  function adopt(container) {
+    var fresh = (container || document).querySelectorAll('[data-reveal]');
+    Array.prototype.forEach.call(fresh, function (el) {
+      if (el.classList.contains('is-in')) return;
+      if (window.__ccObserve) window.__ccObserve(el);
+      else el.classList.add('is-in');
+    });
+  }
+
+  window.addEventListener('content:added', function (e) {
+    adopt(e.detail && e.detail.container);
+  });
+
   if (!('IntersectionObserver' in window) || reduce) {
+    window.__ccObserve = function (el) { el.classList.add('is-in'); };
     Array.prototype.forEach.call(revealables, function (el) {
       el.classList.add('is-in');
     });
@@ -116,6 +133,9 @@
         ro.unobserve(en.target);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+    /* Shared with adopt() above, for content that arrives after load. */
+    window.__ccObserve = function (el) { ro.observe(el); };
 
     Array.prototype.forEach.call(revealables, function (el) {
       /* Stagger siblings inside a shared group so grids cascade. */
