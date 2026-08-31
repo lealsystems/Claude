@@ -1,0 +1,3 @@
+# Fallback redirect rules for hosts that read Netlify's _redirects file
+# directly (Netlify itself prefers netlify.toml, which takes precedence).
+https://capecodderinc.com/*  https://www.capecodderinc.com/:splat  301!

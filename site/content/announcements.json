@@ -1,0 +1,36 @@
+{
+  "_comment": "Cape Codder announcements. Edit this file to change what shows on the site — no code, no rebuild. Newest first is not required; the site sorts by date automatically, and any entry with pinned:true is floated to the top. Delete the sample entries below before launch.",
+
+  "_fields": {
+    "id": "Unique short string. Used for the anchor link, so keep it stable once published.",
+    "date": "YYYY-MM-DD. Shown to visitors and used for sorting.",
+    "tag": "Short label on the card. Suggested: News, Hiring, Schedule, Offer, Storm, Award.",
+    "title": "One line. This is what people scan — keep it under about 70 characters.",
+    "body": "One to three short paragraphs. Separate paragraphs with a blank line (\\n\\n).",
+    "pinned": "true floats this entry to the top regardless of date. Optional, defaults to false.",
+    "expires": "YYYY-MM-DD. Optional. The entry hides itself after this date — good for limited offers.",
+    "link": "Optional { text, href }. Renders as a button under the body."
+  },
+
+  "announcements": [
+    {
+      "id": "booking-2026",
+      "date": "2026-08-24",
+      "tag": "Schedule",
+      "title": "SAMPLE — Booking exterior work for autumn 2026",
+      "body": "This is a sample entry so you can see the layout. Replace the text with a real announcement, or delete the entry entirely.\n\nAnything you write here shows up on the site the moment you save the file. Two or three sentences reads best.",
+      "pinned": true,
+      "link": {
+        "text": "Request an estimate",
+        "href": "#contact"
+      }
+    },
+    {
+      "id": "crew-hiring",
+      "date": "2026-08-10",
+      "tag": "Hiring",
+      "title": "SAMPLE — Looking for an experienced carpenter",
+      "body": "A second sample, to show how multiple announcements stack. The newest one appears first automatically, so you never have to reorder this file by hand.\n\nDelete both samples once you have something real to post."
+    }
+  ]
+}

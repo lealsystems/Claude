@@ -1,0 +1,184 @@
+/* ==========================================================================
+   Motion — split-text scaffolding, scroll reveals, keyframes
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Split text
+   type.js wraps words in .tw and characters in .tc. Words stay unbreakable so
+   a per-letter reveal can never orphan a single character on its own line.
+   -------------------------------------------------------------------------- */
+
+.tw {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.tc {
+  display: inline-block;
+  will-change: transform, opacity, filter, font-variation-settings;
+  backface-visibility: hidden;
+}
+
+/* Before the reveal fires, the characters are laid out but invisible — this
+   keeps the heading occupying its final box, so nothing shifts when the
+   animation starts.
+
+   Every "starts invisible" rule below is scoped to .js, which the inline
+   script in <head> sets. With scripting off nothing hides itself, so the page
+   degrades to plain visible content rather than a blank screen. */
+.js .is-split .tc { opacity: 0; }
+.js .is-split.is-revealed .tc { opacity: 1; }
+
+/* Once a character has landed, JS stops writing inline styles and this takes
+   over as the resting state. */
+.tc.is-set { will-change: auto; }
+
+/* Headings waiting on a settle are held back the same way. */
+.js [data-type-settle]:not(.is-set) { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .is-split .tc,
+  .js [data-type-settle]:not(.is-set) { opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   2. Scroll reveal (non-text elements)
+   -------------------------------------------------------------------------- */
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.js [data-reveal='scale'] { transform: translate3d(0, 26px, 0) scale(0.97); }
+.js [data-reveal='left']  { transform: translate3d(-28px, 0, 0); }
+.js [data-reveal='right'] { transform: translate3d(28px, 0, 0); }
+
+/* A wipe, for images: the frame opens rather than the photo fading.
+
+   This is done with a curtain that retracts, NOT by clipping the element.
+   An earlier version used `clip-path: inset(0 0 100% 0)` on the frame, which
+   looked identical but broke loading: a fully clipped image has no visible
+   area, so Chromium's lazy-loader never fetches it. Scrolling briskly past
+   the gallery left every frame permanently empty, because by the time the
+   reveal removed the clip the element had already left the viewport.
+
+   With a curtain the image is never hidden from the loader — only covered —
+   so `loading="lazy"` behaves normally. */
+.js [data-reveal='wipe'] {
+  opacity: 1;
+  transform: none;
+}
+
+.js [data-reveal='wipe']::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: var(--curtain, var(--c-surface));
+  transform: scaleY(1);
+  transform-origin: bottom;
+  transition: transform 1.1s var(--ease-swell);
+  transition-delay: var(--reveal-delay, 0ms);
+  pointer-events: none;
+}
+
+.js [data-reveal='wipe'].is-in::after { transform: scaleY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Keyframes
+   -------------------------------------------------------------------------- */
+
+@keyframes drift-x {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-7px); }
+}
+
+@keyframes scroll-hint {
+  0%        { transform: translateY(0);    opacity: 0; }
+  22%       { opacity: 1; }
+  78%       { opacity: 1; }
+  100%      { transform: translateY(15px); opacity: 0; }
+}
+
+@keyframes swell {
+  0%, 100% { transform: scaleY(1)    translateY(0); }
+  50%      { transform: scaleY(1.14) translateY(-3px); }
+}
+
+@keyframes shimmer {
+  from { background-position: -180% 0; }
+  to   { background-position: 280% 0; }
+}
+
+/* --------------------------------------------------------------------------
+   4. Applied motion
+   -------------------------------------------------------------------------- */
+
+/* The marquee duplicates its track, so a -50% translate loops seamlessly. */
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: drift-x 46s linear infinite;
+}
+.marquee:hover .marquee__track,
+.marquee:focus-within .marquee__track { animation-play-state: paused; }
+
+.scroll-cue__dot { animation: scroll-hint 2.3s var(--ease-soft) infinite; }
+
+.bob { animation: bob 5.5s var(--ease-soft) infinite; }
+
+/* Underline that fills from the left, like a tide coming in. */
+.tide-link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+.tide-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur-mid) var(--ease-out);
+}
+.tide-link:hover::after,
+.tide-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Hovering a display link nudges the variable axes — the same idea as the
+   reveal, scaled down to an interaction. */
+.axis-hover {
+  transition: font-variation-settings var(--dur-mid) var(--ease-out);
+}
+.axis-hover:hover,
+.axis-hover:focus-visible {
+  font-variation-settings: 'opsz' 144, 'wght' 760, 'SOFT' 40, 'WONK' 1;
+}

@@ -1,0 +1,33 @@
+{
+  "_comment": "Instagram highlights slideshow. Instagram has no API that exposes Story Highlights — not the Graph API, not any third-party widget — so these are images you save out of Instagram and drop into /assets/img/highlights/. Run tools/convert_images.py after adding files to generate the AVIF/WebP versions.",
+
+  "_fields": {
+    "file": "Base filename WITHOUT extension, e.g. 'deck-build-1'. The page requests .avif, .webp and .jpg in that order.",
+    "alt": "Describe the photo for screen readers and for anyone whose images fail to load. Required.",
+    "caption": "Optional short line shown over the image.",
+    "href": "Optional link to the Instagram post or highlight."
+  },
+
+  "settings": {
+    "autoplaySeconds": 6,
+    "loop": true
+  },
+
+  "slides": [
+    {
+      "file": "deck-harbour",
+      "alt": "SAMPLE — multi-level mahogany deck overlooking a harbour at dusk",
+      "caption": "Sample slide — replace with a real highlight"
+    },
+    {
+      "file": "outdoor-shower-cedar",
+      "alt": "SAMPLE — cedar outdoor shower enclosure with teak floor slats",
+      "caption": "Sample slide — replace with a real highlight"
+    },
+    {
+      "file": "shingle-exterior",
+      "alt": "SAMPLE — freshly shingled cape-style exterior with white trim",
+      "caption": "Sample slide — replace with a real highlight"
+    }
+  ]
+}

@@ -1,0 +1,503 @@
+/* ==========================================================================
+   community.css — announcements board, social feeds, highlights slideshow
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. JS / no-JS fallbacks
+   The inline script in <head> swaps .no-js for .js before first paint, so
+   these never flash. Without scripting the announcements and highlights can
+   never load — both are fetched — so saying "Loading..." forever would be a
+   lie. Show the honest message instead.
+   -------------------------------------------------------------------------- */
+
+.js-only { display: none; }
+.js .js-only { display: block; }
+.js .nojs-only { display: none; }
+
+/* --------------------------------------------------------------------------
+   1. Section shell
+   -------------------------------------------------------------------------- */
+
+.community {
+  display: grid;
+  gap: var(--s-8);
+}
+
+/* Announcements get the full width of a comfortable reading column; the
+   social panels sit beside each other underneath. */
+.community__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+@media (max-width: 940px) {
+  .community__split { grid-template-columns: 1fr; }
+}
+
+.community__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-5);
+  margin-bottom: var(--s-5);
+}
+
+.community__label {
+  font-family: var(--font-display);
+  font-size: var(--t-xl);
+  font-variation-settings: 'opsz' 48, 'wght' 600, 'SOFT' 16, 'WONK' 1;
+}
+
+.community__hint {
+  font-size: var(--t-xs);
+  color: var(--c-ink-faint);
+}
+
+/* --------------------------------------------------------------------------
+   2. Announcements
+   This is the one block on the page that people read word for word, so it is
+   tuned for reading rather than for looks: a real reading measure, larger
+   body size than the rest of the page, generous leading, high contrast, and
+   no animation on the text itself.
+   -------------------------------------------------------------------------- */
+
+.announce-list {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.announce {
+  position: relative;
+  padding: clamp(1.4rem, 1rem + 1.4vw, 2.1rem);
+  border-radius: var(--r-lg);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-left: 4px solid var(--c-line-strong);
+  transition: border-color var(--dur-mid) var(--ease-out),
+              box-shadow var(--dur-mid) var(--ease-out);
+}
+
+.announce:hover {
+  border-left-color: var(--c-seaglass);
+  box-shadow: 0 18px 40px -34px rgb(var(--c-shadow) / 0.5);
+}
+
+/* A pinned notice should be unmistakable at a glance. */
+.announce--pinned {
+  border-left-color: var(--c-brass);
+  background:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--c-brass) 7%, transparent),
+      transparent 38%),
+    var(--c-surface);
+}
+
+.announce__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-3);
+  margin-bottom: var(--s-3);
+}
+
+.announce__pin,
+.announce__tag {
+  font-size: var(--t-xs);
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.26em 0.7em;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+
+.announce__pin {
+  background: var(--c-brass);
+  color: #fff;
+}
+
+.announce__tag {
+  background: color-mix(in srgb, var(--c-seaglass) 15%, transparent);
+  color: var(--c-seaglass);
+  border: 1px solid color-mix(in srgb, var(--c-seaglass) 35%, transparent);
+}
+
+.announce__date {
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--c-ink-soft);
+}
+
+.announce__rel {
+  font-size: var(--t-xs);
+  color: var(--c-ink-faint);
+}
+.announce__rel::before {
+  content: '·';
+  margin-right: var(--s-2);
+}
+
+.announce__title {
+  font-size: var(--t-2xl);
+  font-variation-settings: 'opsz' 72, 'wght' 600, 'SOFT' 14, 'WONK' 1;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s-3);
+  max-width: 30ch;
+}
+
+.announce__body {
+  /* Deliberately a step larger and looser than body copy elsewhere. */
+  font-size: var(--t-lg);
+  line-height: 1.7;
+  color: var(--c-ink-soft);
+  max-width: 66ch;
+}
+
+.announce__body p + p { margin-top: 0.9em; }
+
+.announce__cta { margin-top: var(--s-5); }
+
+.announce__empty {
+  padding: var(--s-7) var(--s-5);
+  text-align: center;
+  color: var(--c-ink-faint);
+  border: 1px dashed var(--c-line-strong);
+  border-radius: var(--r-lg);
+  font-size: var(--t-lg);
+}
+
+/* --------------------------------------------------------------------------
+   3. Social panels
+   -------------------------------------------------------------------------- */
+
+.social-stack {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.social {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--c-line);
+  background: var(--c-surface);
+  overflow: hidden;
+}
+
+.social__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-5);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.social__icon {
+  width: 34px; height: 34px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-sm);
+  color: #fff;
+}
+.social__icon svg { width: 19px; height: 19px; }
+
+.social__icon--fb { background: #1877f2; }
+.social__icon--ig {
+  background: linear-gradient(45deg,
+    #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
+}
+
+.social__name {
+  font-weight: 650;
+  font-size: var(--t-base);
+  line-height: 1.2;
+}
+
+.social__handle {
+  font-size: var(--t-xs);
+  color: var(--c-ink-faint);
+}
+
+.social__follow {
+  margin-left: auto;
+  font-size: var(--t-xs);
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-atlantic);
+  white-space: nowrap;
+}
+
+.social__body {
+  min-height: 260px;
+  display: grid;
+  align-content: center;
+  padding: var(--s-5);
+}
+
+.social.is-live .social__body {
+  align-content: start;
+  padding: var(--s-3);
+}
+
+/* The embed mount starts hidden and is revealed by social.js once the
+   visitor opts in. It is a sibling of the gate, not a child of it, so a
+   failed load can put the gate — and its retry button — back. */
+.social__mount { min-width: 0; }
+.social__mount[hidden] { display: none; }
+
+/* -- Consent gate --------------------------------------------------------- */
+
+/* Third-party embeds are not loaded until asked for. This is the placeholder
+   the visitor sees first — it has to look intentional, not broken. */
+.social__gate {
+  display: grid;
+  gap: var(--s-4);
+  justify-items: center;
+  text-align: center;
+  padding: var(--s-5) var(--s-4);
+}
+
+.social__gate-text {
+  font-size: var(--t-sm);
+  color: var(--c-ink-soft);
+  max-width: 38ch;
+  line-height: 1.6;
+}
+
+.social__gate-note {
+  font-size: var(--t-xs);
+  color: var(--c-ink-faint);
+  max-width: 40ch;
+}
+
+.social__note {
+  font-size: var(--t-sm);
+  color: var(--c-ink-faint);
+  text-align: center;
+  line-height: 1.6;
+  padding: var(--s-4);
+}
+
+/* The Facebook plugin renders a fixed-width iframe; keep it centred and stop
+   it forcing the grid wider than the column on small screens. */
+.social__body .fb-page,
+.social__body .fb-page span,
+.social__body .fb-page iframe {
+  max-width: 100% !important;
+}
+.social__body .fb-page { margin-inline: auto; display: block; }
+
+/* Grid used by the "custom" Instagram provider. */
+.ig-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.ig-cell {
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--r-sm);
+  background: var(--c-surface-3);
+}
+
+.ig-cell img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-mid) var(--ease-out);
+}
+.ig-cell:hover img { transform: scale(1.06); }
+
+/* --------------------------------------------------------------------------
+   4. Highlights slideshow
+   -------------------------------------------------------------------------- */
+
+/* Capped, not full-bleed. At the full 1240px wrap a 16/10 panel is ~775px
+   tall and swallows the whole viewport, which makes the slideshow read as the
+   main event rather than a footnote to the announcements. */
+.community__highlights {
+  max-width: 940px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.hl {
+  position: relative;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background: var(--c-surface-3);
+}
+
+.hl__viewport {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-height: 78svh;
+  display: grid;
+  /* Explicit 100% tracks, not the implicit auto row. An auto row is sized by
+     its content, so `height: 100%` on the slide had nothing definite to
+     resolve against and fell back to auto — the figure grew to its image's
+     natural ratio (1175px inside a 560px box) and the caption was pushed
+     out of the clipped area entirely. */
+  grid-template-rows: 100%;
+  grid-template-columns: 100%;
+  overflow: hidden;
+}
+
+@media (min-width: 720px) {
+  .hl__viewport {
+    aspect-ratio: 16 / 9;
+    max-height: 560px;
+  }
+}
+
+/* All slides stack in the same grid cell; only the current one is painted. */
+.hl__slide {
+  grid-area: 1 / 1;
+  margin: 0;
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 780ms var(--ease-soft), visibility 0s linear 780ms;
+}
+
+.hl__slide.is-current {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 780ms var(--ease-soft), visibility 0s;
+}
+
+.hl__slide picture,
+.hl__slide img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hl__slide img { object-fit: cover; }
+
+/* A slide whose file is missing gets a visible marker rather than a blank
+   panel, so a typo in highlights.json is obvious while editing. */
+.hl__slide--missing { background: var(--c-surface-2); }
+
+.hl__missing {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--s-3);
+  font-size: var(--t-xs);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: rgb(192 57 43 / 0.9);
+  color: #fff;
+  text-align: center;
+}
+
+/* Sits ABOVE the controls row, not behind it. Both were previously pinned to
+   inset:auto 0 0 0, so the arrows and dots landed on top of the caption text. */
+.hl__caption {
+  position: absolute;
+  inset: auto 0 5.5rem 0;   /* clears the 88px controls row */
+  padding: var(--s-8) var(--s-5) var(--s-2);
+  color: #fff;
+  font-size: var(--t-base);
+  font-weight: 550;
+  background: linear-gradient(to top, rgb(6 18 24 / 0.8), transparent);
+  pointer-events: none;
+}
+
+/* Invisible overlay that makes the whole slide clickable when it has a link. */
+.hl__link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.hl__empty {
+  padding: var(--s-8) var(--s-5);
+  text-align: center;
+  color: var(--c-ink-soft);
+  font-size: var(--t-sm);
+  line-height: 1.7;
+}
+.hl__empty code {
+  font-size: 0.92em;
+  background: var(--c-surface-2);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+/* -- Controls ------------------------------------------------------------- */
+
+.hl__controls {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-6) var(--s-4) var(--s-4);
+  /* Its own gradient, so the dots and counter stay readable on a slide that
+     has no caption above them. */
+  background: linear-gradient(to top, rgb(6 18 24 / 0.75), transparent);
+}
+
+.hl__btn {
+  width: 40px; height: 40px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-pill);
+  background: rgb(255 255 255 / 0.9);
+  color: var(--c-ink);
+  box-shadow: 0 4px 14px -6px rgb(6 18 24 / 0.6);
+  transition: background var(--dur-fast), transform var(--dur-fast);
+}
+.hl__btn:hover:not(:disabled) {
+  background: #fff;
+  transform: scale(1.07);
+}
+.hl__btn:disabled { opacity: 0.35; cursor: default; }
+.hl__btn svg { width: 18px; height: 18px; }
+
+.hl__dots {
+  display: flex;
+  gap: var(--s-2);
+  margin-inline: auto;
+}
+
+.hl__dot {
+  width: 9px; height: 9px;
+  border-radius: var(--r-pill);
+  background: rgb(255 255 255 / 0.5);
+  box-shadow: 0 1px 3px rgb(6 18 24 / 0.4);
+  transition: background var(--dur-fast), width var(--dur-mid) var(--ease-out);
+}
+.hl__dot[aria-pressed='true'] {
+  background: #fff;
+  width: 26px;
+}
+
+.hl__status {
+  font-size: var(--t-xs);
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  text-shadow: 0 1px 4px rgb(6 18 24 / 0.7);
+  min-width: 3.4em;
+  text-align: right;
+}
+
+/* Until the JSON has loaded there is nothing to control. */
+.hl:not(.is-ready) .hl__controls { display: none; }
+.hl--empty { background: var(--c-surface-2); }
+.hl--empty .hl__viewport { aspect-ratio: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hl__slide { transition: none; }
+}
