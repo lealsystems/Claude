@@ -89,9 +89,10 @@
     <ul class="nav-links">
       <li><a href="#home"            data-navlink><span>01</span>Home</a></li>
       <li><a href="#services"        data-navlink><span>02</span>Services</a></li>
-      <li><a href="#transformations" data-navlink><span>03</span>Before &amp; After</a></li>
-      <li><a href="#about"           data-navlink><span>04</span>About</a></li>
-      <li><a href="#contact"         data-navlink><span>05</span>Free Estimate</a></li>
+      <li><a href="#gallery"         data-navlink><span>03</span>Selected Work</a></li>
+      <li><a href="#transformations" data-navlink><span>04</span>Before &amp; After</a></li>
+      <li><a href="#about"           data-navlink><span>05</span>About</a></li>
+      <li><a href="#contact"         data-navlink><span>06</span>Free Estimate</a></li>
     </ul>
     <div class="nav-meta">
       <a href="tel:+17749940314">+1 (774) 994-0314</a>
@@ -236,9 +237,111 @@
     </section>
 
     <!-- ====================================================
-         03 · BEFORE / AFTER — draggable comparison slider
+         03 · SELECTED WORK — slideshow
+         To add a photo: drop it in assets/ and copy one <li class="slide">
+         block below. Order in the markup is the order it plays.
+         Autoplay interval is data-autoplay (ms) — remove it to hold still.
     ===================================================== -->
-    <section class="transformations section" id="transformations">
+    <section class="gallery section" id="gallery">
+      <div class="container">
+        <p class="eyebrow reveal">Selected Work</p>
+        <h2 class="reveal">From the <em>Job Site</em></h2>
+        <p class="section-lead reveal">A rolling look at the work — masonry, decks, siding,
+           and the finish details that close a project out.</p>
+
+        <div class="slideshow reveal" data-slideshow data-autoplay="6500"
+             role="group" aria-roledescription="carousel" aria-label="Selected work" tabindex="0">
+          <div class="slide-frame">
+            <div class="slide-viewport">
+              <ul class="slide-track" data-slide-track>
+
+                <li class="slide" data-slide>
+                  <figure class="slide-figure">
+                    <!-- Slide 1 reuses the hero photograph through the --photo-chimney
+                         token in the CSS, so the file is only carried once. A new
+                         slide from a fresh photo is just a plain
+                         <img class="slide-img" src="assets/NAME.jpg" alt="..."> -->
+                    <div class="slide-img slide-img-chimney" role="img"
+                         aria-label="Brick chimney and roofline on a Cape Cod home"></div>
+                    <figcaption class="slide-cap">
+                      <strong>Chimney &amp; Roofline — West Barnstable, MA</strong>
+                      <span>Full brick chimney laid plumb, crown rebuilt to shed water,
+                            flashing set tight where brick meets roof.</span>
+                    </figcaption>
+                  </figure>
+                </li>
+
+                <li class="slide" data-slide>
+                  <figure class="slide-figure is-plate">
+                    <div class="slide-plate" aria-hidden="true">
+                      <svg viewBox="0 0 100 100" class="blade-svg"><use href="#sawblade"></use></svg>
+                      <span>Photography coming</span>
+                    </div>
+                    <figcaption class="slide-cap">
+                      <strong>Premium Decking</strong>
+                      <span>Composite and hardwood decks framed square for salt air —
+                            job photos are being gathered now.</span>
+                    </figcaption>
+                  </figure>
+                </li>
+
+                <li class="slide" data-slide>
+                  <figure class="slide-figure is-plate">
+                    <div class="slide-plate" aria-hidden="true">
+                      <svg viewBox="0 0 100 100" class="blade-svg"><use href="#sawblade"></use></svg>
+                      <span>Photography coming</span>
+                    </div>
+                    <figcaption class="slide-cap">
+                      <strong>Premium Siding</strong>
+                      <span>Red cedar shingles and clapboard, flashed and trimmed to weather
+                            the Cape — job photos are being gathered now.</span>
+                    </figcaption>
+                  </figure>
+                </li>
+
+                <li class="slide" data-slide>
+                  <figure class="slide-figure is-plate">
+                    <div class="slide-plate" aria-hidden="true">
+                      <svg viewBox="0 0 100 100" class="blade-svg"><use href="#sawblade"></use></svg>
+                      <span>Photography coming</span>
+                    </div>
+                    <figcaption class="slide-cap">
+                      <strong>Skilled Finish Carpentry</strong>
+                      <span>Built-ins, mantels, casing and stair work with tight miters —
+                            job photos are being gathered now.</span>
+                    </figcaption>
+                  </figure>
+                </li>
+
+              </ul>
+            </div>
+
+            <button class="slide-nav slide-prev" type="button" data-slide-prev aria-label="Previous photo">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="slide-nav slide-next" type="button" data-slide-next aria-label="Next photo">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <p class="slide-count"><span data-slide-current>1</span>&thinsp;/&thinsp;<span data-slide-total>1</span></p>
+          </div>
+
+          <div class="slide-dots" data-slide-dots></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================
+         04 · BEFORE / AFTER — draggable comparison slider
+    ===================================================== -->
+    <section class="transformations section section-gray" id="transformations">
       <div class="container">
         <p class="eyebrow reveal">Before &amp; After</p>
         <h2 class="reveal">The Fenney <em>Transformation</em></h2>
@@ -279,7 +382,7 @@
     </section>
 
     <!-- ====================================================
-         04 · ABOUT
+         05 · ABOUT
     ===================================================== -->
     <section class="about section section-navy" id="about">
       <div class="container about-grid">
@@ -308,7 +411,7 @@
     </section>
 
     <!-- ====================================================
-         05 · CONTACT — GoHighLevel-ready form
+         06 · CONTACT — GoHighLevel-ready form
     ===================================================== -->
     <section class="contact section" id="contact">
       <div class="container contact-grid">

@@ -24,6 +24,9 @@
   --paper-gray: #E2DCCB;
   --brick:      #9E5A45;
 
+  /* Photographs, declared once so a bundled build carries each file once */
+  --photo-chimney: url("../assets/hero-chimney.jpg");
+
   --ink:   #1F2830;
   --body:  #565C60;
 
@@ -221,6 +224,7 @@ img { max-width: 100%; display: block; }
 .nav-links li:nth-child(3) a { transition-delay: .29s; }
 .nav-links li:nth-child(4) a { transition-delay: .36s; }
 .nav-links li:nth-child(5) a { transition-delay: .43s; }
+.nav-links li:nth-child(6) a { transition-delay: .50s; }
 .nav-links a span {
   font-family: var(--sans);
   font-size: .8rem;
@@ -336,7 +340,7 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 76%;
-  background-image: url("../assets/hero-chimney.jpg");
+  background-image: var(--photo-chimney);
   background-size: cover;
   background-position: center 26%;
   /* warm the photograph very slightly so a blue sky sits comfortably
@@ -854,3 +858,127 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   margin-bottom: 6px;
 }
 .contact-promise span { font-size: .89rem; color: var(--body); }
+
+/* ------------------------------------------------------------
+   Selected work — slideshow
+   One slide is always exactly 16:10; the caption rides on a navy
+   scrim over the photo so every slide is the same height and the
+   arrows sit dead centre no matter how long the caption runs.
+------------------------------------------------------------ */
+.slideshow { position: relative; max-width: 1000px; margin: 0 auto; outline: none; }
+.slideshow:focus-visible .slide-viewport { box-shadow: 0 0 0 3px var(--gold), 0 26px 60px rgba(11,49,88,.16); }
+
+.slide-frame { position: relative; }
+.slide-viewport {
+  overflow: hidden;
+  background: var(--paper-card);
+  box-shadow: 0 26px 60px rgba(11,49,88,.16);
+  transition: box-shadow .3s ease;
+  /* Horizontal drags are ours; vertical stays page scroll */
+  touch-action: pan-y;
+  user-select: none;
+}
+.slide-track {
+  display: flex;
+  list-style: none;
+  transition: transform .7s var(--ease);
+  will-change: transform;
+}
+.slide { flex: 0 0 100%; min-width: 100%; }
+.slide-figure { position: relative; aspect-ratio: 16 / 10; margin: 0; overflow: hidden; }
+.slide-img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
+.slide-img-chimney {
+  background: var(--photo-chimney) center / cover no-repeat;
+}
+
+/* Stand-in plate for a service whose photography hasn't landed yet */
+.slide-plate {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px; padding: 24px; text-align: center;
+  background: linear-gradient(155deg, #F6F2E9 0%, #E7E1D1 58%, #D8D1BE 100%);
+}
+.slide-plate .blade-svg {
+  width: clamp(52px, 7vw, 76px); height: clamp(52px, 7vw, 76px);
+  color: var(--gold); --blade-inner: var(--paper-card); opacity: .5;
+}
+.slide-plate strong {
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 2.4vw, 1.5rem);
+  letter-spacing: .1em; color: var(--navy);
+}
+.slide-plate span {
+  font-size: .72rem; letter-spacing: .26em; text-transform: uppercase; color: var(--stone);
+}
+
+.slide-cap {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: clamp(46px, 8vw, 74px) clamp(20px, 3.4vw, 38px) clamp(20px, 3vw, 30px);
+  background: linear-gradient(to top,
+      rgba(11,49,88,.88) 0%, rgba(11,49,88,.66) 42%, rgba(11,49,88,.18) 74%, rgba(11,49,88,0) 100%);
+  color: #EEF2F7;
+}
+.slide-cap strong {
+  display: block; font-family: var(--serif); font-weight: 400;
+  font-size: clamp(1rem, 2vw, 1.25rem); letter-spacing: .06em; color: #fff; margin-bottom: 8px;
+}
+.slide-cap span { font-size: .92rem; line-height: 1.6; color: var(--mist); max-width: 62ch; display: block; }
+
+/* Arrows */
+.slide-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 54px; height: 54px; border: 0; border-radius: 50%;
+  background: rgba(246,242,233,.94); color: var(--navy);
+  display: grid; place-items: center; cursor: pointer;
+  box-shadow: 0 10px 26px rgba(11,49,88,.22);
+  transition: background .25s ease, color .25s ease, transform .25s var(--ease);
+}
+.slide-nav svg { width: 22px; height: 22px; }
+.slide-nav:hover { background: var(--navy); color: #fff; }
+.slide-prev { left: clamp(-22px, -1.6vw, 14px); }
+.slide-next { right: clamp(-22px, -1.6vw, 14px); }
+@media (max-width: 1080px) { .slide-prev { left: 12px; } .slide-next { right: 12px; } }
+@media (pointer: fine) { body.blade-cursor .slide-nav { cursor: none; } }
+
+/* Counter */
+.slide-count {
+  position: absolute; top: 18px; right: 18px;
+  padding: 7px 14px; border-radius: 40px;
+  background: rgba(11,49,88,.72); color: #fff;
+  font-size: .74rem; letter-spacing: .18em;
+}
+
+/* Dots */
+.slide-dots { display: flex; justify-content: center; gap: 12px; margin-top: 28px; }
+.slide-dot {
+  width: 9px; height: 9px; padding: 0; border: 0; border-radius: 50%;
+  background: rgba(11,49,88,.24); cursor: pointer;
+  transition: background .25s ease, transform .25s var(--ease);
+}
+.slide-dot:hover { background: rgba(11,49,88,.5); }
+.slide-dot[aria-current="true"] { background: var(--gold); transform: scale(1.45); }
+@media (pointer: fine) { body.blade-cursor .slide-dot { cursor: none; } }
+
+/* One slide only — hide the controls */
+.slideshow.is-single .slide-nav,
+.slideshow.is-single .slide-count,
+.slideshow.is-single .slide-dots { display: none; }
+
+/* Narrow screens: a taller frame so the caption doesn't swallow the photo */
+@media (max-width: 700px) {
+  .slide-figure { aspect-ratio: 4 / 5; }
+  .slide-nav { width: 44px; height: 44px; }
+  .slide-cap { padding-bottom: 22px; }
+  .slide-cap span { font-size: .86rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide-track { transition: none; }
+}
+
+/* Stand-in slides read lighter — a paper scrim instead of the navy one */
+.slide-figure.is-plate .slide-cap {
+  background: linear-gradient(to top,
+      rgba(226,220,203,.97) 0%, rgba(231,225,209,.86) 44%, rgba(237,232,219,0) 100%);
+}
+.slide-figure.is-plate .slide-cap strong { color: var(--navy); }
+.slide-figure.is-plate .slide-cap span   { color: var(--body); }

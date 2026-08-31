@@ -6,6 +6,8 @@
    4. Scroll cut-line blade    (cuts down the right edge)
    5. Reveal-on-scroll
    6. Before / After sliders
+   7. Selected-work slideshow
+   8. Lead form → GoHighLevel
    ============================================================ */
 
 /* ------------------------------------------------------------
@@ -169,7 +171,125 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ----------------------------------------------------------
-     7. Lead form → GoHighLevel webhook
+     7. Selected-work slideshow
+        Each [data-slideshow] block: the track slides one full
+        width per step. Arrows, dots, arrow keys, and swipe all
+        drive it; autoplay (data-autoplay, ms) pauses on hover,
+        on focus, on a hidden tab, and under reduced motion.
+  ---------------------------------------------------------- */
+  document.querySelectorAll("[data-slideshow]").forEach((box) => {
+    const track = box.querySelector("[data-slide-track]");
+    const slides = Array.from(box.querySelectorAll("[data-slide]"));
+    if (!track || !slides.length) return;
+
+    const viewport = box.querySelector(".slide-viewport");
+    const dotsBox = box.querySelector("[data-slide-dots]");
+    const currentEl = box.querySelector("[data-slide-current]");
+    const totalEl = box.querySelector("[data-slide-total]");
+    const delay = Number(box.dataset.autoplay || 0);
+    const single = slides.length < 2;
+
+    box.classList.toggle("is-single", single);
+    if (totalEl) totalEl.textContent = String(slides.length);
+
+    // Only the first photo is worth blocking on; the rest load lazily
+    slides.forEach((slide, i) => {
+      const img = slide.querySelector("img");
+      if (img && i > 0) img.loading = "lazy";
+    });
+
+    let index = 0;
+    let timer = null;
+
+    const dots = slides.map((_, i) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "slide-dot";
+      dot.setAttribute("aria-label", `Show photo ${i + 1} of ${slides.length}`);
+      dot.addEventListener("click", () => {
+        go(i);
+        restart();
+      });
+      if (dotsBox) dotsBox.appendChild(dot);
+      return dot;
+    });
+
+    const go = (next) => {
+      index = (next + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      slides.forEach((slide, i) => slide.setAttribute("aria-hidden", String(i !== index)));
+      dots.forEach((dot, i) => dot.setAttribute("aria-current", String(i === index)));
+      if (currentEl) currentEl.textContent = String(index + 1);
+    };
+
+    const stop = () => {
+      clearInterval(timer);
+      timer = null;
+    };
+    const start = () => {
+      if (single || prefersReducedMotion || !delay) return;
+      stop();
+      timer = setInterval(() => go(index + 1), delay);
+    };
+    const restart = () => {
+      stop();
+      start();
+    };
+
+    box.querySelector("[data-slide-prev]")?.addEventListener("click", () => {
+      go(index - 1);
+      restart();
+    });
+    box.querySelector("[data-slide-next]")?.addEventListener("click", () => {
+      go(index + 1);
+      restart();
+    });
+
+    box.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      e.preventDefault();
+      go(index + (e.key === "ArrowRight" ? 1 : -1));
+      restart();
+    });
+
+    // Swipe / drag across the photo
+    let dragX = null;
+    if (viewport) {
+      viewport.addEventListener("pointerdown", (e) => {
+        dragX = e.clientX;
+        // Capture so the release always lands here, even if the finger
+        // drifts off the photo and over an arrow on the way out
+        viewport.setPointerCapture(e.pointerId);
+        stop();
+      });
+      viewport.addEventListener("pointerup", (e) => {
+        if (dragX === null) return;
+        const dx = e.clientX - dragX;
+        dragX = null;
+        if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
+        start();
+      });
+      viewport.addEventListener("pointercancel", () => {
+        dragX = null;
+        start();
+      });
+    }
+
+    box.addEventListener("mouseenter", stop);
+    box.addEventListener("mouseleave", start);
+    box.addEventListener("focusin", stop);
+    box.addEventListener("focusout", start);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stop();
+      else start();
+    });
+
+    go(0);
+    start();
+  });
+
+  /* ----------------------------------------------------------
+     8. Lead form → GoHighLevel webhook
   ---------------------------------------------------------- */
   const form = document.getElementById("leadForm");
   const status = document.getElementById("formStatus");
