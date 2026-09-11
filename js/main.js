@@ -424,7 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `Service: ${data.service}\n\n${data.message || ""}`
       );
       window.location.href =
-        `mailto:twfbuilding@outlook.com?subject=${encodeURIComponent(
+        `mailto:twfbuildremodel@gmail.com?subject=${encodeURIComponent(
           "Free Estimate Request — " + data.full_name
         )}&body=${body}`;
       status.textContent = "Opening your email app to send the request…";
@@ -446,7 +446,7 @@ document.addEventListener("DOMContentLoaded", () => {
       status.classList.add("ok");
     } catch (err) {
       status.textContent =
-        "Something went wrong sending the form. Please call +1 (774) 994-0314 or email twfbuilding@outlook.com.";
+        "Something went wrong sending the form. Please call +1 (774) 994-0314 or email twfbuildremodel@gmail.com.";
       status.classList.add("error");
     } finally {
       submitBtn.disabled = false;

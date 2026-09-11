@@ -51,7 +51,7 @@ on a hidden tab, and under `prefers-reduced-motion`.
 
 Paste the inbound webhook URL into `GHL_CONFIG.webhookUrl` at the top of `js/main.js`
 (Automations → Workflow → Inbound Webhook trigger). Until it's set, the form falls back
-to a pre-filled email to twfbuilding@outlook.com. Alternatively, replace the `<form>` in
+to a pre-filled email to twfbuildremodel@gmail.com. Alternatively, replace the `<form>` in
 the contact section with a GHL embed iframe — the spot is marked with a comment.
 
 ## Single-file build
