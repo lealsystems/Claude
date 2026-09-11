@@ -421,7 +421,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!GHL_CONFIG.webhookUrl) {
       const body = encodeURIComponent(
         `Name: ${data.full_name}\nPhone: ${data.phone}\nEmail: ${data.email}\n` +
-        `Service: ${data.service}\n\n${data.message || ""}`
+        `Service: ${data.service || "Not specified"}\n\n${data.message || ""}`
       );
       window.location.href =
         `mailto:twfbuildremodel@gmail.com?subject=${encodeURIComponent(
