@@ -188,41 +188,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const label = item.title || "Fenney Building & Remodeling project";
 
-    if (item.photo === "hero") {
-      // Reuses the chimney photograph through the --photo-chimney CSS token,
-      // so the page only carries that file once
-      const div = document.createElement("div");
-      div.className = "slide-img slide-img-chimney";
-      div.setAttribute("role", "img");
-      div.setAttribute("aria-label", label);
-      figure.appendChild(div);
-    } else if (item.photo) {
+    if (item.photo) {
       const img = document.createElement("img");
       img.className = "slide-img";
       img.src = item.photo;
       img.alt = label;
       figure.appendChild(img);
     } else {
-      // No photo yet — a stand-in plate carrying the mark
+      // No photo yet — a plain plate carrying the mark, no wording
       figure.classList.add("is-plate");
       const plate = document.createElement("div");
       plate.className = "slide-plate";
       plate.setAttribute("aria-hidden", "true");
       plate.innerHTML =
-        '<svg viewBox="0 0 100 100" class="blade-svg"><use href="#sawblade"></use></svg>' +
-        "<span>Photography coming</span>";
+        '<svg viewBox="0 0 100 100" class="blade-svg"><use href="#sawblade"></use></svg>';
       figure.appendChild(plate);
     }
 
-    const cap = document.createElement("figcaption");
-    cap.className = "slide-cap";
-    const strong = document.createElement("strong");
-    strong.textContent = item.title || "";
-    const span = document.createElement("span");
-    span.textContent = item.text || "";
-    cap.append(strong, span);
-
-    figure.appendChild(cap);
+    // Photos carry no wording unless a title is added to the slot
+    if (item.title) {
+      const cap = document.createElement("figcaption");
+      cap.className = "slide-cap";
+      const strong = document.createElement("strong");
+      strong.textContent = item.title;
+      cap.appendChild(strong);
+      figure.appendChild(cap);
+    }
     li.appendChild(figure);
     return li;
   };

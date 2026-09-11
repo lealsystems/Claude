@@ -26,22 +26,18 @@ the `<title>`. Each entry is one slide, and the order there is the order they pl
 
 ```js
 const SLIDESHOW = [
-  {
-    photo: "https://.../twf/deck-osterville.jpg",
-    title: "Mahogany Deck — Osterville, MA",
-    text: "One or two lines about the work.",
-  },
+  { photo: "https://.../twf/deck-osterville.jpg" },
+  { photo: "" },
 ];
 ```
 
-Three values for `photo`:
+`photo` takes the file's link from the GoHighLevel media library (the TWF folder)
+or a path like `assets/NAME.jpg` for a photo committed to this repo. An empty
+string leaves the slot as a plain plate carrying the saw-blade mark.
 
-- **a URL** — the file's link from the GoHighLevel media library (the TWF folder),
-  or a path like `assets/NAME.jpg` for a photo committed to this repo
-- **`"hero"`** — reuses the chimney photograph already on the page, through the
-  `--photo-chimney` CSS token, so a bundled single-file build carries it once
-- **`""`** — a "Photography coming" plate carrying the title, for a service whose
-  photos haven't been taken yet
+No wording appears over the photos. To caption one, add a title to its block —
+`{ photo: "...", title: "Chimney Rebuild — Barnstable" }` — and that slide gets a
+one-line caption on a navy scrim. Slides without a title carry no caption bar at all.
 
 Only the entries listed here appear. Nothing is read from a media folder
 automatically — each photo is named individually, by design.
