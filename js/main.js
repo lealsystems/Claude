@@ -5,9 +5,8 @@
    3. Saw-blade custom cursor  (spins counterclockwise on scroll)
    4. Scroll cut-line blade    (cuts down the right edge)
    5. Reveal-on-scroll
-   6. Before / After sliders
-   7. Selected-work slideshow
-   8. Lead form → GoHighLevel
+   6. The Work carousel (photos + before/after comparisons)
+   7. Lead form → GoHighLevel
    ============================================================ */
 
 /* ------------------------------------------------------------
@@ -142,41 +141,90 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
   /* ----------------------------------------------------------
-     6. Before / After comparison sliders
-        Each [data-ba] block: hidden range input drives --pos,
-        which clips the "before" layer and moves the handle.
+     6. The Work carousel
+        Each [data-slideshow] block: the track slides one full
+        width per step. Arrows, dots, arrow keys, and swipe all
+        drive it; autoplay (data-autoplay, ms) pauses on hover,
+        on focus, mid-drag, on a hidden tab, and under reduced motion.
+        A slide is either a photo or a before/after pair whose
+        divider is dragged in place.
   ---------------------------------------------------------- */
-  document.querySelectorAll("[data-ba]").forEach((figure) => {
-    const frame = figure.querySelector(".ba-frame");
-    const range = figure.querySelector("[data-ba-range]");
-    const setPos = (val) => frame.style.setProperty("--pos", `${val}%`);
+  /* A before/after pair: the "before" layer is clipped from the right
+     by --pos, and an invisible range input drives it so the divider
+     works with mouse, touch, and the keyboard alike. */
+  const buildCompare = (item, label) => {
+    const wrap = document.createElement("div");
+    wrap.className = "compare";
+    wrap.setAttribute("data-compare", "");
+
+    const layer = (cls, src, alt, tagText, tagCls) => {
+      const div = document.createElement("div");
+      div.className = cls;
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = alt;
+      const tag = document.createElement("span");
+      tag.className = "ba-tag " + tagCls;
+      tag.textContent = tagText;
+      div.append(img, tag);
+      return div;
+    };
+
+    wrap.appendChild(layer("compare-after", item.after, label + ", after", "After", "ba-tag-after"));
+    wrap.appendChild(layer("compare-before", item.before, label + ", before", "Before", "ba-tag-before"));
+
+    const handle = document.createElement("div");
+    handle.className = "ba-handle";
+    handle.setAttribute("aria-hidden", "true");
+    handle.innerHTML =
+      '<span class="ba-handle-line"></span>' +
+      '<span class="ba-handle-knob">' +
+      '<svg viewBox="0 0 100 100" class="blade-svg"><use href="#sawblade"></use></svg>' +
+      "</span>";
+    wrap.appendChild(handle);
+
+    const range = document.createElement("input");
+    range.type = "range";
+    range.className = "ba-range";
+    range.min = "0";
+    range.max = "100";
+    range.value = "50";
+    range.setAttribute("aria-label", "Reveal before and after: " + label);
+    wrap.appendChild(range);
+
+    return wrap;
+  };
+
+  /* Wire one comparison's divider. Returns nothing; the carousel calls
+     this once per compare slide after the slides are in the document. */
+  const wireCompare = (wrap, onDragStart, onDragEnd) => {
+    const range = wrap.querySelector(".ba-range");
+    const setPos = (val) => wrap.style.setProperty("--pos", `${val}%`);
 
     setPos(range.value);
     range.addEventListener("input", () => setPos(range.value));
 
-    // Direct drag anywhere on the frame (mouse + touch)
     const dragTo = (clientX) => {
-      const rect = frame.getBoundingClientRect();
+      const rect = wrap.getBoundingClientRect();
       const pct = Math.min(Math.max(((clientX - rect.left) / rect.width) * 100, 0), 100);
       range.value = pct;
       setPos(pct);
     };
-    frame.addEventListener("pointerdown", (e) => {
-      frame.setPointerCapture(e.pointerId);
+
+    wrap.addEventListener("pointerdown", (e) => {
+      wrap.setPointerCapture(e.pointerId);
+      onDragStart();
       dragTo(e.clientX);
     });
-    frame.addEventListener("pointermove", (e) => {
+    wrap.addEventListener("pointermove", (e) => {
       if (e.buttons > 0) dragTo(e.clientX);
     });
-  });
+    wrap.addEventListener("pointerup", onDragEnd);
+    wrap.addEventListener("pointercancel", onDragEnd);
+    range.addEventListener("focus", onDragStart);
+    range.addEventListener("blur", onDragEnd);
+  };
 
-  /* ----------------------------------------------------------
-     7. Selected-work slideshow
-        Each [data-slideshow] block: the track slides one full
-        width per step. Arrows, dots, arrow keys, and swipe all
-        drive it; autoplay (data-autoplay, ms) pauses on hover,
-        on focus, on a hidden tab, and under reduced motion.
-  ---------------------------------------------------------- */
   /* Turn each entry in SLIDESHOW into a slide */
   const buildSlide = (item) => {
     const li = document.createElement("li");
@@ -187,8 +235,11 @@ document.addEventListener("DOMContentLoaded", () => {
     figure.className = "slide-figure";
 
     const label = item.title || "Fenney Building & Remodeling project";
+    const isCompare = "before" in item || "after" in item;
 
-    if (item.photo) {
+    if (isCompare && item.before && item.after) {
+      figure.appendChild(buildCompare(item, label));
+    } else if (item.photo) {
       const img = document.createElement("img");
       img.className = "slide-img";
       img.src = item.photo;
@@ -244,10 +295,10 @@ document.addEventListener("DOMContentLoaded", () => {
     box.classList.toggle("is-single", single);
     if (totalEl) totalEl.textContent = String(slides.length);
 
-    // Only the first photo is worth blocking on; the rest load lazily
+    // Only the first slide is worth blocking on; the rest load lazily
     slides.forEach((slide, i) => {
-      const img = slide.querySelector("img");
-      if (img && i > 0) img.loading = "lazy";
+      if (i === 0) return;
+      slide.querySelectorAll("img").forEach((img) => { img.loading = "lazy"; });
     });
 
     let index = 0;
@@ -257,7 +308,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const dot = document.createElement("button");
       dot.type = "button";
       dot.className = "slide-dot";
-      dot.setAttribute("aria-label", `Show photo ${i + 1} of ${slides.length}`);
+      const kind = slides[i].querySelector("[data-compare]") ? "comparison" : "photo";
+      dot.setAttribute("aria-label", `Show ${kind} ${i + 1} of ${slides.length}`);
       dot.addEventListener("click", () => {
         go(i);
         restart();
@@ -288,6 +340,10 @@ document.addEventListener("DOMContentLoaded", () => {
       start();
     };
 
+    // Comparison slides own the horizontal gesture inside their own frame,
+    // so the carousel must not read a divider drag as a swipe
+    box.querySelectorAll("[data-compare]").forEach((wrap) => wireCompare(wrap, stop, start));
+
     box.querySelector("[data-slide-prev]")?.addEventListener("click", () => {
       go(index - 1);
       restart();
@@ -299,6 +355,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     box.addEventListener("keydown", (e) => {
       if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      // On a comparison, the arrows belong to its divider
+      if (e.target.classList && e.target.classList.contains("ba-range")) return;
       e.preventDefault();
       go(index + (e.key === "ArrowRight" ? 1 : -1));
       restart();
@@ -308,6 +366,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let dragX = null;
     if (viewport) {
       viewport.addEventListener("pointerdown", (e) => {
+        // A drag that starts on a comparison moves its divider, not the track
+        if (e.target.closest && e.target.closest("[data-compare]")) return;
         dragX = e.clientX;
         // Capture so the release always lands here, even if the finger
         // drifts off the photo and over an arrow on the way out
@@ -341,7 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ----------------------------------------------------------
-     8. Lead form → GoHighLevel webhook
+     7. Lead form → GoHighLevel webhook
   ---------------------------------------------------------- */
   const form = document.getElementById("leadForm");
   const status = document.getElementById("formStatus");

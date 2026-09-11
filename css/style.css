@@ -224,7 +224,6 @@ img { max-width: 100%; display: block; }
 .nav-links li:nth-child(3) a { transition-delay: .29s; }
 .nav-links li:nth-child(4) a { transition-delay: .36s; }
 .nav-links li:nth-child(5) a { transition-delay: .43s; }
-.nav-links li:nth-child(6) a { transition-delay: .50s; }
 .nav-links a span {
   font-family: var(--sans);
   font-size: .8rem;
@@ -492,26 +491,25 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
 /* ------------------------------------------------------------
    Before / After slider
 ------------------------------------------------------------ */
-.ba-figure { max-width: 940px; margin: 0 auto; }
-.ba-frame {
-  position: relative;
+/* A comparison fills its slide; the "before" layer is clipped from the
+   right by --pos, which the hidden range input drives. */
+.compare {
+  position: absolute; inset: 0;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
   background: var(--mist);
-  box-shadow: 0 30px 70px rgba(11,49,88,.18);
   user-select: none;
+  /* Horizontal belongs to the divider, vertical stays page scroll */
   touch-action: pan-y;
 }
-.ba-after, .ba-before { position: absolute; inset: 0; }
-.ba-after img, .ba-before img {
+.compare-after, .compare-before { position: absolute; inset: 0; }
+.compare-after img, .compare-before img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
+  -webkit-user-drag: none;
 }
-/* Before layer is clipped from the right edge by --pos (0–100) */
-.ba-before {
-  clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0);
-}
+.compare-before { clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0); }
+
 .ba-tag {
   position: absolute;
   top: 18px;
@@ -549,9 +547,9 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   filter: drop-shadow(0 6px 14px rgba(0,0,0,.3));
   transition: transform .3s var(--ease);
 }
-.ba-frame:active .ba-handle-knob { transform: translate(-50%, -50%) scale(1.08); }
+.compare:active .ba-handle-knob { transform: translate(-50%, -50%) scale(1.08); }
 
-/* Invisible range input drives the slider (mouse, touch, keyboard) */
+/* Invisible range input drives the divider (mouse, touch, keyboard) */
 .ba-range {
   position: absolute;
   inset: 0;
@@ -559,28 +557,18 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
   opacity: 0;
   margin: 0;
 }
+.ba-range:focus-visible { outline: none; }
+.compare:has(.ba-range:focus-visible) .ba-handle-line {
+  background: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold), 0 0 16px rgba(176,141,87,.7);
+}
 @media (pointer: fine) { body.blade-cursor .ba-range { cursor: none; } }
 
-.ba-figure figcaption {
-  margin-top: 26px;
-  font-size: .95rem;
-  color: var(--body);
-  max-width: 720px;
-}
-.ba-figure figcaption strong {
-  display: block;
-  font-family: var(--serif);
-  font-weight: 600;
-  color: var(--navy);
-  letter-spacing: .04em;
-  margin-bottom: 6px;
-}
-.ba-note {
-  margin-top: 44px;
-  text-align: center;
-  font-size: .85rem;
-  letter-spacing: .08em;
-  color: var(--stone);
+@media (max-width: 560px) {
+  .ba-tag { top: 12px; font-size: .62rem; letter-spacing: .2em; padding: 6px 11px; }
+  .ba-tag-before { left: 12px; }
+  .ba-tag-after  { right: 12px; }
+  .ba-handle-knob { width: 42px; height: 42px; }
 }
 
 /* ------------------------------------------------------------
@@ -928,16 +916,21 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
 @media (max-width: 1080px) { .slide-prev { left: 12px; } .slide-next { right: 12px; } }
 @media (pointer: fine) { body.blade-cursor .slide-nav { cursor: none; } }
 
-/* Counter */
-.slide-count {
-  position: absolute; top: 18px; right: 18px;
-  padding: 7px 14px; border-radius: 40px;
-  background: rgba(11,49,88,.72); color: #fff;
-  font-size: .74rem; letter-spacing: .18em;
+/* Dots and counter sit below the frame, clear of the photo and its tags */
+.slide-foot {
+  position: relative;
+  margin-top: 28px;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 20px;
 }
-
-/* Dots */
-.slide-dots { display: flex; justify-content: center; gap: 12px; margin-top: 28px; }
+.slide-dots { display: flex; justify-content: center; gap: 12px; }
+.slide-count {
+  position: absolute; right: 0; top: 50%;
+  transform: translateY(-50%);
+  font-size: .74rem; letter-spacing: .18em;
+  color: var(--stone);
+  font-variant-numeric: tabular-nums;
+}
 .slide-dot {
   width: 9px; height: 9px; padding: 0; border: 0; border-radius: 50%;
   background: rgba(11,49,88,.24); cursor: pointer;
@@ -949,8 +942,7 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
 
 /* One slide only — hide the controls */
 .slideshow.is-single .slide-nav,
-.slideshow.is-single .slide-count,
-.slideshow.is-single .slide-dots { display: none; }
+.slideshow.is-single .slide-foot { display: none; }
 
 /* Narrow screens: a taller frame so the caption doesn't swallow the photo */
 @media (max-width: 700px) {

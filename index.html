@@ -9,30 +9,37 @@
 
   <script>
   /* ============================================================
-     SELECTED WORK SLIDESHOW — the photos on the site
+     THE WORK — the slides on the site
+
+     Every picture on the site lives in this one list. A slide is
+     either a single photo or a before/after pair you can drag.
 
      TO FILL A SLOT
      1. In GoHighLevel, open Media Storage -> the TWF folder.
      2. Click the photo you want and copy its link.
-     3. Paste that link between the quotes after photo:
+     3. Paste that link between the quotes.
 
-     Four empty slots are set up below. To add a fifth, copy one
-     whole { ... } block including the comma and paste it below.
-     To use fewer, delete a block.
+        A single photo:        { photo: "PASTE LINK HERE" },
+        A before/after pair:   { before: "PASTE LINK", after: "PASTE LINK" },
 
-     The order here is the order they play on the site. Only the
-     photos listed here appear — nothing else in the TWF folder
-     shows up. An empty slot shows a plain plate with the saw-blade
-     mark until you fill it in.
+     Four photo slots and one before/after slot are set up below.
+     To add another, copy a whole line including the comma and paste
+     it below. To use fewer, delete a line. The order here is the
+     order they play on the site.
 
-     No words appear over the photos. To caption one later, add a
-     title line to its block:  title: "Chimney Rebuild — Barnstable",
+     Only the slides listed here appear — nothing else in the TWF
+     folder shows up. An empty slot shows a plain plate with the
+     saw-blade mark until you fill it in.
+
+     No words appear over the pictures. To caption one later, add a
+     title:  { photo: "...", title: "Chimney Rebuild — Barnstable" },
   ============================================================ */
   const SLIDESHOW = [
     { photo: "" },
     { photo: "" },
     { photo: "" },
     { photo: "" },
+    { before: "", after: "" },
   ];
   </script>
 
@@ -118,10 +125,9 @@
     <ul class="nav-links">
       <li><a href="#home"            data-navlink><span>01</span>Home</a></li>
       <li><a href="#services"        data-navlink><span>02</span>Services</a></li>
-      <li><a href="#gallery"         data-navlink><span>03</span>Selected Work</a></li>
-      <li><a href="#transformations" data-navlink><span>04</span>Before &amp; After</a></li>
-      <li><a href="#about"           data-navlink><span>05</span>About</a></li>
-      <li><a href="#contact"         data-navlink><span>06</span>Free Estimate</a></li>
+      <li><a href="#work"            data-navlink><span>03</span>The Work</a></li>
+      <li><a href="#about"           data-navlink><span>04</span>About</a></li>
+      <li><a href="#contact"         data-navlink><span>05</span>Free Estimate</a></li>
     </ul>
     <div class="nav-meta">
       <a href="tel:+17749940314">+1 (774) 994-0314</a>
@@ -266,17 +272,19 @@
     </section>
 
     <!-- ====================================================
-         03 · SELECTED WORK — slideshow
-         The photos come from the SLIDESHOW list at the top of this
-         file (just under the <title>). Add, reorder, or remove them there.
+         03 · THE WORK — one carousel holding both finished photos
+         and draggable before/after pairs. Everything comes from the
+         SLIDESHOW list at the top of this file (just under the
+         <title>); add, reorder, or remove slides there.
          Autoplay interval is data-autoplay (ms) — remove it to hold still.
     ===================================================== -->
-    <section class="gallery section" id="gallery">
+    <section class="work section" id="work">
       <div class="container">
         <p class="eyebrow reveal">Selected Work</p>
-        <h2 class="reveal">From the <em>Job Site</em></h2>
-        <p class="section-lead reveal">A rolling look at the work — masonry, decks, siding,
-           and the finish details that close a project out.</p>
+        <h2 class="reveal">From the Job Site to the <em>Fenney Transformation</em></h2>
+        <p class="section-lead reveal">Finished work and the change it made, in one place —
+           masonry, decking, siding, and the details that close a project out.
+           Drag any slide marked <em>Before &amp; After</em> to watch it turn over.</p>
 
         <div class="slideshow reveal" data-slideshow data-autoplay="6500"
              role="group" aria-roledescription="carousel" aria-label="Selected work" tabindex="0">
@@ -284,77 +292,35 @@
             <div class="slide-viewport">
               <ul class="slide-track" data-slide-track>
                 <!-- Built from the SLIDESHOW list at the top of this file.
-                     Add a photo there, not here. -->
+                     Add a photo or a before/after pair there, not here. -->
               </ul>
             </div>
 
-            <button class="slide-nav slide-prev" type="button" data-slide-prev aria-label="Previous photo">
+            <button class="slide-nav slide-prev" type="button" data-slide-prev aria-label="Previous slide">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor"
                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
-            <button class="slide-nav slide-next" type="button" data-slide-next aria-label="Next photo">
+            <button class="slide-nav slide-next" type="button" data-slide-next aria-label="Next slide">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor"
                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
 
-            <p class="slide-count"><span data-slide-current>1</span>&thinsp;/&thinsp;<span data-slide-total>1</span></p>
           </div>
 
-          <div class="slide-dots" data-slide-dots></div>
+          <div class="slide-foot">
+            <div class="slide-dots" data-slide-dots></div>
+            <p class="slide-count"><span data-slide-current>1</span>&thinsp;/&thinsp;<span data-slide-total>1</span></p>
+          </div>
         </div>
       </div>
     </section>
 
-
     <!-- ====================================================
-         04 · BEFORE / AFTER — draggable comparison slider
-    ===================================================== -->
-    <section class="transformations section section-gray" id="transformations">
-      <div class="container">
-        <p class="eyebrow reveal">Before &amp; After</p>
-        <h2 class="reveal">The Fenney <em>Transformation</em></h2>
-        <p class="section-lead reveal">Real projects, documented start to finish — the difference
-           premium materials and patient hands make.</p>
-
-        <!-- BA ITEMS · To add a project: drop before/after photos in assets/
-             and add a .ba-figure block here (draggable comparison slider):
-
-        <figure class="ba-figure reveal" data-ba>
-          <div class="ba-frame">
-            <div class="ba-after">
-              <img src="assets/PROJECT-after.jpg" alt="After">
-              <span class="ba-tag ba-tag-after">After</span>
-            </div>
-            <div class="ba-before" data-ba-before>
-              <img src="assets/PROJECT-before.jpg" alt="Before">
-              <span class="ba-tag ba-tag-before">Before</span>
-            </div>
-            <div class="ba-handle" data-ba-handle aria-hidden="true">
-              <span class="ba-handle-line"></span>
-              <span class="ba-handle-knob">
-                <svg viewBox="0 0 100 100" class="blade-svg"><use href="#sawblade"></use></svg>
-              </span>
-            </div>
-            <input type="range" class="ba-range" data-ba-range min="0" max="100" value="50"
-                   aria-label="Reveal before and after comparison">
-          </div>
-          <figcaption>
-            <strong>PROJECT TITLE — Town, MA</strong>
-            Short description of the transformation.
-          </figcaption>
-        </figure>
-        -->
-
-        <p class="ba-note reveal">Project photography is being gathered now — transformations are added here as jobs wrap up.</p>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         05 · ABOUT
+         04 · ABOUT
     ===================================================== -->
     <section class="about section section-navy" id="about">
       <div class="container about-grid">
@@ -383,7 +349,7 @@
     </section>
 
     <!-- ====================================================
-         06 · CONTACT — GoHighLevel-ready form
+         05 · CONTACT — GoHighLevel-ready form
     ===================================================== -->
     <section class="contact section" id="contact">
       <div class="container contact-grid">
