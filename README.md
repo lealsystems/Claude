@@ -21,25 +21,30 @@ the contact section with a GHL embed iframe — the spot is marked with a commen
 
 ## Selected Work slideshow
 
-Slides live in `index.html` under `#gallery`. To add a photo, drop it in `assets/`
-and copy one `<li class="slide">` block — markup order is play order:
+The photos come from the `SLIDESHOW` list at the top of `index.html`, just under
+the `<title>`. Each entry is one slide, and the order there is the order they play:
 
-```html
-<li class="slide" data-slide>
-  <figure class="slide-figure">
-    <img class="slide-img" src="assets/NAME.jpg" alt="Short description">
-    <figcaption class="slide-cap">
-      <strong>Project — Town, MA</strong>
-      <span>One or two lines about the work.</span>
-    </figcaption>
-  </figure>
-</li>
+```js
+const SLIDESHOW = [
+  {
+    photo: "https://.../twf/deck-osterville.jpg",
+    title: "Mahogany Deck — Osterville, MA",
+    text: "One or two lines about the work.",
+  },
+];
 ```
 
-Services still waiting on photography use a stand-in plate instead of an `<img>`
-(`<figure class="slide-figure is-plate">`) — delete those blocks as real photos arrive.
-The first slide reuses the hero photograph through the `--photo-chimney` CSS token so a
-bundled single-file build only carries that image once.
+Three values for `photo`:
+
+- **a URL** — the file's link from the GoHighLevel media library (the TWF folder),
+  or a path like `assets/NAME.jpg` for a photo committed to this repo
+- **`"hero"`** — reuses the chimney photograph already on the page, through the
+  `--photo-chimney` CSS token, so a bundled single-file build carries it once
+- **`""`** — a "Photography coming" plate carrying the title, for a service whose
+  photos haven't been taken yet
+
+Only the entries listed here appear. Nothing is read from a media folder
+automatically — each photo is named individually, by design.
 
 Arrows, dots, arrow keys, and swipe all drive it. Autoplay is the `data-autoplay`
 value in milliseconds on `.slideshow` — remove the attribute to hold on one slide.

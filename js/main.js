@@ -177,10 +177,71 @@ document.addEventListener("DOMContentLoaded", () => {
         drive it; autoplay (data-autoplay, ms) pauses on hover,
         on focus, on a hidden tab, and under reduced motion.
   ---------------------------------------------------------- */
+  /* Turn each entry in SLIDESHOW into a slide */
+  const buildSlide = (item) => {
+    const li = document.createElement("li");
+    li.className = "slide";
+    li.setAttribute("data-slide", "");
+
+    const figure = document.createElement("figure");
+    figure.className = "slide-figure";
+
+    const label = item.title || "Fenney Building & Remodeling project";
+
+    if (item.photo === "hero") {
+      // Reuses the chimney photograph through the --photo-chimney CSS token,
+      // so the page only carries that file once
+      const div = document.createElement("div");
+      div.className = "slide-img slide-img-chimney";
+      div.setAttribute("role", "img");
+      div.setAttribute("aria-label", label);
+      figure.appendChild(div);
+    } else if (item.photo) {
+      const img = document.createElement("img");
+      img.className = "slide-img";
+      img.src = item.photo;
+      img.alt = label;
+      figure.appendChild(img);
+    } else {
+      // No photo yet — a stand-in plate carrying the mark
+      figure.classList.add("is-plate");
+      const plate = document.createElement("div");
+      plate.className = "slide-plate";
+      plate.setAttribute("aria-hidden", "true");
+      plate.innerHTML =
+        '<svg viewBox="0 0 100 100" class="blade-svg"><use href="#sawblade"></use></svg>' +
+        "<span>Photography coming</span>";
+      figure.appendChild(plate);
+    }
+
+    const cap = document.createElement("figcaption");
+    cap.className = "slide-cap";
+    const strong = document.createElement("strong");
+    strong.textContent = item.title || "";
+    const span = document.createElement("span");
+    span.textContent = item.text || "";
+    cap.append(strong, span);
+
+    figure.appendChild(cap);
+    li.appendChild(figure);
+    return li;
+  };
+
   document.querySelectorAll("[data-slideshow]").forEach((box) => {
     const track = box.querySelector("[data-slide-track]");
+    if (!track) return;
+
+    const list = typeof SLIDESHOW === "undefined" ? null : SLIDESHOW;
+    if (Array.isArray(list) && list.length) {
+      track.textContent = "";
+      list.forEach((item) => track.appendChild(buildSlide(item)));
+    }
+
     const slides = Array.from(box.querySelectorAll("[data-slide]"));
-    if (!track || !slides.length) return;
+    if (!slides.length) {
+      box.hidden = true;
+      return;
+    }
 
     const viewport = box.querySelector(".slide-viewport");
     const dotsBox = box.querySelector("[data-slide-dots]");
