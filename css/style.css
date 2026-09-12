@@ -30,6 +30,9 @@
 
   /* Dark maroon, a step deeper than the brick, for the form's hint */
   --maroon: #6E2A2A;
+
+  /* Millwork dimmer. 1 = as drawn, 0 = every piece of trim gone. */
+  --trim-ink: 1;
   --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236E2A2A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9 L12 16 L19 9'/%3E%3C/svg%3E");
 
   /* Saw blade and running-bond brick, as CSS art */
@@ -1063,3 +1066,75 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
       rgba(226,220,203,.97) 0%, rgba(231,225,209,.86) 44%, rgba(237,232,219,0) 100%);
 }
 .slide-figure.is-plate .slide-cap strong { color: var(--navy); }
+
+
+/* ------------------------------------------------------------
+   Millwork — the trim that marks where one room becomes the next.
+   Every piece is a gradient, adds no weight, and is scaled by
+   --trim-ink, so setting that to 0 removes all of it at once.
+------------------------------------------------------------ */
+
+/* A course of brick, the same one framing the band under the hero,
+   repeated where Services hands off to The Work */
+.work { position: relative; isolation: isolate; }
+.work::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; z-index: -1;
+  height: 7px;
+  background: var(--brick-strip) repeat-x center / auto 15px;
+  opacity: calc(.20 * var(--trim-ink));
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
+}
+
+/* Crown molding where the page steps into the navy room: three courses
+   of light, widest at the bottom, over a soft falloff */
+.section-navy { isolation: isolate; }
+.section-navy::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; z-index: -1;
+  height: 20px;
+  background:
+    linear-gradient(to bottom,
+      rgba(255,255,255,.13) 0 1px,
+      transparent        1px 5px,
+      rgba(255,255,255,.09) 5px 6px,
+      transparent        6px 10px,
+      rgba(255,255,255,.06) 10px 12px,
+      rgba(0,0,0,.16)      12px 13px,
+      transparent        13px 20px),
+    linear-gradient(to bottom, rgba(0,0,0,.20), rgba(0,0,0,0) 20px);
+  opacity: var(--trim-ink);
+}
+
+/* A wainscot dado along the foot of the contact section: a chair rail,
+   then panel stiles at a whisper of ink */
+.contact { isolation: isolate; }
+.contact::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: -1;
+  height: 104px;
+  background-image:
+    linear-gradient(to bottom,
+      rgba(31,40,48,.11) 0 1px,
+      transparent      1px 3px,
+      rgba(31,40,48,.06) 3px 4px,
+      transparent      4px 100%),
+    repeating-linear-gradient(to right,
+      transparent 0 92px,
+      rgba(31,40,48,.055) 92px 93px,
+      transparent 93px 95px,
+      rgba(31,40,48,.03) 95px 96px,
+      transparent 96px 188px);
+  background-size: 100% 4px, 100% 100px;
+  background-position: left top, left 4px;
+  background-repeat: no-repeat, repeat-x;
+  opacity: var(--trim-ink);
+}
+
+/* Vertical room is scarce on a phone; the dado is the first thing to go */
+@media (max-width: 700px) {
+  .contact::after { display: none; }
+  .section-navy::before { height: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { /* trim is static; nothing to disable */ }

@@ -54,6 +54,16 @@ Paste the inbound webhook URL into `GHL_CONFIG.webhookUrl` at the top of `js/mai
 to a pre-filled email to twfbuildremodel@gmail.com. Alternatively, replace the `<form>` in
 the contact section with a GHL embed iframe — the spot is marked with a comment.
 
+## Millwork
+
+Three pieces of trim mark where one section becomes the next: a crown molding
+where the page steps into the navy About section, a wainscot dado along the foot
+of the contact form, and a course of brick above The Work matching the band under
+the hero. All three are gradients — no image files, no weight — and all three are
+scaled by `--trim-ink` in `:root`. Set that to `0` and every piece disappears
+without touching another line. The dado is dropped under 700px, where vertical
+room is scarce.
+
 ## Single-file build
 
 `index.html`, `css/`, `js/`, and `assets/` can be bundled into one self-contained HTML
