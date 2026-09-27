@@ -981,6 +981,10 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
    scrim over the photo so every slide is the same height and the
    arrows sit dead centre no matter how long the caption runs.
 ------------------------------------------------------------ */
+/* The Work stands on its heading alone — no lead paragraph beneath it —
+   so the heading carries the gap the lead used to hold open. */
+.work-title { margin-bottom: clamp(40px, 6vw, 70px); }
+
 .slideshow { position: relative; max-width: 1000px; margin: 0 auto; outline: none; }
 .slideshow:focus-visible .slide-viewport { box-shadow: 0 0 0 3px var(--gold), 0 26px 60px rgba(11,49,88,.16); }
 

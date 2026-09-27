@@ -1051,6 +1051,10 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
    scrim over the photo so every slide is the same height and the
    arrows sit dead centre no matter how long the caption runs.
 ------------------------------------------------------------ */
+/* The Work stands on its heading alone — no lead paragraph beneath it —
+   so the heading carries the gap the lead used to hold open. */
+.work-title { margin-bottom: clamp(40px, 6vw, 70px); }
+
 .slideshow { position: relative; max-width: 1000px; margin: 0 auto; outline: none; }
 .slideshow:focus-visible .slide-viewport { box-shadow: 0 0 0 3px var(--gold), 0 26px 60px rgba(11,49,88,.16); }
 
@@ -1456,10 +1460,7 @@ h1 em, h2 em { font-style: normal; color: var(--gold); }
     ===================================================== -->
     <section class="work section" id="work">
       <div class="container">
-        <p class="eyebrow reveal">On the Boards</p>
-        <h2 class="reveal">Our Current <em>Projects</em></h2>
-        <p class="section-lead reveal">Three jobs running now — a chimney rebuilt from the
-           crown down, a mahogany deck brought back, and a paver walk set from bed to border.</p>
+        <h2 class="reveal work-title">Our Current <em>Projects</em></h2>
 
         <div class="slideshow reveal" data-slideshow data-autoplay="6500"
              role="group" aria-roledescription="carousel" aria-label="Current projects" tabindex="0">
