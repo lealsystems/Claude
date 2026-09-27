@@ -93,7 +93,7 @@ in the script). The copies in `assets/` stay at full quality for hosting.
 
 **To shrink the paste.** Every photo is inlined only because it lives in this repo.
 Point a `SLIDESHOW` entry at its link in the GoHighLevel media library instead and
-that picture drops out of the file — all seven together are about two thirds of it.
+that picture drops out of the file — all thirteen together are about four fifths of it.
 The page behaves the same either way.
 
 `build/fonts-inline.css` is generated but committed, so a bundle can be built
