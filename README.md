@@ -11,6 +11,8 @@ Plain HTML / CSS / JS (no build step). Open `index.html` in a browser or serve t
 - `css/style.css` — brand palette from the logo: navy `#0B3158`, slate `#25476A`, stone `#8A8A8A`, mist `#D1D8E0`, gold `#B08D57`, on a Lancaster Whitewash `#EDE8DB` ground
 - `js/main.js` — menu, saw-blade cursor + scroll cut-line (counterclockwise spin on scroll), the work carousel, lead form
 - `assets/` — the hero photograph and the logo (original, knocked-out, and squared)
+- `assets/work/` — Tim's job photographs, the ones the carousel plays
+- `build/` — the bundler (see **Single-file build**); nothing the site itself needs
 
 ## The Work — one carousel for every picture
 
@@ -21,9 +23,9 @@ is the order they play:
 
 ```js
 const SLIDESHOW = [
-  { photo: "https://.../twf/deck-osterville.jpg" },
-  { before: "https://.../twf/mantel-before.jpg",
-    after:  "https://.../twf/mantel-after.jpg" },
+  { photo: "assets/work/deck-mahogany.jpg" },
+  { before: "assets/work/fireplace-before.jpg",
+    after:  "assets/work/fireplace-after.jpg", focus: "center 25%" },
   { photo: "" },
 ];
 ```
@@ -33,6 +35,9 @@ const SLIDESHOW = [
 - **`before` + `after`** — a comparison whose divider the visitor drags. Shoot the
   pair from the same spot so the two line up.
 - **empty** — a plain plate carrying the saw-blade mark, holding the slot.
+- **`focus`** — where a tall photo is cropped. A slide is 16:10 on a desktop and
+  4:5 on a phone, so a portrait shot loses its top and bottom; `focus: "center 30%"`
+  keeps the upper part instead of the middle. Left out, the middle is kept.
 
 No wording appears over the pictures. To caption one, add a title to its entry —
 `{ photo: "...", title: "Chimney Rebuild — Barnstable" }` — and that slide gets a
@@ -66,7 +71,30 @@ room is scarce.
 
 ## Single-file build
 
-`index.html`, `css/`, `js/`, and `assets/` can be bundled into one self-contained HTML
-file — fonts and images inlined, zero external requests — for pasting into a hosted code
-editor. Point the `SLIDESHOW` entries at hosted image URLs rather than local paths to
-keep that file small.
+```sh
+python3 build/fonts.py     # only when the typefaces change; needs the network
+python3 build/build.py     # needs Pillow, to size the photos for the bundle
+```
+
+`build/build.py` folds the CSS, the JavaScript, the fonts and every picture into
+single files under `dist/`:
+
+- `fenney-standalone.html` — the whole page. Open it anywhere; it asks the network
+  for nothing.
+- `fenney-ghl.html` — the same thing as body content, for a GoHighLevel **Custom
+  Code** element. Two blocks are appended and marked in the file: CSS that steps
+  the site back out of the builder's padded column, and a script that pulls it
+  flush to the top of the page.
+- `fenney-netlify.zip` — the plain folder, to drag onto Netlify.
+
+Pictures are text once inlined, about a third longer than the file on disk, so the
+bundle re-encodes each one to the size the page actually paints it (`BUNDLE_SIZE`
+in the script). The copies in `assets/` stay at full quality for hosting.
+
+**To shrink the paste.** Every photo is inlined only because it lives in this repo.
+Point a `SLIDESHOW` entry at its link in the GoHighLevel media library instead and
+that picture drops out of the file — all seven together are about two thirds of it.
+The page behaves the same either way.
+
+`build/fonts-inline.css` is generated but committed, so a bundle can be built
+without reaching Google Fonts.

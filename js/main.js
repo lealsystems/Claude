@@ -163,6 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const img = document.createElement("img");
       img.src = src;
       img.alt = alt;
+      if (item.focus) img.style.objectPosition = item.focus;
       const tag = document.createElement("span");
       tag.className = "ba-tag " + tagCls;
       tag.textContent = tagText;
@@ -244,6 +245,8 @@ document.addEventListener("DOMContentLoaded", () => {
       img.className = "slide-img";
       img.src = item.photo;
       img.alt = label;
+      // A tall photo is cropped to the 16:10 slide; focus picks which band
+      if (item.focus) img.style.objectPosition = item.focus;
       figure.appendChild(img);
     } else {
       // No photo yet — a plain plate carrying the mark, no wording
