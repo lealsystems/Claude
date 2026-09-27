@@ -52,6 +52,19 @@ never fight. Autoplay is the `data-autoplay` value in milliseconds on `.slidesho
 remove the attribute to hold on one slide. It pauses on hover, on focus, mid-drag,
 on a hidden tab, and under `prefers-reduced-motion`.
 
+## Chat widget
+
+The LeadConnector bubble loads from a three-line script tag at the foot of
+`index.html`, marked with a comment. `data-widget-id` picks which widget; nothing
+else needs changing, and deleting those lines takes the bubble off the site.
+
+It mounts itself above every layer on the page, which is right everywhere except
+over the full-screen menu, so `body.menu-open` hides it while the menu is open
+(the class is set in `setMenu`, the rule sits beside `.site-header.menu-open`).
+
+If GoHighLevel is also set to inject the widget at page level, the site shows two
+bubbles — turn one of the two off.
+
 ## GoHighLevel form
 
 Paste the inbound webhook URL into `GHL_CONFIG.webhookUrl` at the top of `js/main.js`
@@ -79,8 +92,8 @@ python3 build/build.py     # needs Pillow, to size the photos for the bundle
 `build/build.py` folds the CSS, the JavaScript, the fonts and every picture into
 single files under `dist/`:
 
-- `fenney-standalone.html` — the whole page. Open it anywhere; it asks the network
-  for nothing.
+- `fenney-standalone.html` — the whole page. Open it anywhere; the only thing it
+  fetches is the chat widget.
 - `fenney-ghl.html` — the same thing as body content, for a GoHighLevel **Custom
   Code** element. Two blocks are appended and marked in the file: CSS that steps
   the site back out of the builder's padded column, and a script that pulls it

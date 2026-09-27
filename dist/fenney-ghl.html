@@ -260,6 +260,14 @@ img { max-width: 100%; display: block; }
    X stays clickable, and fade the white-boxed logo out of the navy. */
 .brand { transition: opacity .3s ease; }
 .site-header.menu-open { z-index: 1350; background: transparent; box-shadow: none; }
+
+/* The chat bubble mounts itself above every layer on the page. That is
+   right everywhere except over the full-screen menu, so it stands down
+   while the menu is open. */
+body.menu-open chat-widget,
+body.menu-open #chat-widget,
+body.menu-open [id^="lc_text-widget"],
+body.menu-open [class*="chat-widget"] { display: none !important; }
 .site-header.menu-open .brand { opacity: 0; pointer-events: none; }
 
 /* Hamburger */
@@ -1671,6 +1679,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const setMenu = (open) => {
     header.classList.toggle("menu-open", open);
+    /* the chat bubble floats above everything, so it needs to know too */
+    document.body.classList.toggle("menu-open", open);
     toggle.classList.toggle("open", open);
     overlay.classList.toggle("open", open);
     toggle.setAttribute("aria-expanded", String(open));
@@ -2099,6 +2109,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
+
+  <!-- ======================================================
+       CHAT WIDGET
+       The LeadConnector bubble from the GoHighLevel account.
+       data-widget-id names which widget loads; change it there
+       and nowhere else. Delete these three lines to take the
+       bubble off the site.
+  ======================================================= -->
+  <script src="https://widgets.leadconnectorhq.com/loader.js"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          data-widget-id="6ab8853915c2d16d13292367"></script>
 
 <style>
 /* ==========================================================

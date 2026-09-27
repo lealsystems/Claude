@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const setMenu = (open) => {
     header.classList.toggle("menu-open", open);
+    /* the chat bubble floats above everything, so it needs to know too */
+    document.body.classList.toggle("menu-open", open);
     toggle.classList.toggle("open", open);
     overlay.classList.toggle("open", open);
     toggle.setAttribute("aria-expanded", String(open));

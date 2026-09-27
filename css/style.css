@@ -190,6 +190,14 @@ img { max-width: 100%; display: block; }
    X stays clickable, and fade the white-boxed logo out of the navy. */
 .brand { transition: opacity .3s ease; }
 .site-header.menu-open { z-index: 1350; background: transparent; box-shadow: none; }
+
+/* The chat bubble mounts itself above every layer on the page. That is
+   right everywhere except over the full-screen menu, so it stands down
+   while the menu is open. */
+body.menu-open chat-widget,
+body.menu-open #chat-widget,
+body.menu-open [id^="lc_text-widget"],
+body.menu-open [class*="chat-widget"] { display: none !important; }
 .site-header.menu-open .brand { opacity: 0; pointer-events: none; }
 
 /* Hamburger */
