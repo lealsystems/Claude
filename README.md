@@ -85,16 +85,25 @@ single files under `dist/`:
   Code** element. Two blocks are appended and marked in the file: CSS that steps
   the site back out of the builder's padded column, and a script that pulls it
   flush to the top of the page.
+- `fenney-ghl-hosted.html` — the same body content with the job photographs
+  left out, about a sixth the size. Its slide list carries an empty slot per
+  photo, each labelled with what the picture shows, its filename, and the name
+  it came off the phone under; paste in the media-library link for each. An
+  empty slot shows the saw-blade plate, so a half-filled list still plays.
 - `fenney-netlify.zip` — the plain folder, to drag onto Netlify.
+- `twf-photos.zip` — just the thirteen photographs, sized for the site and
+  named to match the hosted list, for uploading to a media library.
 
 Pictures are text once inlined, about a third longer than the file on disk, so the
 bundle re-encodes each one to the size the page actually paints it (`BUNDLE_SIZE`
 in the script). The copies in `assets/` stay at full quality for hosting.
 
-**To shrink the paste.** Every photo is inlined only because it lives in this repo.
-Point a `SLIDESHOW` entry at its link in the GoHighLevel media library instead and
-that picture drops out of the file — all thirteen together are about four fifths of it.
-The page behaves the same either way.
+**Two sizes.** Every photo is inlined only because it lives in this repo, and the
+thirteen are about four fifths of the bundle. `fenney-ghl-hosted.html` leaves them
+out for hosting elsewhere — 541 KB against 3.1 MB — and the page behaves the same
+either way. `SLIDE_WHAT` in the build script holds each slot's description and
+`build/photo-sources.json` the file each came from; both need a line when the
+slide list changes.
 
 `build/fonts-inline.css` is generated but committed, so a bundle can be built
 without reaching Google Fonts.

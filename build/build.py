@@ -9,7 +9,7 @@
 Everything the page needs — CSS, JS, fonts, photos — is inlined, so there
 is nothing to upload alongside it and nothing to break later.
 """
-import base64, io, mimetypes, os, re, zipfile
+import base64, io, json, mimetypes, os, re, sys, zipfile
 
 try:
     from PIL import Image
@@ -70,8 +70,8 @@ def inline_assets(text, prefixes=("assets/", "../assets/")):
     return text, used
 
 
-def bundle():
-    html = read("index.html")
+def bundle(html=None):
+    html = read("index.html") if html is None else html
     css = read("css", "style.css")
     js = read("js", "main.js")
     fonts = read("build", "fonts-inline.css")
@@ -105,6 +105,79 @@ def bundle():
     assert not re.search(r'(?:href|src)="(?:css|js)/', html), "a file stayed linked"
     assert not re.search(r'["\(](?:\.\./)?assets/', html), "an asset stayed linked"
     return html, sorted(set(used))
+
+
+# What each slide shows, for the version whose pictures are hosted rather
+# than carried. build/photo-sources.json says which file in the TWF folder
+# each one came from.
+SLIDE_WHAT = {
+    "deck-shade.jpg":              "Deck 1 of 3 — boards under dappled shade",
+    "deck-staining.jpg":           "Deck 2 of 3 — mid-stain, the can still out",
+    "deck-finished.jpg":           "Deck 3 of 3 — finished, full sun",
+    "walkway-setting.jpg":         "Walkway 1 of 3 — setting the field, level down",
+    "walkway-closing-in.jpg":      "Walkway 2 of 3 — last courses going in",
+    "walkway-finished.jpg":        "Walkway 3 of 3 — finished, from the drive",
+    "chimney-crown-poured.jpg":    "Chimney — crown poured, clay flue set",
+    "flue-liner-detail.jpg":       "Chimney — down the flue liner, crown slab",
+    "crown-slab-set.jpg":          "Chimney — crown slab being set on the stack",
+    "chimney-brickwork.jpg":       "Chimney — brickwork from the staging",
+    "chimney-repointing.jpg":      "Chimney — Tim repointing the stack",
+    "crown-twin-flues.jpg":        "Chimney — twin flues, crown finished",
+    "chimney-crown-clay-flue.jpg": "Chimney — crown and clay flue, close",
+}
+
+HOSTED_HOWTO = """  /* ============================================================
+     PUT THE PICTURE LINKS IN HERE
+
+     Thirteen slides, in the order they play. For each one:
+
+       1. In GoHighLevel, open Media Storage and find that photo.
+       2. Copy its link.
+       3. Paste it between the two quote marks.
+
+     Each line gives three ways to know which photo it wants: what is
+     in it, the tidy name it has in twf-photos.zip, and the name it
+     was uploaded from the phone under. Any one of them will do.
+
+     If the photos are not in Media Storage yet, upload the thirteen
+     in twf-photos.zip first — they are already sized for the site,
+     and their names match the ones below.
+
+     A line left empty is not a mistake: that slide shows a plain
+     saw-blade plate until a link goes in, and the other twelve still
+     play. Fill them in as you go.
+     ============================================================ */
+"""
+
+
+def hosted(html):
+    """The same page with the job photographs left out, so the paste is
+    small and each picture is fetched from the media library instead."""
+    try:
+        with open(os.path.join(BUILD, "photo-sources.json"), encoding="utf-8") as f:
+            sources = json.load(f)
+    except OSError:
+        sources = {}
+
+    block = re.search(r"  const SLIDESHOW = \[\n(.*?)\n  \];", html, re.S)
+    assert block, "could not find the slide list"
+
+    lines, n = [], 0
+    for entry in block.group(1).split("\n"):
+        ref = re.search(r'photo: "(assets/work/([^"]+))"', entry)
+        if not ref:
+            lines.append(entry)
+            continue
+        n += 1
+        name = ref.group(2)
+        lines.append("    /* %d. %s" % (n, SLIDE_WHAT.get(name, name)))
+        lines.append("          file:  %s" % name)
+        lines.append("          phone: %s */" % sources.get(ref.group(1), "—"))
+        lines.append(entry.replace(ref.group(1), ""))
+
+    assert n, "no photographs to lift out"
+    listing = "  const SLIDESHOW = [\n" + "\n".join(lines) + "\n  ];"
+    return n, html[:block.start()] + HOSTED_HOWTO + listing + html[block.end():]
 
 
 GHL_CSS = """
@@ -181,6 +254,15 @@ def fragment(html):
     return note + "\n".join(keep) + "\n" + body.strip() + "\n" + GHL_CSS + GHL_JS
 
 
+def photo_zip(path):
+    """The job photographs on their own, for uploading to a media library."""
+    folder = os.path.join(ROOT, "assets", "work")
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
+        for name in sorted(os.listdir(folder)):
+            if name.lower().endswith((".jpg", ".jpeg", ".png")):
+                z.write(os.path.join(folder, name), name)
+
+
 def netlify_zip(path):
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         for name in ("index.html", "netlify.toml", "README.md"):
@@ -197,23 +279,28 @@ def netlify_zip(path):
 def main():
     os.makedirs(DIST, exist_ok=True)
     html, used = bundle()
-    frag = fragment(html)
+    lifted, source = hosted(read("index.html"))
+    light, _ = bundle(source)
 
-    out = {"fenney-standalone.html": html, "fenney-ghl.html": frag}
+    out = {"fenney-standalone.html": html,
+           "fenney-ghl.html": fragment(html),
+           "fenney-ghl-hosted.html": fragment(light)}
     for name, text in out.items():
         with open(os.path.join(DIST, name), "w", encoding="utf-8") as f:
             f.write(text)
 
-    zip_path = os.path.join(DIST, "fenney-netlify.zip")
-    netlify_zip(zip_path)
+    netlify_zip(os.path.join(DIST, "fenney-netlify.zip"))
+    photo_zip(os.path.join(DIST, "twf-photos.zip"))
 
     print("inlined %d files (on disk -> in the bundle):" % len(used))
     for rel in used:
         disk = os.path.getsize(os.path.join(ROOT, rel)) / 1024
         print("   %-34s %6.0f KB -> %6.0f KB" % (rel, disk, len(encoded(rel)) / 1024))
     print()
-    for name in list(out) + ["fenney-netlify.zip"]:
+    for name in list(out) + ["fenney-netlify.zip", "twf-photos.zip"]:
         print("   %-28s %6.0f KB" % (name, os.path.getsize(os.path.join(DIST, name)) / 1024))
+    print("\n   the hosted version leaves out %d photographs, to be pasted in"
+          " as media-library links" % lifted)
 
 
 if __name__ == "__main__":
